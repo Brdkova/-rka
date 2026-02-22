@@ -12,11 +12,8 @@ function calculateInterest() {
 
     for (let i = 1; i <= years; i++) {
         labels.push("Rok " + i);
-        
-        // Vklady: Počáteční + (měsíční * 12 * počet let)
         const totalDeposits = P + (PMT * 12 * i);
         
-        // Celková hodnota (složené úročení)
         const valPrincipal = P * Math.pow(1 + r_annual, i);
         let valMonthly = 0;
         if (r_annual > 0) {
@@ -43,7 +40,7 @@ function calculateInterest() {
         data: {
             labels: labels,
             datasets: [
-                { label: 'Vaše vklady', data: depositsData, backgroundColor: '#2b6cb0' },
+                { label: 'Vaše vklady', data: depositsData, backgroundColor: '#1a365d' },
                 { label: 'Zhodnocení (Úrok)', data: interestData, backgroundColor: '#90cdf4' }
             ]
         },
@@ -70,7 +67,7 @@ function calculateInterest() {
 function toggleHypo() {
     const content = document.getElementById('hypo-content');
     content.style.display = (content.style.display === 'none') ? 'block' : 'none';
-    calculateHypo(); // Přepočítat při zobrazení
+    calculateHypo();
 }
 
 function calculateHypo() {
@@ -87,10 +84,8 @@ function calculateHypo() {
     }
 }
 
-// Spuštění při načtení
 document.addEventListener('DOMContentLoaded', () => {
     calculateInterest();
-    // Propojení automatického výpočtu u hypotéky
     ['loanAmount', 'loanYears', 'loanRate'].forEach(id => {
         document.getElementById(id).addEventListener('input', calculateHypo);
     });
