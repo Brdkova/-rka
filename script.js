@@ -7,54 +7,44 @@ function calculateInterest() {
     const years = parseInt(document.getElementById('years').value) || 0;
 
     const labels = [];
-    const depositsData = []; // Celkové vklady
-    const interestData = []; // Celkové zhodnocení
+    const depositsData = [];
+    const interestData = [];
 
     for (let i = 1; i <= years; i++) {
         labels.push("Rok " + i);
         
-        // Celkové vklady (Počáteční + měsíční * 12 * počet let)
+        // Vklady: Počáteční + (měsíční * 12 * počet let)
         const totalDeposits = P + (PMT * 12 * i);
-        depositsData.push(totalDeposits);
-
-        // Celková hodnota se složeným úročením
-        const value_from_principal = P * Math.pow(1 + r_annual, i);
-        let value_from_monthly = 0;
+        
+        // Celková hodnota (složené úročení)
+        const valPrincipal = P * Math.pow(1 + r_annual, i);
+        let valMonthly = 0;
         if (r_annual > 0) {
-            value_from_monthly = (PMT * 12) * ((Math.pow(1 + r_annual, i) - 1) / r_annual);
+            valMonthly = (PMT * 12) * ((Math.pow(1 + r_annual, i) - 1) / r_annual);
         } else {
-            value_from_monthly = (PMT * 12) * i;
+            valMonthly = (PMT * 12) * i;
         }
 
-        const totalValue = value_from_principal + value_from_monthly;
-        const totalInterest = Math.round(totalValue - totalDeposits);
-        interestData.push(totalInterest > 0 ? totalInterest : 0);
+        const totalValue = valPrincipal + valMonthly;
+        const totalInterest = Math.max(0, Math.round(totalValue - totalDeposits));
+        
+        depositsData.push(totalDeposits);
+        interestData.push(totalInterest);
     }
 
-    const finalValue = Math.round(depositsData[depositsData.length - 1] + interestData[interestData.length - 1]);
-    document.getElementById('total-result').innerText = finalValue.toLocaleString('cs-CZ');
+    const finalVal = depositsData[depositsData.length - 1] + interestData[interestData.length - 1];
+    document.getElementById('total-result').innerText = Math.round(finalVal).toLocaleString('cs-CZ');
 
     const ctx = document.getElementById('interestChart').getContext('2d');
-    
-    if (myChart) {
-        myChart.destroy();
-    }
+    if (myChart) { myChart.destroy(); }
 
     myChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: labels,
             datasets: [
-                {
-                    label: 'Vaše vklady',
-                    data: depositsData,
-                    backgroundColor: '#2b6cb0', // Stabilní tmavší modrá
-                },
-                {
-                    label: 'Zhodnocení (Úrok)',
-                    data: interestData,
-                    backgroundColor: '#90cdf4', // Světle modrá (růst)
-                }
+                { label: 'Vaše vklady', data: depositsData, backgroundColor: '#2b6cb0' },
+                { label: 'Zhodnocení (Úrok)', data: interestData, backgroundColor: '#90cdf4' }
             ]
         },
         options: {
@@ -62,21 +52,14 @@ function calculateInterest() {
             maintainAspectRatio: false,
             scales: {
                 x: { stacked: true },
-                y: { 
-                    stacked: true,
-                    ticks: {
-                        callback: (value) => value.toLocaleString('cs-CZ') + ' Kč'
-                    }
-                }
+                y: { stacked: true, ticks: { callback: (v) => v.toLocaleString('cs-CZ') + ' Kč' } }
             },
             plugins: {
                 tooltip: {
                     mode: 'index',
                     intersect: false,
                     callbacks: {
-                        label: function(context) {
-                            return context.dataset.label + ': ' + context.parsed.y.toLocaleString('cs-CZ') + ' Kč';
-                        }
+                        label: (ctx) => ctx.dataset.label + ': ' + ctx.parsed.y.toLocaleString('cs-CZ') + ' Kč'
                     }
                 }
             }
@@ -84,4 +67,31 @@ function calculateInterest() {
     });
 }
 
-window.onload = calculateInterest;
+function toggleHypo() {
+    const content = document.getElementById('hypo-content');
+    content.style.display = (content.style.display === 'none') ? 'block' : 'none';
+    calculateHypo(); // Přepočítat při zobrazení
+}
+
+function calculateHypo() {
+    const amount = parseFloat(document.getElementById('loanAmount').value) || 0;
+    const years = parseFloat(document.getElementById('loanYears').value) || 0;
+    const rate = (parseFloat(document.getElementById('loanRate').value) || 0) / 100 / 12;
+    const n = years * 12;
+
+    if (rate > 0 && n > 0) {
+        const monthly = (amount * rate) / (1 - Math.pow(1 + rate, -n));
+        document.getElementById('monthlyPayment').innerText = Math.round(monthly).toLocaleString('cs-CZ');
+    } else {
+        document.getElementById('monthlyPayment').innerText = "0";
+    }
+}
+
+// Spuštění při načtení
+document.addEventListener('DOMContentLoaded', () => {
+    calculateInterest();
+    // Propojení automatického výpočtu u hypotéky
+    ['loanAmount', 'loanYears', 'loanRate'].forEach(id => {
+        document.getElementById(id).addEventListener('input', calculateHypo);
+    });
+});

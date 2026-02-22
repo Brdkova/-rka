@@ -15,7 +15,8 @@
     <nav>
         <a href="#domu">Domů</a>
         <a href="#sluzby">Služby</a>
-        <a href="#kalkulacka">Kalkulačka</a>
+        <a href="#kalkulacka">Investice</a>
+        <a href="#hypoteky">Hypotéky</a>
         <a href="#kontakt">Kontakt</a>
     </nav>
 </header>
@@ -26,27 +27,9 @@
         <p>Pomáhám svým klientům najít cestu k finanční stabilitě. Věřím, že správa financí by neměla být zdrojem stresu, ale nástrojem pro váš klidnější život.</p>
     </section>
 
-    <section id="sluzby">
-        <h2>Moje služby</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <h3>Osobní rozpočet</h3>
-                <p>Nastavení rovnováhy mezi příjmy a výdaji.</p>
-            </div>
-            <div class="service-card">
-                <h3>Plánování rezerv</h3>
-                <p>Tvorba finančního polštáře pro nečekané situace.</p>
-            </div>
-            <div class="service-card">
-                <h3>Konzultace</h3>
-                <p>Individuální přístup k vašim finančním cílům.</p>
-            </div>
-        </div>
-    </section>
-
     <section id="kalkulacka">
         <h2>Kalkulačka složeného úročení</h2>
-        <p style="margin-bottom: 20px; color: #4a5568;">Podívejte se, jak se vaše vklady v čase zhodnocují díky síle úroků.</p>
+        <p style="margin-bottom: 20px; color: #4a5568;">Sledujte, jak se vaše vklady (tmavě modrá) zhodnocují díky úrokům (světle modrá).</p>
         
         <div class="calc-container">
             <div class="input-group">
@@ -65,10 +48,10 @@
                 <label>Doba investování (let)</label>
                 <input type="number" id="years" value="20">
             </div>
-            <button onclick="calculateInterest()">Spočítat a vykreslit graf</button>
+            <button onclick="calculateInterest()">Aktualizovat graf růstu</button>
             
             <div class="result-box">
-                <h3>Budoucí hodnota: <span id="total-result">0</span> Kč</h3>
+                <h3>Celková hodnota: <span id="total-result">0</span> Kč</h3>
             </div>
 
             <div class="chart-container">
@@ -77,15 +60,51 @@
         </div>
     </section>
 
+    <section id="hypoteky">
+        <h2>Hypoteční úvěry</h2>
+        <p>Plánujete vlastní bydlení? Zobrazte si kalkulačku a seznam bank, se kterými spolupracuji.</p>
+        <button class="secondary-btn" onclick="toggleHypo()">Zobrazit hypoteční sekci</button>
+        
+        <div id="hypo-content" style="display: none; margin-top: 25px;">
+            <div class="calc-container">
+                <h3>Bankovní partneři</h3>
+                <div class="bank-list">
+                    <span>Česká spořitelna</span>
+                    <span>UniCredit Bank</span>
+                    <span>Raiffeisenbank (RB)</span>
+                    <span>Komerční banka</span>
+                    <span>mBank</span>
+                </div>
+                <hr style="margin: 20px 0; border: 0; border-top: 1px solid #cbd5e0;">
+                <h3>Orientační kalkulačka hypotéky</h3>
+                <div class="input-group">
+                    <label>Výše úvěru (Kč)</label>
+                    <input type="number" id="loanAmount" value="3000000">
+                </div>
+                <div class="input-group">
+                    <label>Doba splácení (let)</label>
+                    <input type="number" id="loanYears" value="30">
+                </div>
+                <div class="input-group">
+                    <label>Úroková sazba (%)</label>
+                    <input type="number" id="loanRate" value="4.99" step="0.01">
+                </div>
+                <div class="result-box" style="border-color: #4a5568;">
+                    <p>Měsíční splátka: <strong><span id="monthlyPayment">0</span> Kč</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="kontakt">
         <h2>Kontaktujte mě</h2>
-        <p>Máte dotaz nebo chcete probrat svou situaci? Napište mi na: <br>
-        <strong><a href="mailto:sarka.brdkova@4fin.cz" style="color: #2b6cb0;">sarka.brdkova@4fin.cz</a></strong></p>
+        <p>Ráda vám pomohu s vašimi dotazy. Napište mi na:<br>
+        <strong><a href="mailto:sarka.brdkova@4fin.cz" style="color: #2b6cb0; text-decoration: none;">sarka.brdkova@4fin.cz</a></strong></p>
     </section>
 </main>
 
 <footer>
-    &copy; 2026 www.brdkova.cz finance_pro_vas - Všechna práva vyhrazena.
+    &copy; 2026 www.brdkova.cz finance_pro_vas
 </footer>
 
 <script src="script.js"></script>
