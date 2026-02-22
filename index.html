@@ -1,9 +1,10 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brdkova.cz | Stabilita a klid ve financích</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,6 +15,7 @@
     <nav>
         <a href="#domu">Domů</a>
         <a href="#sluzby">Služby</a>
+        <a href="#kalkulacka">Kalkulačka</a>
         <a href="#kontakt">Kontakt</a>
     </nav>
 </header>
@@ -42,9 +44,42 @@
         </div>
     </section>
 
+    <section id="kalkulacka">
+        <h2>Kalkulačka složeného úročení</h2>
+        <p style="margin-bottom: 20px; color: #4a5568;">Podívejte se, jak vaše peníze mohou v čase růst díky síle složeného úročení.</p>
+        
+        <div class="calc-container">
+            <div class="input-group">
+                <label>Počáteční investice (Kč)</label>
+                <input type="number" id="principal" value="100000">
+            </div>
+            <div class="input-group">
+                <label>Měsíční úložka (Kč)</label>
+                <input type="number" id="monthly" value="5000">
+            </div>
+            <div class="input-group">
+                <label>Roční zhodnocení (%)</label>
+                <input type="number" id="rate" value="7">
+            </div>
+            <div class="input-group">
+                <label>Doba investování (let)</label>
+                <input type="number" id="years" value="20">
+            </div>
+            <button onclick="calculateInterest()">Spočítat výsledek a vykreslit graf</button>
+            
+            <div class="result-box">
+                <h3>Budoucí hodnota: <span id="total-result">0</span> Kč</h3>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="interestChart"></canvas>
+            </div>
+        </div>
+    </section>
+
     <section id="kontakt">
         <h2>Kontaktujte mě</h2>
-        <p>Máte dotaz? Napište mi na: <strong>vas@email.cz</strong></p>
+        <p>Máte dotaz nebo chcete probrat svou situaci? Napište mi na: <strong>info@brdkova.cz</strong></p>
     </section>
 </main>
 
@@ -52,5 +87,6 @@
     &copy; 2026 Brdkova.cz - Všechna práva vyhrazena.
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>
