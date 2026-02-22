@@ -7,32 +7,33 @@ function calculateInterest() {
     const years = parseInt(document.getElementById('years').value) || 0;
 
     const labels = [];
-    const data = [];
-    
-    // Výpočet pro graf (ukazuje hodnotu na konci každého roku)
+    const depositsData = []; // Celkové vklady
+    const interestData = []; // Celkové zhodnocení
+
     for (let i = 1; i <= years; i++) {
         labels.push("Rok " + i);
         
-        // Složené úročení počátečního vkladu + měsíčních úložek
-        // Vzorec: A = P(1+r)^t + PMT * [((1+r)^t - 1) / r]
+        // Celkové vklady (Počáteční + měsíční * 12 * počet let)
+        const totalDeposits = P + (PMT * 12 * i);
+        depositsData.push(totalDeposits);
+
+        // Celková hodnota se složeným úročením
         const value_from_principal = P * Math.pow(1 + r_annual, i);
         let value_from_monthly = 0;
-        
         if (r_annual > 0) {
             value_from_monthly = (PMT * 12) * ((Math.pow(1 + r_annual, i) - 1) / r_annual);
         } else {
             value_from_monthly = (PMT * 12) * i;
         }
 
-        const total = Math.round(value_from_principal + value_from_monthly);
-        data.push(total);
+        const totalValue = value_from_principal + value_from_monthly;
+        const totalInterest = Math.round(totalValue - totalDeposits);
+        interestData.push(totalInterest > 0 ? totalInterest : 0);
     }
 
-    // Vypsání výsledku do textového políčka
-    const finalTotal = data.length > 0 ? data[data.length - 1] : P;
-    document.getElementById('total-result').innerText = finalTotal.toLocaleString('cs-CZ');
+    const finalValue = Math.round(depositsData[depositsData.length - 1] + interestData[interestData.length - 1]);
+    document.getElementById('total-result').innerText = finalValue.toLocaleString('cs-CZ');
 
-    // Vykreslení nebo aktualizace grafu
     const ctx = document.getElementById('interestChart').getContext('2d');
     
     if (myChart) {
@@ -43,22 +44,38 @@ function calculateInterest() {
         type: 'bar',
         data: {
             labels: labels,
-            datasets: [{
-                label: 'Hodnota investice v čase',
-                data: data,
-                backgroundColor: 'rgba(43, 108, 176, 0.7)',
-                borderColor: '#1a365d',
-                borderWidth: 1
-            }]
+            datasets: [
+                {
+                    label: 'Vaše vklady',
+                    data: depositsData,
+                    backgroundColor: '#2b6cb0', // Stabilní tmavší modrá
+                },
+                {
+                    label: 'Zhodnocení (Úrok)',
+                    data: interestData,
+                    backgroundColor: '#90cdf4', // Světle modrá (růst)
+                }
+            ]
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             scales: {
-                y: {
-                    beginAtZero: true,
+                x: { stacked: true },
+                y: { 
+                    stacked: true,
                     ticks: {
-                        callback: function(value) {
-                            return value.toLocaleString('cs-CZ') + ' Kč';
+                        callback: (value) => value.toLocaleString('cs-CZ') + ' Kč'
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        label: function(context) {
+                            return context.dataset.label + ': ' + context.parsed.y.toLocaleString('cs-CZ') + ' Kč';
                         }
                     }
                 }
@@ -67,5 +84,4 @@ function calculateInterest() {
     });
 }
 
-// Spustí výpočet hned po načtení stránky, aby tam graf nebyl prázdný
 window.onload = calculateInterest;
