@@ -19,6 +19,9 @@
         <a href="#domu">Domů</a>
         <a href="#kalkulacka">Investice</a>
         <a href="#hypoteky">Hypotéky</a>
+        <a href="#uvery">Úvěry</a>
+        <a href="#pojisteni">Pojištění</a>
+        <a href="#penze">Penzijní spoření</a>
         <a href="#kontakt">Kontakt</a>
     </nav>
 </header>
@@ -37,9 +40,8 @@
     </section>
 
     <section id="kalkulacka">
-        <h2>Kalkulačka složeného úročení</h2>
-        <p style="margin-bottom: 20px; color: #4a5568;">Sledujte, jak vaše peníze pracují za vás.</p>
-        
+        <h2>Investice</h2>
+        <p>Sledujte, jak vaše peníze pracují za vás díky složenému úročení.</p>
         <div class="calc-container">
             <div class="input-group">
                 <label>Počáteční investice (Kč)</label>
@@ -57,11 +59,9 @@
                 <label>Doba investování (let)</label>
                 <input type="number" id="years" value="20" oninput="calculateInterest()">
             </div>
-            
             <div class="result-box">
                 <h3>Odhadovaná cílová částka: <span id="total-result">0</span> Kč</h3>
             </div>
-
             <div class="chart-container">
                 <canvas id="interestChart"></canvas>
             </div>
@@ -71,12 +71,10 @@
     <section id="hypoteky">
         <h2>Hypoteční úvěry</h2>
         <p>Plánujete vlastní bydlení? Zobrazte si kalkulačku a vyberte si banku pro orientační sazbu.</p>
-        <button class="secondary-btn" onclick="toggleHypo()">Zobrazit hypoteční sekci</button>
-        
+        <button class="secondary-btn" onclick="toggleSection('hypo-content')">Zobrazit hypoteční sekci</button>
         <div id="hypo-content" style="display: none; margin-top: 25px;">
             <div class="calc-container">
                 <h3>Bankovní partneři</h3>
-                <p style="font-size: 0.8rem; color: #718096; margin-bottom: 10px;">Kliknutím na banku nastavíte její aktuální sazbu:</p>
                 <div class="bank-list">
                     <span onclick="setRate(5.49)">Česká spořitelna</span>
                     <span onclick="setRate(5.69)">UniCredit Bank</span>
@@ -84,10 +82,7 @@
                     <span onclick="setRate(5.79)">Komerční banka</span>
                     <span onclick="setRate(5.29)">mBank</span>
                 </div>
-                
                 <hr style="margin: 25px 0; border: 0; border-top: 1px solid #cbd5e0;">
-                
-                <h3>Orientační kalkulačka</h3>
                 <div class="input-group">
                     <label>Výše úvěru (Kč)</label>
                     <input type="number" id="loanAmount" value="3000000" oninput="calculateHypo()">
@@ -103,6 +98,65 @@
                 <div class="result-box" style="border-color: #4a5568;">
                     <p>Měsíční splátka: <strong><span id="monthlyPayment">0</span> Kč</strong></p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="uvery">
+        <h2>Spotřebitelské úvěry</h2>
+        <p>Potřebujete financovat rekonstrukci, auto nebo jiné potřeby? Pomohu vám najít úvěr s nejlepším úrokem a férovými podmínkami.</p>
+        <ul>
+            <li>Rychlé schválení</li>
+            <li>Možnost předčasného splacení</li>
+            <li>Konsolidace stávajících půjček</li>
+        </ul>
+    </section>
+
+    <section id="pojisteni">
+        <h2>Pojištění</h2>
+        <p>Zajistím ochranu toho, na čem vám nejvíce záleží. Od zdraví až po majetek.</p>
+        <div class="bank-list">
+            <span>Životní pojištění</span>
+            <span>Pojištění majetku</span>
+            <span>Odpovědnost</span>
+            <span>Autopojištění</span>
+        </div>
+    </section>
+
+    <section id="penze">
+        <h2>Doplňkové penzijní spoření (DPS)</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <strong>Přidá vám i stát</strong>
+                <p>Díky státním příspěvkům můžete získat ročně až 4 080 Kč.</p>
+            </div>
+            <div class="info-card">
+                <strong>Záruka vyplacení</strong>
+                <p>Ručíme za to, že dostanete zpět minimálně své vklady do konzervativních fondů.</p>
+            </div>
+            <div class="info-card">
+                <strong>Daňové úlevy</strong>
+                <p>Můžete si snížit daňový základ o 48 000 Kč a ušetřit až 7 200 Kč na daních.</p>
+            </div>
+        </div>
+
+        <h3>Spočítejte si, kolik si na penzi uspoříte</h3>
+        <div class="calc-container penze-calc">
+            <div class="input-group">
+                <label>Váš věk:</label>
+                <input type="number" id="penzeVek" value="25" oninput="calculatePenze()">
+            </div>
+            <div class="input-group">
+                <label>Měsíčně budete spořit (Kč):</label>
+                <input type="number" id="penzeUlozka" value="1700" oninput="calculatePenze()">
+            </div>
+            <div class="input-group">
+                <label>Zaměstnavatel Vám přispěje (Kč):</label>
+                <input type="number" id="penzeZamestnavatel" value="800" oninput="calculatePenze()">
+            </div>
+            <div class="result-box penze-result">
+                <p>V penzi můžete mít naspořeno:</p>
+                <h3 id="penzeCelkem">0 Kč</h3>
             </div>
         </div>
     </section>
