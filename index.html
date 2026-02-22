@@ -3,55 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>www.brdkova.cz finance_pro_vas</title>
+    <title>www.brdkova.cz | finance_pro_vas</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-    <h1>www.brdkova.cz finance_pro_vas</h1>
-    <p>Váš partner pro klidnou finanční budoucnost</p>
+    <div class="header-content">
+        <h1>www.brdkova.cz</h1>
+        <p class="subtitle">finance_pro_vas</p>
+        <p class="tagline">Váš partner pro klidnou finanční budoucnost</p>
+    </div>
     <nav>
         <a href="#domu">Domů</a>
-        <a href="#sluzby">Služby</a>
         <a href="#kalkulacka">Investice</a>
         <a href="#hypoteky">Hypotéky</a>
         <a href="#kontakt">Kontakt</a>
     </nav>
 </header>
 
-<main id="domu">
-    <section>
-        <h2>O mně</h2>
-        <p>Pomáhám svým klientům najít cestu k finanční stabilitě. Věřím, že správa financí by neměla být zdrojem stresu, ale nástrojem pro váš klidnější život.</p>
+<main>
+    <section id="domu" class="about-section">
+        <div class="about-flex">
+            <div class="about-text">
+                <h2>O mně</h2>
+                <p>Pomáhám svým klientům najít cestu k finanční stabilitě. Věřím, že správa financí by neměla být zdrojem stresu, ale nástrojem pro váš klidnější život.</p>
+            </div>
+            <div class="about-photo">
+                <img src="profil.jpg" alt="Šárka Brdková" class="profile-img">
+            </div>
+        </div>
     </section>
 
     <section id="kalkulacka">
         <h2>Kalkulačka složeného úročení</h2>
-        <p style="margin-bottom: 20px; color: #4a5568;">Sledujte, jak se vaše vklady (tmavě modrá) zhodnocují díky úrokům (světle modrá).</p>
+        <p style="margin-bottom: 20px; color: #4a5568;">Sledujte, jak se vaše vklady zhodnocují v čase.</p>
         
         <div class="calc-container">
             <div class="input-group">
                 <label>Počáteční investice (Kč)</label>
-                <input type="number" id="principal" value="100000">
+                <input type="number" id="principal" value="100000" oninput="calculateInterest()">
             </div>
             <div class="input-group">
                 <label>Měsíční úložka (Kč)</label>
-                <input type="number" id="monthly" value="5000">
+                <input type="number" id="monthly" value="5000" oninput="calculateInterest()">
             </div>
             <div class="input-group">
                 <label>Roční zhodnocení (%)</label>
-                <input type="number" id="rate" value="7">
+                <input type="number" id="rate" value="7" oninput="calculateInterest()">
             </div>
             <div class="input-group">
                 <label>Doba investování (let)</label>
-                <input type="number" id="years" value="20">
+                <input type="number" id="years" value="20" oninput="calculateInterest()">
             </div>
-            <button onclick="calculateInterest()">Aktualizovat graf růstu</button>
             
             <div class="result-box">
-                <h3>Celková hodnota: <span id="total-result">0</span> Kč</h3>
+                <h3>Celková hodnota po zdanění: <span id="total-result">0</span> Kč</h3>
             </div>
 
             <div class="chart-container">
@@ -99,7 +107,7 @@
     <section id="kontakt">
         <h2>Kontaktujte mě</h2>
         <p>Ráda vám pomohu s vašimi dotazy. Napište mi na:<br>
-        <strong><a href="mailto:sarka.brdkova@4fin.cz" style="color: #2b6cb0; text-decoration: none;">sarka.brdkova@4fin.cz</a></strong></p>
+        <strong><a href="mailto:sarka.brdkova@4fin.cz" class="email-link">sarka.brdkova@4fin.cz</a></strong></p>
     </section>
 </main>
 
