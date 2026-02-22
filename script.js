@@ -1,5 +1,6 @@
 let myChart;
 
+// Funkce pro výpočet investic
 function calculateInterest() {
     const P = parseFloat(document.getElementById('principal').value) || 0;
     const PMT = parseFloat(document.getElementById('monthly').value) || 0;
@@ -64,12 +65,25 @@ function calculateInterest() {
     });
 }
 
+// Funkce pro rozbalení hypotéky
 function toggleHypo() {
     const content = document.getElementById('hypo-content');
     content.style.display = (content.style.display === 'none') ? 'block' : 'none';
     calculateHypo();
 }
 
+// Funkce pro nastavení sazby kliknutím na banku
+function setRate(rate) {
+    const rateInput = document.getElementById('loanRate');
+    rateInput.value = rate;
+    calculateHypo();
+    
+    // Malý vizuální efekt bliknutí pole
+    rateInput.style.backgroundColor = '#90cdf4';
+    setTimeout(() => { rateInput.style.backgroundColor = 'white'; }, 200);
+}
+
+// Funkce pro výpočet hypotéky
 function calculateHypo() {
     const amount = parseFloat(document.getElementById('loanAmount').value) || 0;
     const years = parseFloat(document.getElementById('loanYears').value) || 0;
@@ -84,9 +98,7 @@ function calculateHypo() {
     }
 }
 
+// Spuštění po načtení stránky
 document.addEventListener('DOMContentLoaded', () => {
     calculateInterest();
-    ['loanAmount', 'loanYears', 'loanRate'].forEach(id => {
-        document.getElementById(id).addEventListener('input', calculateHypo);
-    });
 });
