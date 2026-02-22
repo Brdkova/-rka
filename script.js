@@ -19,7 +19,6 @@ function calculateInterest() {
         labels.push("Rok " + i);
         const totalDeposits = P + (PMT * 12 * i);
         const totalValue = P * Math.pow(1 + r, i) + (PMT * 12) * ((Math.pow(1 + r, i) - 1) / r);
-        
         deposits.push(totalDeposits);
         interest.push(Math.max(0, Math.round(totalValue - totalDeposits)));
     }
@@ -33,7 +32,7 @@ function calculateInterest() {
         data: {
             labels: labels,
             datasets: [
-                { label: 'Vložené prostředky', data: deposits, backgroundColor: '#1a365d' },
+                { label: 'Vklady', data: deposits, backgroundColor: '#1a365d' },
                 { label: 'Zhodnocení', data: interest, backgroundColor: '#90cdf4' }
             ]
         },
@@ -43,8 +42,7 @@ function calculateInterest() {
             scales: { 
                 x: { stacked: true }, 
                 y: { stacked: true, ticks: { callback: v => v.toLocaleString('cs-CZ') + ' Kč' } } 
-            },
-            plugins: { legend: { position: 'bottom' } }
+            } 
         }
     });
 }
@@ -67,21 +65,12 @@ function calculatePenze() {
     const vek = parseInt(document.getElementById('penzeVek').value) || 0;
     const ulozka = parseFloat(document.getElementById('penzeUlozka').value) || 0;
     const zamestnavatel = parseFloat(document.getElementById('penzeZamestnavatel').value) || 0;
-    
     const letDoPenze = 65 - vek;
-    if (letDoPenze <= 0) {
-        document.getElementById('penzeCelkem').innerText = "Již v penzi";
-        return;
-    }
-
-    let statniPodpora = 0;
-    if (ulozka >= 1700) statniPodpora = 340;
-    else if (ulozka >= 500) statniPodpora = ulozka * 0.2;
-
+    if (letDoPenze <= 0) { document.getElementById('penzeCelkem').innerText = "V penzi"; return; }
+    let statniPodpora = (ulozka >= 1700) ? 340 : (ulozka >= 500 ? ulozka * 0.2 : 0);
     const mesicniCelkem = ulozka + zamestnavatel + statniPodpora;
-    const r = 0.04 / 12; // Odhad 4% p.a. pro DPS
+    const r = 0.04 / 12; 
     const n = letDoPenze * 12;
-
     const celkem = (r > 0) ? mesicniCelkem * ((Math.pow(1 + r, n) - 1) / r) : mesicniCelkem * n;
     document.getElementById('penzeCelkem').innerText = Math.round(celkem).toLocaleString('cs-CZ') + " Kč";
 }
