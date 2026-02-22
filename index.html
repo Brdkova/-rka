@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>www.brdkova.cz | finance_pro_vas</title>
+    <title>www.brdkova.cz | Profesionální finanční poradenství</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,15 +13,14 @@
     <div class="header-content">
         <h1>www.brdkova.cz</h1>
         <p class="subtitle">finance_pro_vas</p>
-        <p class="tagline">Váš partner pro klidnou finanční budoucnost</p>
+        <p class="tagline">Vaše cesta k finanční nezávislosti a klidnému spánku</p>
     </div>
     <nav>
-        <a href="#domu">Domů</a>
-        <a href="#kalkulacka">Investice</a>
+        <a href="#domu">O mně</a>
+        <a href="#investice">Investice</a>
         <a href="#hypoteky">Hypotéky</a>
-        <a href="#uvery">Úvěry</a>
-        <a href="#pojisteni">Pojištění</a>
-        <a href="#penze">Penzijní spoření</a>
+        <a href="#penze">Penzijní renta</a>
+        <a href="#recenze">Reference</a>
         <a href="#kontakt">Kontakt</a>
     </nav>
 </header>
@@ -31,7 +30,8 @@
         <div class="about-flex">
             <div class="about-text">
                 <h2>O mně</h2>
-                <p>Pomáhám svým klientům najít cestu k finanční stabilitě. Věřím, že správa financí by neměla být zdrojem stresu, ale nástrojem pro váš klidnější život.</p>
+                <p>Ve světě financí se pohybuji jako partner, který Vám naslouchá. Moje podnikání je postaveno na hodnotách **čestnosti, odbornosti a srozumitelnosti**. Pomáhám rodinám i jednotlivcům ovládnout jejich rozpočet a efektivně budovat majetek.</p>
+                <p>Jako certifikovaná poradkyně sítě **4fin** mám přístup k celému trhu. To mi umožňuje vybrat pro Vás skutečně to nejlepší řešení bez vazby na jednu konkrétní banku nebo pojišťovnu.</p>
             </div>
             <div class="about-photo">
                 <img src="profil.jpg" alt="Šárka Brdková" class="profile-img">
@@ -39,28 +39,30 @@
         </div>
     </section>
 
-    <section id="kalkulacka">
-        <h2>Investice</h2>
-        <p>Sledujte, jak vaše peníze pracují za vás díky složenému úročení.</p>
+    <section id="investice">
+        <h2>Bohatství se buduje časem</h2>
+        <p>Nechte své peníze pracovat. Díky složenému úročení se i malé pravidelné částky mohou v dlouhém období proměnit v milionové jmění.</p>
         <div class="calc-container">
-            <div class="input-group">
-                <label>Počáteční investice (Kč)</label>
-                <input type="number" id="principal" value="100000" oninput="calculateInterest()">
-            </div>
-            <div class="input-group">
-                <label>Měsíční úložka (Kč)</label>
-                <input type="number" id="monthly" value="5000" oninput="calculateInterest()">
-            </div>
-            <div class="input-group">
-                <label>Roční zhodnocení (%)</label>
-                <input type="number" id="rate" value="7" oninput="calculateInterest()">
-            </div>
-            <div class="input-group">
-                <label>Doba investování (let)</label>
-                <input type="number" id="years" value="20" oninput="calculateInterest()">
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>Počáteční vklad (Kč)</label>
+                    <input type="number" id="principal" value="100000" oninput="calculateInterest()">
+                </div>
+                <div class="input-group">
+                    <label>Měsíční investice (Kč)</label>
+                    <input type="number" id="monthly" value="5000" oninput="calculateInterest()">
+                </div>
+                <div class="input-group">
+                    <label>Očekávaný výnos (%)</label>
+                    <input type="number" id="rate" value="7" oninput="calculateInterest()">
+                </div>
+                <div class="input-group">
+                    <label>Horizont (let)</label>
+                    <input type="number" id="years" value="20" oninput="calculateInterest()">
+                </div>
             </div>
             <div class="result-box">
-                <h3>Odhadovaná cílová částka: <span id="total-result">0</span> Kč</h3>
+                <h3>Předpokládaný majetek: <span id="total-result">0</span> Kč</h3>
             </div>
             <div class="chart-container">
                 <canvas id="interestChart"></canvas>
@@ -70,106 +72,100 @@
 
     <section id="hypoteky">
         <h2>Hypoteční úvěry</h2>
-        <p>Plánujete vlastní bydlení? Zobrazte si kalkulačku a vyberte si banku pro orientační sazbu.</p>
-        <button class="secondary-btn" onclick="toggleSection('hypo-content')">Zobrazit hypoteční sekci</button>
+        <p>Provázím klienty celým procesem od výběru banky až po čerpání úvěru. Hlídám pro Vás termíny fixací a zajišťuji nejvýhodnější podmínky na trhu.</p>
+        <button class="secondary-btn" onclick="toggleSection('hypo-content')">Zobrazit srovnávač sazeb</button>
         <div id="hypo-content" style="display: none; margin-top: 25px;">
             <div class="calc-container">
-                <h3>Bankovní partneři</h3>
+                <h3>Aktuální nabídky bank</h3>
                 <div class="bank-list">
-                    <span onclick="setRate(5.49)">Česká spořitelna</span>
-                    <span onclick="setRate(5.69)">UniCredit Bank</span>
-                    <span onclick="setRate(5.59)">Raiffeisenbank</span>
-                    <span onclick="setRate(5.79)">Komerční banka</span>
-                    <span onclick="setRate(5.29)">mBank</span>
+                    <span onclick="setRate(5.39)">Česká spořitelna</span>
+                    <span onclick="setRate(5.59)">UniCredit Bank</span>
+                    <span onclick="setRate(5.49)">Raiffeisenbank</span>
+                    <span onclick="setRate(5.69)">Komerční banka</span>
+                    <span onclick="setRate(5.19)">mBank</span>
                 </div>
-                <hr style="margin: 25px 0; border: 0; border-top: 1px solid #cbd5e0;">
+                <hr style="margin: 20px 0; border: 0; border-top: 1px solid #cbd5e0;">
                 <div class="input-group">
                     <label>Výše úvěru (Kč)</label>
-                    <input type="number" id="loanAmount" value="3000000" oninput="calculateHypo()">
+                    <input type="number" id="loanAmount" value="3500000" oninput="calculateHypo()">
                 </div>
                 <div class="input-group">
-                    <label>Doba splácení (let)</label>
+                    <label>Splatnost (let)</label>
                     <input type="number" id="loanYears" value="30" oninput="calculateHypo()">
                 </div>
                 <div class="input-group">
                     <label>Úroková sazba (%)</label>
-                    <input type="number" id="loanRate" value="5.49" step="0.01" oninput="calculateHypo()">
+                    <input type="number" id="loanRate" value="5.39" step="0.01" oninput="calculateHypo()">
                 </div>
-                <div class="result-box" style="border-color: #4a5568;">
-                    <p>Měsíční splátka: <strong><span id="monthlyPayment">0</span> Kč</strong></p>
+                <div class="result-box darker">
+                    <p>Orientační měsíční splátka: <strong><span id="monthlyPayment">0</span> Kč</strong></p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="uvery">
-        <h2>Spotřebitelské úvěry</h2>
-        <p>Potřebujete financovat rekonstrukci, auto nebo jiné potřeby? Pomohu vám najít úvěr s nejlepším úrokem a férovými podmínkami.</p>
-        <ul>
-            <li>Rychlé schválení</li>
-            <li>Možnost předčasného splacení</li>
-            <li>Konsolidace stávajících půjček</li>
-        </ul>
-    </section>
-
-    <section id="pojisteni">
-        <h2>Pojištění</h2>
-        <p>Zajistím ochranu toho, na čem vám nejvíce záleží. Od zdraví až po majetek.</p>
-        <div class="bank-list">
-            <span>Životní pojištění</span>
-            <span>Pojištění majetku</span>
-            <span>Odpovědnost</span>
-            <span>Autopojištění</span>
         </div>
     </section>
 
     <section id="penze">
-        <h2>Doplňkové penzijní spoření (DPS)</h2>
-        <div class="info-grid">
-            <div class="info-card">
-                <strong>Přidá vám i stát</strong>
-                <p>Díky státním příspěvkům můžete získat ročně až 4 080 Kč.</p>
-            </div>
-            <div class="info-card">
-                <strong>Záruka vyplacení</strong>
-                <p>Ručíme za to, že dostanete zpět minimálně své vklady do konzervativních fondů.</p>
-            </div>
-            <div class="info-card">
-                <strong>Daňové úlevy</strong>
-                <p>Můžete si snížit daňový základ o 48 000 Kč a ušetřit až 7 200 Kč na daních.</p>
+        <h2>Vlastní renta a penze</h2>
+        <p>Státní důchod by měl být jen doplňkem k Vašemu vlastnímu kapitálu. Pomáhám nastavit Doplňkové penzijní spoření tak, abyste vytěžili maximum ze státních benefitů.</p>
+        <div class="benefits-row">
+            <div class="benefit">✔️ Státní příspěvek až 4 080 Kč/rok</div>
+            <div class="benefit">✔️ Daňová úleva až 7 200 Kč/rok</div>
+            <div class="benefit">✔️ Příspěvek zaměstnavatele</div>
+        </div>
+        <button class="secondary-btn" onclick="toggleSection('penze-calc-box')">Spočítat budoucí rentu</button>
+        <div id="penze-calc-box" style="display: none; margin-top: 25px;">
+            <div class="calc-container penze-theme">
+                <div class="input-group">
+                    <label>Aktuální věk:</label>
+                    <input type="number" id="penzeVek" value="30" oninput="calculatePenze()">
+                </div>
+                <div class="input-group">
+                    <label>Měsíční úložka (Kč):</label>
+                    <input type="number" id="penzeUlozka" value="1700" oninput="calculatePenze()">
+                </div>
+                <div class="input-group">
+                    <label>Příspěvek zaměstnavatele (Kč):</label>
+                    <input type="number" id="penzeZamestnavatel" value="1000" oninput="calculatePenze()">
+                </div>
+                <div class="result-box highlight">
+                    <p>Odhadovaná částka v 65 letech:</p>
+                    <h3 id="penzeCelkem">0 Kč</h3>
+                </div>
             </div>
         </div>
+    </section>
 
-        <h3>Spočítejte si, kolik si na penzi uspoříte</h3>
-        <div class="calc-container penze-calc">
-            <div class="input-group">
-                <label>Váš věk:</label>
-                <input type="number" id="penzeVek" value="25" oninput="calculatePenze()">
+    <section id="recenze">
+        <h2>Hodnocení z portálu Dobrý poradce</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"Velmi oceňuji lidský přístup a schopnost vysvětlit složité finanční produkty naprosto jednoduše. Konečně mám pocit, že mým financím někdo rozumí."</p>
+                <cite>— Martin K., klient</cite>
             </div>
-            <div class="input-group">
-                <label>Měsíčně budete spořit (Kč):</label>
-                <input type="number" id="penzeUlozka" value="1700" oninput="calculatePenze()">
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"Paní Brdková nám pomohla s hypotékou v době, kdy nám ostatní říkali, že to nepůjde. Je to profesionálka na svém místě."</p>
+                <cite>— Lucie S., Praha</cite>
             </div>
-            <div class="input-group">
-                <label>Zaměstnavatel Vám přispěje (Kč):</label>
-                <input type="number" id="penzeZamestnavatel" value="800" oninput="calculatePenze()">
-            </div>
-            <div class="result-box penze-result">
-                <p>V penzi můžete mít naspořeno:</p>
-                <h3 id="penzeCelkem">0 Kč</h3>
-            </div>
+        </div>
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="https://www.dobryporadce.cz" target="_blank" class="dp-badge">Zobrazit další recenze na Dobrý poradce</a>
         </div>
     </section>
 
     <section id="kontakt">
-        <h2>Kontaktujte mě</h2>
-        <p>Ráda vám pomohu s vašimi dotazy. Napište mi na:<br>
-        <strong><a href="mailto:sarka.brdkova@4fin.cz" class="email-link">sarka.brdkova@4fin.cz</a></strong></p>
+        <h2>Pojďme se potkat</h2>
+        <p>První konzultace je vždy nezávazná a zdarma. Probereme Vaši situaci a podíváme se, kde můžeme ušetřit nebo vydělat více.</p>
+        <div class="contact-box">
+            <p>📧 Email: <strong><a href="mailto:sarka.brdkova@4fin.cz">sarka.brdkova@4fin.cz</a></strong></p>
+        </div>
     </section>
 </main>
 
 <footer>
-    &copy; 2026 www.brdkova.cz finance_pro_vas
+    <p>&copy; 2026 Šárka Brdková | finance_pro_vas</p>
+    <p style="font-size: 0.7rem; margin-top: 10px;">Informace uvedené na tomto webu mají informativní charakter a nejsou návrhem na uzavření smlouvy.</p>
 </footer>
 
 <script src="script.js"></script>
