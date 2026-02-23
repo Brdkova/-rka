@@ -17,10 +17,11 @@
     </div>
     <nav>
         <a href="#domu">O mně</a>
+        <a href="#checklist">Finanční zdraví</a>
         <a href="#investice">Investice</a>
         <a href="#hypoteky">Hypotéky</a>
         <a href="#penze">Penzijní renta</a>
-        <a href="#blog">Blog</a>
+        <a href="#faq">Časté dotazy</a>
         <a href="#recenze">Reference</a>
         <a href="#kontakt">Kontakt</a>
     </nav>
@@ -32,7 +33,7 @@
             <div class="about-text">
                 <h2>O mně</h2>
                 <p>Ve světě financí se pohybuji jako partner, který Vám naslouchá. Moje podnikání je postaveno na hodnotách **čestnosti, odbornosti a srozumitelnosti**. Pomáhám rodinám i jednotlivcům ovládnout jejich rozpočet a efektivně budovat majetek.</p>
-                <p>Jako certifikovaná poradkyně sítě **4fin** mám přístup k celému trhu. To mi umožňuje vybrat pro Vás skutečně to nejlepší řešení bez vazby na jednu konkrétní banku nebo pojišťovnu.</p>
+                <p>Jako certifikovaná poradkyně sítě **4fin** mám přístup k celému trhu. To mi umožňuje vybrat pro Vás skutečně to nejlepší řešení.</p>
             </div>
             <div class="about-photo">
                 <img src="profil.jpg" alt="Šárka Brdková" class="profile-img">
@@ -40,98 +41,80 @@
         </div>
     </section>
 
+    <section id="checklist">
+        <h2>Krátký test finančního zdraví</h2>
+        <p>Zaškrtněte, co už máte vyřešené, a zjistěte, jak na tom jste:</p>
+        <div class="checklist-container">
+            <div class="check-item">
+                <input type="checkbox" id="c1" class="check-box" onchange="updateChecklist()">
+                <label for="c1">Mám finanční rezervu alespoň na 3 měsíce výdajů.</label>
+            </div>
+            <div class="check-item">
+                <input type="checkbox" id="c2" class="check-box" onchange="updateChecklist()">
+                <label for="c2">Moje rodina je zajištěna pro případ výpadku příjmu.</label>
+            </div>
+            <div class="check-item">
+                <input type="checkbox" id="c3" class="check-box" onchange="updateChecklist()">
+                <label for="c3">Moje peníze v bance neztrácejí hodnotu díky inflaci.</label>
+            </div>
+            <div class="check-item">
+                <input type="checkbox" id="c4" class="check-box" onchange="updateChecklist()">
+                <label for="c4">Mám přehled o poplatcích u svých smluv a úvěrů.</label>
+            </div>
+            <div class="check-item">
+                <input type="checkbox" id="c5" class="check-box" onchange="updateChecklist()">
+                <label for="c5">Připravuji si vlastní rentu na stáří mimo státní důchod.</label>
+            </div>
+            
+            <div id="checklist-result" class="result-box darker" style="display:none;">
+                <p id="checklist-text"></p>
+                <a href="#kontakt" class="secondary-btn" style="display:inline-block; margin-top:10px; text-decoration:none; width:auto;">Chci to probrat</a>
+            </div>
+        </div>
+    </section>
+
     <section id="investice">
         <h2>Bohatství se buduje časem</h2>
-        <p>Nechte své peníze pracovat. Díky složenému úročení se i malé pravidelné částky mohou v dlouhém období proměnit v milionové jmění.</p>
         <div class="calc-container">
             <div class="input-grid">
-                <div class="input-group">
-                    <label>Počáteční vklad (Kč)</label>
-                    <input type="number" id="principal" value="100000" oninput="calculateInterest()">
-                </div>
-                <div class="input-group">
-                    <label>Měsíční investice (Kč)</label>
-                    <input type="number" id="monthly" value="5000" oninput="calculateInterest()">
-                </div>
-                <div class="input-group">
-                    <label>Očekávaný výnos (%)</label>
-                    <input type="number" id="rate" value="7" oninput="calculateInterest()">
-                </div>
-                <div class="input-group">
-                    <label>Horizont (let)</label>
-                    <input type="number" id="years" value="20" oninput="calculateInterest()">
-                </div>
+                <div class="input-group"><label>Počáteční vklad</label><input type="number" id="principal" value="100000" oninput="calculateInterest()"></div>
+                <div class="input-group"><label>Měsíční vklad</label><input type="number" id="monthly" value="5000" oninput="calculateInterest()"></div>
+                <div class="input-group"><label>Výnos (%)</label><input type="number" id="rate" value="7" oninput="calculateInterest()"></div>
+                <div class="input-group"><label>Let</label><input type="number" id="years" value="20" oninput="calculateInterest()"></div>
             </div>
-            <div class="result-box">
-                <h3>Předpokládaný majetek: <span id="total-result">0</span> Kč</h3>
-            </div>
-            <div class="chart-container">
-                <canvas id="interestChart"></canvas>
-            </div>
+            <div class="result-box"><h3>Výsledek: <span id="total-result">0</span> Kč</h3></div>
+            <div class="chart-container"><canvas id="interestChart"></canvas></div>
         </div>
     </section>
 
     <section id="hypoteky">
         <h2>Hypoteční úvěry</h2>
-        <p>Provázím klienty celým procesem od výběru banky až po čerpání úvěru. Hlídám pro Vás termíny fixací a zajišťuji nejvýhodnější podmínky na trhu.</p>
-        <button class="secondary-btn" onclick="toggleSection('hypo-content')">Zobrazit srovnávač sazeb</button>
+        <button class="secondary-btn" onclick="toggleSection('hypo-content')">Zobrazit srovnávač a kalkulačku</button>
         <div id="hypo-content" style="display: none; margin-top: 25px;">
             <div class="calc-container">
-                <h3>Aktuální nabídky bank</h3>
                 <div class="bank-list">
                     <span onclick="setRate(5.39)">Česká spořitelna</span>
-                    <span onclick="setRate(5.59)">UniCredit Bank</span>
-                    <span onclick="setRate(5.49)">Raiffeisenbank</span>
-                    <span onclick="setRate(5.69)">Komerční banka</span>
+                    <span onclick="setRate(5.59)">UniCredit</span>
+                    <span onclick="setRate(5.49)">Raiffeisen</span>
                     <span onclick="setRate(5.19)">mBank</span>
                 </div>
-                <hr style="margin: 20px 0; border: 0; border-top: 1px solid #cbd5e0;">
-                <div class="input-group">
-                    <label>Výše úvěru (Kč)</label>
-                    <input type="number" id="loanAmount" value="3500000" oninput="calculateHypo()">
-                </div>
-                <div class="input-group">
-                    <label>Splatnost (let)</label>
-                    <input type="number" id="loanYears" value="30" oninput="calculateHypo()">
-                </div>
-                <div class="input-group">
-                    <label>Úroková sazba (%)</label>
-                    <input type="number" id="loanRate" value="5.39" step="0.01" oninput="calculateHypo()">
-                </div>
-                <div class="result-box darker">
-                    <p>Orientační měsíční splátka: <strong><span id="monthlyPayment">0</span> Kč</strong></p>
-                </div>
+                <div class="input-group" style="margin-top:20px;"><label>Výše úvěru</label><input type="number" id="loanAmount" value="3500000" oninput="calculateHypo()"></div>
+                <div class="input-group"><label>Splatnost (let)</label><input type="number" id="loanYears" value="30" oninput="calculateHypo()"></div>
+                <div class="input-group"><label>Úrok (%)</label><input type="number" id="loanRate" value="5.39" step="0.01" oninput="calculateHypo()"></div>
+                <div class="result-box darker"><p>Měsíční splátka: <strong><span id="monthlyPayment">0</span> Kč</strong></p></div>
             </div>
         </div>
     </section>
 
     <section id="penze">
         <h2>Vlastní renta a penze</h2>
-        <p>Státní důchod by měl být jen doplňkem k Vašemu vlastnímu kapitálu. Pomáhám nastavit Doplňkové penzijní spoření tak, abyste vytěžili maximum ze státních benefitů.</p>
-        <div class="benefits-row">
-            <div class="benefit">✔️ Státní příspěvek až 4 080 Kč/rok</div>
-            <div class="benefit">✔️ Daňová úleva až 7 200 Kč/rok</div>
-            <div class="benefit">✔️ Příspěvek zaměstnavatele</div>
-        </div>
         <button class="secondary-btn" onclick="toggleSection('penze-calc-box')">Spočítat budoucí rentu</button>
         <div id="penze-calc-box" style="display: none; margin-top: 25px;">
-            <div class="calc-container penze-theme">
-                <div class="input-group">
-                    <label>Aktuální věk:</label>
-                    <input type="number" id="penzeVek" value="30" oninput="calculatePenze()">
-                </div>
-                <div class="input-group">
-                    <label>Měsíční úložka (Kč):</label>
-                    <input type="number" id="penzeUlozka" value="1700" oninput="calculatePenze()">
-                </div>
-                <div class="input-group">
-                    <label>Příspěvek zaměstnavatele (Kč):</label>
-                    <input type="number" id="penzeZamestnavatel" value="1000" oninput="calculatePenze()">
-                </div>
-                <div class="result-box highlight">
-                    <p>Odhadovaná částka v 65 letech:</p>
-                    <h3 id="penzeCelkem">0 Kč</h3>
-                </div>
+            <div class="calc-container">
+                <div class="input-group"><label>Váš věk</label><input type="number" id="penzeVek" value="30" oninput="calculatePenze()"></div>
+                <div class="input-group"><label>Měsíčně (Kč)</label><input type="number" id="penzeUlozka" value="1700" oninput="calculatePenze()"></div>
+                <div class="input-group"><label>Zaměstnavatel (Kč)</label><input type="number" id="penzeZamestnavatel" value="1000" oninput="calculatePenze()"></div>
+                <div class="result-box highlight"><h3>V 65 letech: <span id="penzeCelkem">0 Kč</span></h3></div>
             </div>
         </div>
     </section>
@@ -141,29 +124,46 @@
         <div class="blog-container">
             <article class="blog-post-main">
                 <div class="blog-date">22. února 2026</div>
-                <h3>Penzijní připojištění vs. DPS: Proč miliony Čechů stále přicházejí o peníze?</h3>
-                <p>I po více než 10 letech od reformy má téměř 2,5 milionu lidí své úspory ve "starém" penzijku (transformovaných fondech). Zatímco tyto fondy loni připsaly zhodnocení kolem 1–2 %, inflace i dynamické strategie DPS byly úplně jinde.</p>
-                <p><strong>Zkušenosti z praxe:</strong> Klienti, kteří přešli do DPS před 5 lety, mají dnes na účtech často o desítky i stovky tisíc korun více díky zhodnocení akciových trhů.</p>
+                <h3>Penzijní připojištění vs. DPS: Proč miliony Čechů přicházejí o peníze?</h3>
+                <p>I po 10 letech má většina lidí úspory ve "starém" penzijku. Rozdíl ve výnosech může na dlouhém horizontu činit stovky tisíc korun...</p>
             </article>
         </div>
     </section>
 
+    <section id="faq">
+        <h2>Často kladené dotazy</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">Kolik mě stojí úvodní konzultace?</button>
+                <div class="faq-answer"><p>Úvodní schůzka je vždy zdarma. Jsem placena formou provizí od finančních institucí, což pro vás znamená nulové přímé náklady za mé poradenství.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">Musím kvůli vám měnit svoji banku?</button>
+                <div class="faq-answer"><p>Vůbec ne. Společně vybereme to nejlepší řešení na trhu. Pokud je vaše stávající banka nejvýhodnější, zůstaneme u ní.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">Kde se můžeme potkat?</button>
+                <div class="faq-answer"><p>Působím po celé ČR. Můžeme se potkat osobně, nebo vše vyřešit pohodlně online přes videohovor.</p></div>
+            </div>
+        </div>
+    </section>
+
     <section id="recenze">
-        <h2>Hodnocení z portálu Dobrý poradce</h2>
+        <h2>Reference</h2>
         <div class="reviews-grid">
             <div class="review-card">
                 <div class="stars">★★★★★</div>
-                <p>"Velmi oceňuji lidský přístup a schopnost vysvětlit složité finanční produkty naprosto jednoduše. Konečně mám pocit, že mým financím někdo rozumí."</p>
-                <cite>— Martin K., klient</cite>
+                <p>"Lidský přístup a schopnost vysvětlit složité věci jednoduše."</p>
+                <cite>— Martin K.</cite>
             </div>
             <div class="review-card">
                 <div class="stars">★★★★★</div>
-                <p>"Paní Brdková nám pomohla s hypotékou v době, kdy nám ostatní říkali, že to nepůjde. Je to profesionálka na svém místě."</p>
-                <cite>— Lucie S., Praha</cite>
+                <p>"Pomohla nám s hypotékou, když ostatní říkali, že to nepůjde."</p>
+                <cite>— Lucie S.</cite>
             </div>
         </div>
         <div style="text-align: center; margin-top: 30px;">
-            <a href="https://dobryporadce.cz/poradci/sarka-brdkova" target="_blank" class="dp-badge">Zobrazit další recenze na Dobrý poradce</a>
+            <a href="https://dobryporadce.cz/poradci/sarka-brdkova" target="_blank" class="dp-badge">Všechny recenze na Dobrý poradce</a>
         </div>
     </section>
 
@@ -171,7 +171,7 @@
         <h2>Pojďme se potkat</h2>
         <div class="contact-box">
             <p>📧 Email: <strong><a href="mailto:sarka.brdkova@4fin.cz">sarka.brdkova@4fin.cz</a></strong></p>
-            <p>📍 Působnost: Celá ČR (online i osobně)</p>
+            <p>📍 Osobní i online konzultace</p>
         </div>
     </section>
 </main>

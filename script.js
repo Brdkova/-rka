@@ -1,5 +1,31 @@
 let myChart;
 
+// Harmonika pro FAQ
+function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isVisible = answer.style.display === 'block';
+    document.querySelectorAll('.faq-answer').forEach(el => el.style.display = 'none');
+    answer.style.display = isVisible ? 'none' : 'block';
+}
+
+// Logika Checklistu
+function updateChecklist() {
+    const checks = document.querySelectorAll('.check-box');
+    const checkedCount = Array.from(checks).filter(c => c.checked).length;
+    const resultDiv = document.getElementById('checklist-result');
+    const resultText = document.getElementById('checklist-text');
+
+    resultDiv.style.display = 'block';
+    
+    if (checkedCount === 5) {
+        resultText.innerText = "Skvělá práce! Vaše finance jsou ve výborné kondici. Chcete je posunout ještě dál?";
+    } else if (checkedCount >= 3) {
+        resultText.innerText = "Máte dobrý základ, ale jsou tam místa, kde vám utíkají peníze. Pojďme to vyladit.";
+    } else {
+        resultText.innerText = "Vaše finance vyžadují pozornost. Společně najdeme cestu, jak je zabezpečit a stabilizovat.";
+    }
+}
+
 function toggleSection(id) {
     const el = document.getElementById(id);
     el.style.display = (el.style.display === 'none') ? 'block' : 'none';
@@ -11,16 +37,13 @@ function calculateInterest() {
     const r = (parseFloat(document.getElementById('rate').value) || 0) / 100;
     const t = parseInt(document.getElementById('years').value) || 0;
 
-    let labels = [];
-    let deposits = [];
-    let interest = [];
-
+    let labels = [], deposits = [], interest = [];
     for (let i = 1; i <= t; i++) {
-        labels.push("Rok " + i);
-        const totalDeposits = P + (PMT * 12 * i);
-        const totalValue = P * Math.pow(1 + r, i) + (PMT * 12) * ((Math.pow(1 + r, i) - 1) / r);
-        deposits.push(totalDeposits);
-        interest.push(Math.max(0, Math.round(totalValue - totalDeposits)));
+        labels.push("R " + i);
+        const totalDeps = P + (PMT * 12 * i);
+        const totalVal = P * Math.pow(1 + r, i) + (PMT * 12) * ((Math.pow(1 + r, i) - 1) / r);
+        deposits.push(totalDeps);
+        interest.push(Math.max(0, Math.round(totalVal - totalDeps)));
     }
 
     document.getElementById('total-result').innerText = Math.round(deposits[t-1] + interest[t-1]).toLocaleString('cs-CZ');
@@ -36,14 +59,7 @@ function calculateInterest() {
                 { label: 'Zhodnocení', data: interest, backgroundColor: '#90cdf4' }
             ]
         },
-        options: { 
-            responsive: true, 
-            maintainAspectRatio: false, 
-            scales: { 
-                x: { stacked: true }, 
-                y: { stacked: true, ticks: { callback: v => v.toLocaleString('cs-CZ') + ' Kč' } } 
-            } 
-        }
+        options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
     });
 }
 
@@ -67,11 +83,11 @@ function calculatePenze() {
     const zamestnavatel = parseFloat(document.getElementById('penzeZamestnavatel').value) || 0;
     const letDoPenze = 65 - vek;
     if (letDoPenze <= 0) { document.getElementById('penzeCelkem').innerText = "V penzi"; return; }
-    let statniPodpora = (ulozka >= 1700) ? 340 : (ulozka >= 500 ? ulozka * 0.2 : 0);
-    const mesicniCelkem = ulozka + zamestnavatel + statniPodpora;
+    let podpora = (ulozka >= 1700) ? 340 : (ulozka >= 500 ? ulozka * 0.2 : 0);
+    const mCelkem = ulozka + zamestnavatel + podpora;
     const r = 0.04 / 12; 
     const n = letDoPenze * 12;
-    const celkem = (r > 0) ? mesicniCelkem * ((Math.pow(1 + r, n) - 1) / r) : mesicniCelkem * n;
+    const celkem = (r > 0) ? mCelkem * ((Math.pow(1 + r, n) - 1) / r) : mCelkem * n;
     document.getElementById('penzeCelkem').innerText = Math.round(celkem).toLocaleString('cs-CZ') + " Kč";
 }
 
