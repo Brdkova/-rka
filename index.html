@@ -1,15 +1,8 @@
-<header>
-    <div class="header-content">
-        <h1>www.brdkova.cz</h1>
-        <p class="subtitle">finance_pro_vas</p>
-    </div>
-</header>
-
 <section id="hero-diagnostic">
     <div class="hero-container">
         <div class="hero-text">
             <h2>Jak silné je vaše finanční zdraví?</h2>
-            <p>Zjistěte svůj výsledek během 30 sekund. Zaškrtněte oblasti, které máte plně vyřešené:</p>
+            <p>Zjistěte svůj výsledek během 30 sekund. Zaškrtněte oblasti, které máte vyřešené:</p>
         </div>
 
         <div class="diagnostic-card">
@@ -23,33 +16,28 @@
             <div class="check-list-hero">
                 <label class="check-item-modern">
                     <input type="checkbox" class="health-check" onchange="calculateHealth()">
-                    <span class="checkmark"></span>
                     Mám rezervu na 3-6 měsíců výdajů
                 </label>
                 <label class="check-item-modern">
                     <input type="checkbox" class="health-check" onchange="calculateHealth()">
-                    <span class="checkmark"></span>
                     Jsem pojištěn/a pro případ výpadku příjmu
                 </label>
                 <label class="check-item-modern">
                     <input type="checkbox" class="health-check" onchange="calculateHealth()">
-                    <span class="checkmark"></span>
                     Investuji pravidelně alespoň 10 % příjmu
                 </label>
                 <label class="check-item-modern">
                     <input type="checkbox" class="health-check" onchange="calculateHealth()">
-                    <span class="checkmark"></span>
                     Mám plán na rentu (vlastní důchod)
                 </label>
                 <label class="check-item-modern">
                     <input type="checkbox" class="health-check" onchange="calculateHealth()">
-                    <span class="checkmark"></span>
-                    Moje hypotéka/úvěry jsou s optimálním úrokem
+                    Moje úvěry jsou s optimálním úrokem
                 </label>
             </div>
 
-            <div id="health-result" class="health-feedback" style="display: none;">
-                <p id="health-text"></p>
+            <div id="health-result" class="health-feedback" style="display: none; margin-top: 20px; padding: 15px; background: #f0fff4; border-radius: 10px; border: 1px solid #c6f6d5;">
+                <p id="health-text" style="color: #276749; font-weight: bold; margin-bottom: 10px;"></p>
                 <a href="#kontakt" class="cta-button-gold">Chci vylepšit své skóre</a>
             </div>
         </div>
