@@ -5,7 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>www.brdkova.cz | finance_pro_vas</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* VEŠKERÝ STYLING JE TEĎ TADY, ABY SE VŽDY NAČETL */
+        :root {
+            --navy: #1a365d;
+            --blue: #2b6cb0;
+            --light-blue: #90cdf4;
+            --gray: #f7fafc;
+            --text: #2d3748;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: var(--text); background-color: var(--gray); scroll-behavior: smooth; }
+
+        header { background: var(--navy); color: white; padding: 2.5rem 1rem; text-align: center; }
+        .subtitle { font-size: 1.6rem; color: var(--light-blue); margin-top: 5px; }
+        .tagline { font-size: 0.85rem; opacity: 0.8; margin-top: 10px; }
+
+        nav { margin-top: 1.5rem; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
+        nav a { color: white; text-decoration: none; padding: 8px 12px; border-radius: 5px; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
+        nav a:hover { background: rgba(255,255,255,0.1); }
+
+        main { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+        section { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 2.5rem; }
+
+        h2 { color: var(--navy); margin-bottom: 1.2rem; border-bottom: 2px solid var(--gray); padding-bottom: 8px; }
+
+        .about-flex { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+        .profile-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid var(--gray); }
+
+        .checklist-container { background: var(--gray); padding: 1.2rem; border-radius: 10px; }
+        .check-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-weight: 500; cursor: pointer; }
+        .check-box { width: 18px; height: 18px; margin-top: 4px; cursor: pointer; }
+
+        .calc-container { background: var(--gray); padding: 1.2rem; border-radius: 10px; }
+        .input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+        .input-group label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+        .input-group input { width: 100%; padding: 0.7rem; border: 1px solid #cbd5e0; border-radius: 6px; }
+
+        .result-box { padding: 1.2rem; background: white; border: 2px solid var(--blue); border-radius: 10px; text-align: center; margin: 15px 0; }
+        .chart-container { height: 300px; background: white; padding: 10px; border-radius: 8px; margin-top: 15px; }
+
+        .secondary-btn { background: var(--blue); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; text-align: center; text-decoration: none; display: block; }
+
+        .faq-question { width: 100%; text-align: left; padding: 12px 0; background: none; border: none; font-weight: 700; color: var(--navy); cursor: pointer; border-bottom: 1px solid #edf2f7; }
+        .faq-answer { display: none; padding: 10px 0; font-size: 0.95rem; }
+
+        .dp-badge { display: inline-block; border: 2px solid var(--blue); color: var(--blue); padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: bold; }
+
+        .bank-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+        .bank-list span { background: var(--navy); color: white; padding: 5px 10px; border-radius: 15px; font-size: 0.75rem; cursor: pointer; }
+
+        footer { text-align: center; padding: 2rem; color: #a0aec0; font-size: 0.8rem; }
+
+        /* MOBILNÍ ÚPRAVY */
+        @media (max-width: 600px) {
+            header { padding: 1.5rem 1rem; }
+            .subtitle { font-size: 1.2rem; }
+            nav a { font-size: 0.8rem; padding: 5px 8px; }
+            section { padding: 1.2rem; }
+            .about-flex { flex-direction: column-reverse; text-align: center; }
+            .chart-container { height: 220px; }
+        }
+    </style>
 </head>
 <body>
 
@@ -32,7 +95,7 @@
         <div class="about-flex">
             <div class="about-text">
                 <h2>O mně</h2>
-                <p>Jako certifikovaná poradkyně sítě **4fin** pomáhám rodinám i jednotlivcům ovládnout jejich rozpočet a efektivně budovat majetek. Moje práce je založena na čestnosti a srozumitelnosti.</p>
+                <p>Jako certifikovaná poradkyně sítě **4fin** pomáhám rodinám i jednotlivcům ovládnout jejich rozpočet a efektivně budovat majetek.</p>
             </div>
             <div class="about-photo">
                 <img src="profil.jpg" alt="Šárka Brdková" class="profile-img">
@@ -42,33 +105,16 @@
 
     <section id="checklist">
         <h2>Jak silné je vaše finanční zdraví?</h2>
-        <p>Zjistěte svůj výsledek během 30 sekund. Zaškrtněte oblasti, které máte vyřešené:</p>
         <div class="checklist-container">
-            <div class="check-item">
-                <input type="checkbox" id="c1" class="check-box" onchange="updateChecklist()">
-                <label for="c1">Mám rezervu na 3-6 měsíců výdajů</label>
-            </div>
-            <div class="check-item">
-                <input type="checkbox" id="c2" class="check-box" onchange="updateChecklist()">
-                <label for="c2">Jsem pojištěn/a pro případ výpadku příjmu</label>
-            </div>
-            <div class="check-item">
-                <input type="checkbox" id="c3" class="check-box" onchange="updateChecklist()">
-                <label for="c3">Investuji pravidelně alespoň 10 % příjmu</label>
-            </div>
-            <div class="check-item">
-                <input type="checkbox" id="c4" class="check-box" onchange="updateChecklist()">
-                <label for="c4">Mám plán na rentu (vlastní důchod)</label>
-            </div>
-            <div class="check-item">
-                <input type="checkbox" id="c5" class="check-box" onchange="updateChecklist()">
-                <label for="c5">Moje úvěry jsou s optimálním úrokem</label>
-            </div>
+            <div class="check-item"><input type="checkbox" class="check-box" onchange="updateChecklist()"><label>Mám rezervu na 3-6 měsíců výdajů</label></div>
+            <div class="check-item"><input type="checkbox" class="check-box" onchange="updateChecklist()"><label>Jsem pojištěn/a pro případ výpadku příjmu</label></div>
+            <div class="check-item"><input type="checkbox" class="check-box" onchange="updateChecklist()"><label>Investuji pravidelně alespoň 10 % příjmu</label></div>
+            <div class="check-item"><input type="checkbox" class="check-box" onchange="updateChecklist()"><label>Mám plán na rentu (vlastní důchod)</label></div>
+            <div class="check-item"><input type="checkbox" class="check-box" onchange="updateChecklist()"><label>Moje úvěry jsou s optimálním úrokem</label></div>
             
-            <div id="checklist-result" class="result-box" style="display:none; margin-top: 20px;">
-                <p id="checklist-text" style="font-weight: bold;"></p>
-                <p>Vaše skóre: <span id="score-percent">0</span> %</p>
-                <a href="#kontakt" class="secondary-btn" style="display:inline-block; margin-top:10px; text-decoration:none;">Chci to probrat</a>
+            <div id="checklist-result" class="result-box" style="display:none;">
+                <p id="checklist-text" style="font-weight:bold;"></p>
+                <a href="#kontakt" class="secondary-btn" style="margin-top:10px;">Chci to probrat</a>
             </div>
         </div>
     </section>
@@ -90,46 +136,40 @@
     <section id="hypoteky">
         <h2>Hypotéky</h2>
         <button class="secondary-btn" onclick="toggleSection('hypo-content')">Otevřít kalkulačku</button>
-        <div id="hypo-content" style="display: none; margin-top: 20px;">
+        <div id="hypo-content" style="display: none; margin-top: 15px;">
             <div class="calc-container">
                 <div class="bank-list">
-                    <span onclick="setRate(5.39)">Česká spořitelna</span>
-                    <span onclick="setRate(5.59)">UniCredit</span>
-                    <span onclick="setRate(5.19)">mBank</span>
+                    <span onclick="setRate(5.39)">Česká spořitelna (5.39%)</span>
+                    <span onclick="setRate(5.59)">UniCredit (5.59%)</span>
+                    <span onclick="setRate(5.19)">mBank (5.19%)</span>
                 </div>
-                <div class="input-group" style="margin-top:15px;"><label>Výše úvěru</label><input type="number" id="loanAmount" value="3000000" oninput="calculateHypo()"></div>
+                <div class="input-group"><label>Výše úvěru</label><input type="number" id="loanAmount" value="3000000" oninput="calculateHypo()"></div>
                 <div class="input-group"><label>Splatnost (let)</label><input type="number" id="loanYears" value="30" oninput="calculateHypo()"></div>
                 <div class="input-group"><label>Úrok (%)</label><input type="number" id="loanRate" value="5.39" step="0.01" oninput="calculateHypo()"></div>
-                <div class="result-box"><p>Měsíční splátka: <strong><span id="monthlyPayment">0</span> Kč</strong></p></div>
+                <div class="result-box"><p>Splátka: <strong><span id="monthlyPayment">0</span> Kč</strong></p></div>
             </div>
         </div>
     </section>
 
     <section id="faq">
         <h2>Časté dotazy</h2>
-        <div class="faq-container">
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">Kolik mě stojí konzultace?</button>
-                <div class="faq-answer"><p>Úvodní schůzka je zdarma. Jsem placena formou provizí od institucí, což pro vás znamená nulové přímé náklady.</p></div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">Kde se můžeme potkat?</button>
-                <div class="faq-answer"><p>Osobně po celé ČR nebo pohodlně online přes videohovor.</p></div>
-            </div>
-        </div>
+        <button class="faq-question" onclick="toggleFaq(this)">Kolik mě stojí konzultace?</button>
+        <div class="faq-answer"><p>Úvodní schůzka je zdarma. Jsem placena provizemi od institucí.</p></div>
+        <button class="faq-question" onclick="toggleFaq(this)">Kde se můžeme potkat?</button>
+        <div class="faq-answer"><p>Osobně po celé ČR nebo online přes videohovor.</p></div>
     </section>
 
     <section id="recenze">
         <h2>Reference</h2>
         <div style="text-align: center;">
-            <a href="https://dobryporadce.cz/poradci/sarka-brdkova" target="_blank" class="dp-badge">Zobrazit mé hodnocení na Dobrý poradce</a>
+            <a href="https://dobryporadce.cz/poradci/sarka-brdkova" target="_blank" class="dp-badge">Mé hodnocení na Dobrý poradce</a>
         </div>
     </section>
 
     <section id="kontakt">
         <h2>Kontakt</h2>
-        <div class="contact-box">
-            <p>📧 Email: <strong><a href="mailto:sarka.brdkova@4fin.cz">sarka.brdkova@4fin.cz</a></strong></p>
+        <div class="result-box">
+            <p>📧 Email: <strong><a href="mailto:sarka.brdkova@4fin.cz" style="color:var(--blue);">sarka.brdkova@4fin.cz</a></strong></p>
         </div>
     </section>
 </main>
@@ -138,6 +178,81 @@
     <p>&copy; 2026 Šárka Brdková | finance_pro_vas</p>
 </footer>
 
-<script src="script.js"></script>
+<script>
+    // JAVASCRIPT JE TEĎ TAKÉ PŘÍMO TADY
+    let myChart;
+
+    function toggleFaq(btn) {
+        const answer = btn.nextElementSibling;
+        answer.style.display = (answer.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function toggleSection(id) {
+        const el = document.getElementById(id);
+        el.style.display = (el.style.display === 'none') ? 'block' : 'none';
+    }
+
+    function updateChecklist() {
+        const checks = document.querySelectorAll('.check-box');
+        const checkedCount = Array.from(checks).filter(c => c.checked).length;
+        const resultDiv = document.getElementById('checklist-result');
+        const resultText = document.getElementById('checklist-text');
+        resultDiv.style.display = 'block';
+        if (checkedCount === 5) resultText.innerText = "Výborně! Vaše finance jsou v top kondici.";
+        else if (checkedCount >= 3) resultText.innerText = "Dobrý základ, ale jsou tam mezery.";
+        else resultText.innerText = "Doporučuji co nejdříve nastavit krizový plán.";
+    }
+
+    function calculateInterest() {
+        const P = parseFloat(document.getElementById('principal').value) || 0;
+        const PMT = parseFloat(document.getElementById('monthly').value) || 0;
+        const r = (parseFloat(document.getElementById('rate').value) || 0) / 100;
+        const t = parseInt(document.getElementById('years').value) || 0;
+
+        let labels = [], deposits = [], interest = [];
+        for (let i = 1; i <= t; i++) {
+            labels.push("R " + i);
+            const totalDeps = P + (PMT * 12 * i);
+            const totalVal = P * Math.pow(1 + r, i) + (PMT * 12) * ((Math.pow(1 + r, i) - 1) / r);
+            deposits.push(totalDeps);
+            interest.push(Math.max(0, Math.round(totalVal - totalDeps)));
+        }
+
+        document.getElementById('total-result').innerText = Math.round(deposits[t-1] + interest[t-1]).toLocaleString('cs-CZ');
+
+        const ctx = document.getElementById('interestChart').getContext('2d');
+        if (myChart) myChart.destroy();
+        myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    { label: 'Vklady', data: deposits, backgroundColor: '#1a365d' },
+                    { label: 'Zhodnocení', data: interest, backgroundColor: '#90cdf4' }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
+        });
+    }
+
+    function setRate(rate) {
+        document.getElementById('loanRate').value = rate;
+        calculateHypo();
+    }
+
+    function calculateHypo() {
+        const amount = parseFloat(document.getElementById('loanAmount').value) || 0;
+        const years = parseFloat(document.getElementById('loanYears').value) || 0;
+        const rate = (parseFloat(document.getElementById('loanRate').value) || 0) / 100 / 12;
+        const n = years * 12;
+        const monthly = (rate > 0) ? (amount * rate) / (1 - Math.pow(1 + rate, -n)) : amount / n;
+        document.getElementById('monthlyPayment').innerText = Math.round(monthly).toLocaleString('cs-CZ');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        calculateInterest();
+        calculateHypo();
+    });
+</script>
 </body>
 </html>
