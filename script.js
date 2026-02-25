@@ -1,34 +1,23 @@
 let myChart;
 
-// Harmonika pro FAQ
 function toggleFaq(btn) {
     const answer = btn.nextElementSibling;
-    const isVisible = answer.style.display === 'block';
-    document.querySelectorAll('.faq-answer').forEach(el => el.style.display = 'none');
-    answer.style.display = isVisible ? 'none' : 'block';
+    answer.style.display = (answer.style.display === 'block') ? 'none' : 'block';
 }
 
-// Logika Checklistu
 function updateChecklist() {
     const checks = document.querySelectorAll('.check-box');
     const checkedCount = Array.from(checks).filter(c => c.checked).length;
     const resultDiv = document.getElementById('checklist-result');
     const resultText = document.getElementById('checklist-text');
+    const scoreSpan = document.getElementById('score-percent');
 
     resultDiv.style.display = 'block';
+    scoreSpan.innerText = (checkedCount / 5) * 100;
     
-    if (checkedCount === 5) {
-        resultText.innerText = "Skvělá práce! Vaše finance jsou ve výborné kondici. Chcete je posunout ještě dál?";
-    } else if (checkedCount >= 3) {
-        resultText.innerText = "Máte dobrý základ, ale jsou tam místa, kde vám utíkají peníze. Pojďme to vyladit.";
-    } else {
-        resultText.innerText = "Vaše finance vyžadují pozornost. Společně najdeme cestu, jak je zabezpečit a stabilizovat.";
-    }
-}
-
-function toggleSection(id) {
-    const el = document.getElementById(id);
-    el.style.display = (el.style.display === 'none') ? 'block' : 'none';
+    if (checkedCount === 5) resultText.innerText = "Výborně! Vaše finance jsou v top kondici.";
+    else if (checkedCount >= 3) resultText.innerText = "Dobrý základ, ale jsou tam mezery.";
+    else resultText.innerText = "Doporučuji co nejdříve nastavit krizový plán.";
 }
 
 function calculateInterest() {
@@ -77,22 +66,12 @@ function calculateHypo() {
     document.getElementById('monthlyPayment').innerText = Math.round(monthly).toLocaleString('cs-CZ');
 }
 
-function calculatePenze() {
-    const vek = parseInt(document.getElementById('penzeVek').value) || 0;
-    const ulozka = parseFloat(document.getElementById('penzeUlozka').value) || 0;
-    const zamestnavatel = parseFloat(document.getElementById('penzeZamestnavatel').value) || 0;
-    const letDoPenze = 65 - vek;
-    if (letDoPenze <= 0) { document.getElementById('penzeCelkem').innerText = "V penzi"; return; }
-    let podpora = (ulozka >= 1700) ? 340 : (ulozka >= 500 ? ulozka * 0.2 : 0);
-    const mCelkem = ulozka + zamestnavatel + podpora;
-    const r = 0.04 / 12; 
-    const n = letDoPenze * 12;
-    const celkem = (r > 0) ? mCelkem * ((Math.pow(1 + r, n) - 1) / r) : mCelkem * n;
-    document.getElementById('penzeCelkem').innerText = Math.round(celkem).toLocaleString('cs-CZ') + " Kč";
+function toggleSection(id) {
+    const el = document.getElementById(id);
+    el.style.display = (el.style.display === 'none') ? 'block' : 'none';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     calculateInterest();
-    calculatePenze();
     calculateHypo();
 });
