@@ -7,51 +7,33 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: var(--text); background-color: var(--gray); scroll-behavior: smooth; }
+body { font-family: 'Segoe UI', sans-serif; color: var(--text); background: var(--gray); overflow-x: hidden; }
 
-header { background: var(--navy); color: white; padding: 2.5rem 1rem; text-align: center; }
-.subtitle { font-size: 1.6rem; color: var(--light-blue); margin-top: 5px; }
-.tagline { font-size: 0.85rem; opacity: 0.8; margin-top: 10px; }
+/* Animace sekcí */
+.page-section { display: none; opacity: 0; transform: translateX(20px); transition: all 0.5s ease; }
+.page-section.active { display: block; opacity: 1; transform: translateX(0); }
 
-nav { margin-top: 1.5rem; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
-nav a { color: white; text-decoration: none; padding: 8px 12px; border-radius: 5px; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
-nav a:hover { background: rgba(255,255,255,0.1); }
+header { background: linear-gradient(135deg, var(--navy), var(--blue)); color: white; padding: 5rem 1rem; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%); }
 
-main { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
-section { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 2.5rem; }
+nav { position: sticky; top: 0; background: rgba(26, 54, 93, 0.95); backdrop-filter: blur(10px); padding: 15px; display: flex; justify-content: center; gap: 20px; z-index: 1000; }
+nav a { color: white; text-decoration: none; font-weight: 600; padding: 8px 15px; border-radius: 20px; transition: 0.3s; }
+nav a:hover { background: var(--blue); transform: scale(1.05); }
 
-h2 { color: var(--navy); margin-bottom: 1.2rem; border-bottom: 2px solid var(--gray); padding-bottom: 8px; }
+section { background: white; padding: 3rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 3rem; }
 
-.about-flex { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
-.profile-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid var(--gray); }
+/* Investiční karta */
+.calc-card { background: var(--gray); padding: 2rem; border-radius: 15px; border: 1px solid #e2e8f0; }
+.result-display { text-align: center; margin: 2rem 0; padding: 2rem; background: white; border: 3px solid var(--blue); border-radius: 15px; animation: pulse 2s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(43, 108, 176, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(43, 108, 176, 0); } 100% { box-shadow: 0 0 0 0 rgba(43, 108, 176, 0); } }
 
-.checklist-container { background: var(--gray); padding: 1.2rem; border-radius: 10px; }
-.check-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-weight: 500; cursor: pointer; }
-.check-box { width: 18px; height: 18px; margin-top: 4px; cursor: pointer; }
+.btn { background: var(--blue); color: white; padding: 12px 25px; border-radius: 30px; text-decoration: none; display: inline-block; font-weight: bold; transition: 0.3s; border: none; cursor: pointer; }
+.btn:hover { background: var(--navy); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
-.calc-container { background: var(--gray); padding: 1.2rem; border-radius: 10px; }
-.input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
-.input-group label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
-.input-group input { width: 100%; padding: 0.7rem; border: 1px solid #cbd5e0; border-radius: 6px; }
+/* QR kód styl */
+.qr-area { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
+.qr-card { background: white; padding: 15px; border-radius: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+.qr-card img { width: 130px; }
 
-.result-box { padding: 1.2rem; background: white; border: 2px solid var(--blue); border-radius: 10px; text-align: center; margin: 15px 0; }
-.chart-container { height: 300px; background: white; padding: 10px; border-radius: 8px; margin-top: 15px; }
-
-.secondary-btn { background: var(--blue); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; text-align: center; }
-
-.faq-question { width: 100%; text-align: left; padding: 12px 0; background: none; border: none; font-weight: 700; color: var(--navy); cursor: pointer; border-bottom: 1px solid #edf2f7; }
-.faq-answer { display: none; padding: 10px 0; font-size: 0.95rem; }
-
-.dp-badge { display: inline-block; border: 2px solid var(--blue); color: var(--blue); padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: bold; }
-
-footer { text-align: center; padding: 2rem; color: #a0aec0; font-size: 0.8rem; }
-
-/* RESPONZIVITA PRO MOBILY */
-@media (max-width: 600px) {
-    header { padding: 1.5rem 1rem; }
-    .subtitle { font-size: 1.2rem; }
-    nav a { font-size: 0.8rem; padding: 5px 8px; }
-    section { padding: 1.2rem; }
-    .about-flex { flex-direction: column-reverse; text-align: center; }
-    .chart-container { height: 220px; }
-}
+/* Kvíz overlay */
+#quiz-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(5px); }
+#quiz-modal { background: white; padding: 2.5rem; border-radius: 20px; max-width: 550px; width: 95%; position: relative; }

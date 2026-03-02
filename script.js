@@ -1,77 +1,61 @@
-let myChart;
+let mainChart;
 
-function toggleFaq(btn) {
-    const answer = btn.nextElementSibling;
-    answer.style.display = (answer.style.display === 'block') ? 'none' : 'block';
-}
-
-function updateChecklist() {
-    const checks = document.querySelectorAll('.check-box');
-    const checkedCount = Array.from(checks).filter(c => c.checked).length;
-    const resultDiv = document.getElementById('checklist-result');
-    const resultText = document.getElementById('checklist-text');
-    const scoreSpan = document.getElementById('score-percent');
-
-    resultDiv.style.display = 'block';
-    scoreSpan.innerText = (checkedCount / 5) * 100;
+// Přepínání sekcí bez načítání stránky
+function showSection(sectionId) {
+    document.querySelectorAll('.page-section').forEach(sec => {
+        sec.classList.remove('active');
+    });
+    const target = document.getElementById('section-' + sectionId);
+    target.classList.add('active');
     
-    if (checkedCount === 5) resultText.innerText = "Výborně! Vaše finance jsou v top kondici.";
-    else if (checkedCount >= 3) resultText.innerText = "Dobrý základ, ale jsou tam mezery.";
-    else resultText.innerText = "Doporučuji co nejdříve nastavit krizový plán.";
+    if(sectionId === 'home') runCalc();
 }
 
-function calculateInterest() {
-    const P = parseFloat(document.getElementById('principal').value) || 0;
-    const PMT = parseFloat(document.getElementById('monthly').value) || 0;
-    const r = (parseFloat(document.getElementById('rate').value) || 0) / 100;
-    const t = parseInt(document.getElementById('years').value) || 0;
+// Investiční výpočet
+function runCalc() {
+    const P = parseFloat(document.getElementById('p-start').value) || 0;
+    const PMT = parseFloat(document.getElementById('p-monthly').value) || 0;
+    const r = (parseFloat(document.getElementById('p-rate').value) || 0) / 100;
+    const t = parseInt(document.getElementById('p-years').value) || 0;
 
-    let labels = [], deposits = [], interest = [];
+    let labels = [], deposits = [], totalVal = [];
     for (let i = 1; i <= t; i++) {
-        labels.push("R " + i);
-        const totalDeps = P + (PMT * 12 * i);
-        const totalVal = P * Math.pow(1 + r, i) + (PMT * 12) * ((Math.pow(1 + r, i) - 1) / r);
-        deposits.push(totalDeps);
-        interest.push(Math.max(0, Math.round(totalVal - totalDeps)));
+        labels.push("Rok " + i);
+        const dep = P + (PMT * 12 * i);
+        const val = P * Math.pow(1 + r, i) + (PMT * 12) * ((Math.pow(1 + r, i) - 1) / (r || 0.0001));
+        deposits.push(dep);
+        totalVal.push(Math.round(val));
     }
 
-    document.getElementById('total-result').innerText = Math.round(deposits[t-1] + interest[t-1]).toLocaleString('cs-CZ');
+    document.getElementById('total-res').innerText = totalVal[t-1].toLocaleString('cs-CZ');
 
-    const ctx = document.getElementById('interestChart').getContext('2d');
-    if (myChart) myChart.destroy();
-    myChart = new Chart(ctx, {
-        type: 'bar',
+    const ctx = document.getElementById('mainChart').getContext('2d');
+    if (mainChart) mainChart.destroy();
+    mainChart = new Chart(ctx, {
+        type: 'line',
         data: {
             labels: labels,
             datasets: [
-                { label: 'Vklady', data: deposits, backgroundColor: '#1a365d' },
-                { label: 'Zhodnocení', data: interest, backgroundColor: '#90cdf4' }
+                { label: 'Budovaný majetek', data: totalVal, borderColor: '#2b6cb0', backgroundColor: 'rgba(144, 205, 244, 0.2)', fill: true },
+                { label: 'Vložené peníze', data: deposits, borderColor: '#1a365d', borderDash: [5, 5] }
             ]
         },
-        options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
+        options: { responsive: true, maintainAspectRatio: false }
     });
 }
 
-function setRate(rate) {
-    document.getElementById('loanRate').value = rate;
-    calculateHypo();
+// Kvíz logika
+function openQuiz() { document.getElementById('quiz-overlay').style.display = 'flex'; }
+function closeQuiz() { document.getElementById('quiz-overlay').style.display = 'none'; }
+function finishQuiz() {
+    const score = Array.from(document.querySelectorAll('.q-check')).filter(c => c.checked).length;
+    document.getElementById('quiz-steps').style.display = 'none';
+    document.getElementById('quiz-result').style.display = 'block';
+    document.getElementById('quiz-score-title').innerText = score + " / 10";
+    document.getElementById('quiz-advice').innerText = score < 6 ? "Vaše finance vyžadují revizi." : "Skvělý výsledek!";
 }
 
-function calculateHypo() {
-    const amount = parseFloat(document.getElementById('loanAmount').value) || 0;
-    const years = parseFloat(document.getElementById('loanYears').value) || 0;
-    const rate = (parseFloat(document.getElementById('loanRate').value) || 0) / 100 / 12;
-    const n = years * 12;
-    const monthly = (rate > 0) ? (amount * rate) / (1 - Math.pow(1 + rate, -n)) : amount / n;
-    document.getElementById('monthlyPayment').innerText = Math.round(monthly).toLocaleString('cs-CZ');
-}
-
-function toggleSection(id) {
-    const el = document.getElementById(id);
-    el.style.display = (el.style.display === 'none') ? 'block' : 'none';
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    calculateInterest();
-    calculateHypo();
-});
+window.onload = () => {
+    setTimeout(openQuiz, 5000);
+    runCalc();
+};
