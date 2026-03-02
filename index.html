@@ -181,7 +181,7 @@
     function calcHypo() {
         const p = parseFloat(document.getElementById('hypo-amt').value) || 0;
         const r = (parseFloat(document.getElementById('hypo-rate').value) || 0) / 100 / 12;
-        const n = (parseFloat(document.getElementById('hypo-yrs').value) || 0) * 12;
+        const n = (parseFloat(document.getElementById('hypo-years').value) || 0) * 12;
         const res = (r > 0) ? (p * r) / (1 - Math.pow(1 + r, -n)) : p / n;
         document.getElementById('hypo-res').innerText = Math.round(res).toLocaleString('cs-CZ');
     }
