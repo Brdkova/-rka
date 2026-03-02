@@ -1,14 +1,9 @@
 let mainChart;
 
-function showSection(sectionId) {
-    document.querySelectorAll('.page-section').forEach(sec => {
-        sec.classList.remove('active');
-        sec.style.display = 'none';
-    });
-    const target = document.getElementById('section-' + sectionId);
-    target.style.display = 'block';
-    setTimeout(() => target.classList.add('active'), 50);
-    if(sectionId === 'home') runCalc();
+function showSection(id) {
+    document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+    document.getElementById('section-' + id).classList.add('active');
+    if (id === 'investice') runCalc();
 }
 
 function runCalc() {
@@ -19,46 +14,34 @@ function runCalc() {
     
     document.getElementById('res-years').innerText = t;
 
-    let labels = [], deposits = [], totalVal = [];
+    let labels = [], deposits = [], interest = [];
     for (let i = 1; i <= t; i++) {
         labels.push("Rok " + i);
         const dep = P + (PMT * 12 * i);
-        const val = P * Math.pow(1 + r, i) + (PMT * 12) * ((Math.pow(1 + r, i) - 1) / (r || 0.0001));
+        const totalVal = P * Math.pow(1 + r, i) + (PMT * 12) * ((Math.pow(1 + r, i) - 1) / (r || 0.0001));
         deposits.push(dep);
-        totalVal.push(Math.round(val));
+        interest.push(Math.max(0, Math.round(totalVal - dep)));
     }
 
-    document.getElementById('total-res').innerText = totalVal[t-1].toLocaleString('cs-CZ') + " Kč";
+    document.getElementById('total-res').innerText = (deposits[t-1] + interest[t-1]).toLocaleString('cs-CZ') + " Kč";
 
     const ctx = document.getElementById('mainChart').getContext('2d');
     if (mainChart) mainChart.destroy();
     mainChart = new Chart(ctx, {
-        type: 'line',
+        type: 'bar', // Návrat ke sloupcovému grafu
         data: {
             labels: labels,
             datasets: [
-                { label: 'Vývoj majetku', data: totalVal, borderColor: '#2b6cb0', backgroundColor: 'rgba(144, 205, 244, 0.2)', fill: true, tension: 0.4 },
-                { label: 'Vložené vklady', data: deposits, borderColor: '#1a365d', borderDash: [5, 5], tension: 0 }
+                { label: 'Vklady', data: deposits, backgroundColor: '#1a365d' },
+                { label: 'Zisk', data: interest, backgroundColor: '#90cdf4' }
             ]
         },
-        options: { responsive: true, maintainAspectRatio: false }
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: false, 
+            scales: { x: { stacked: true }, y: { stacked: true } } 
+        }
     });
-}
-
-function calcHypo() {
-    const p = parseFloat(document.getElementById('h-amt').value) || 0;
-    const r = (parseFloat(document.getElementById('h-rate').value) || 0) / 100 / 12;
-    const n = 30 * 12;
-    const res = (r > 0) ? (p * r) / (1 - Math.pow(1 + r, -n)) : p / n;
-    document.getElementById('h-res').innerText = Math.round(res).toLocaleString('cs-CZ');
-}
-
-function calcPen() {
-    const pmt = parseFloat(document.getElementById('pen-pmt').value) || 0;
-    let res = 0;
-    if (pmt >= 1700) res = 340;
-    else if (pmt >= 500) res = pmt * 0.2;
-    document.getElementById('pen-res').innerText = Math.round(res);
 }
 
 function openQuiz() { document.getElementById('quiz-overlay').style.display = 'flex'; }
@@ -66,15 +49,9 @@ function closeQuiz() { document.getElementById('quiz-overlay').style.display = '
 function finishQuiz() {
     const score = Array.from(document.querySelectorAll('.q-check')).filter(c => c.checked).length;
     document.getElementById('quiz-steps').style.display = 'none';
-    const resDiv = document.getElementById('quiz-result');
-    resDiv.style.display = 'block';
+    document.getElementById('quiz-result').style.display = 'block';
     document.getElementById('quiz-score-title').innerText = score + " / 10";
-    document.getElementById('quiz-advice').innerText = score < 6 ? "Vaše finance vyžadují revizi." : "Máte velmi dobrý základ!";
+    document.getElementById('quiz-advice').innerText = score < 7 ? "Pojďme vaše finance nastavit lépe." : "Skvělý výsledek!";
 }
 
-window.onload = () => {
-    setTimeout(openQuiz, 5000);
-    runCalc();
-    calcHypo();
-    calcPen();
-};
+window.onload = () => { setTimeout(openQuiz, 4000); runCalc(); };
