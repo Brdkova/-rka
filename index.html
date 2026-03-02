@@ -12,70 +12,61 @@
             --light-blue: #90cdf4;
             --gray: #f7fafc;
             --text: #2d3748;
-            --white: #ffffff;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: var(--text); background-color: var(--gray); scroll-behavior: smooth; }
 
-        /* HEADER & NAV */
-        header { background: var(--navy); color: white; padding: 3rem 1rem; text-align: center; }
-        .subtitle { font-size: 1.8rem; color: var(--light-blue); font-weight: bold; }
-        nav { position: sticky; top: 0; background: var(--navy); padding: 10px 0; z-index: 1000; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
-        nav a { color: white; text-decoration: none; padding: 8px 15px; border-radius: 5px; font-size: 0.9rem; transition: 0.3s; }
-        nav a:hover { background: var(--blue); }
+        header { background: var(--navy); color: white; padding: 2.5rem 1rem; text-align: center; }
+        .subtitle { font-size: 1.6rem; color: var(--light-blue); margin-top: 5px; }
+        nav { margin-top: 1.5rem; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; position: sticky; top: 0; background: var(--navy); padding: 10px 0; z-index: 1000; }
+        nav a { color: white; text-decoration: none; padding: 8px 12px; border-radius: 5px; font-weight: 500; font-size: 0.9rem; }
 
-        /* SECTIONS */
-        main { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
-        section { background: var(--white); padding: 2.5rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 3rem; }
-        h2 { color: var(--navy); margin-bottom: 1.5rem; border-bottom: 2px solid var(--gray); padding-bottom: 10px; }
-        h3 { color: var(--blue); margin-top: 1.5rem; }
+        main { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+        section { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 2.5rem; }
+        h2 { color: var(--navy); margin-bottom: 1.2rem; border-bottom: 2px solid var(--gray); padding-bottom: 8px; }
 
-        /* ABOUT */
         .about-flex { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
         .profile-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid var(--gray); }
-
-        /* KALKULAČKY - AKORDION */
-        .accordion-btn { background: var(--gray); color: var(--navy); border: 2px solid var(--blue); padding: 15px; width: 100%; text-align: left; font-weight: bold; cursor: pointer; border-radius: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-        .accordion-content { display: none; padding: 1.5rem; background: var(--gray); border-radius: 0 0 10px 10px; margin-top: -10px; margin-bottom: 20px; }
-        .calc-box { background: white; padding: 1.5rem; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-
-        /* BLOG */
-        .blog-card { border-left: 4px solid var(--blue); padding-left: 20px; margin-top: 20px; }
-        .blog-date { font-size: 0.8rem; color: #718096; }
 
         /* POP-UP */
         #quiz-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 2000; }
         #quiz-modal { background: white; padding: 2rem; border-radius: 15px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; position: relative; }
-        .close-quiz { position: absolute; top: 10px; right: 15px; font-size: 1.5rem; cursor: pointer; }
-        .quiz-q { margin-bottom: 10px; display: flex; gap: 10px; font-size: 0.9rem; }
+        .quiz-q { margin-bottom: 10px; display: flex; gap: 10px; font-size: 0.9rem; border-bottom: 1px solid #f0f0f0; padding-bottom: 5px; }
 
-        /* BUTTONS & INPUTS */
-        .secondary-btn { background: var(--blue); color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; text-align: center; text-decoration: none; display: block; }
+        /* KALKULAČKY - AKORDION */
+        .acc-btn { background: var(--gray); color: var(--navy); border: 1px solid var(--blue); padding: 15px; width: 100%; text-align: left; font-weight: bold; cursor: pointer; border-radius: 8px; margin-bottom: 5px; display: flex; justify-content: space-between; }
+        .acc-content { display: none; padding: 1.5rem; background: var(--gray); border-radius: 8px; margin-bottom: 15px; }
         .input-group label { display: block; font-size: 0.8rem; font-weight: 700; margin-bottom: 4px; }
-        .input-group input { width: 100%; padding: 0.6rem; border: 1px solid #cbd5e0; border-radius: 6px; margin-bottom: 10px; }
+        .input-group input { width: 100%; padding: 0.7rem; border: 1px solid #cbd5e0; border-radius: 6px; margin-bottom: 10px; }
+
+        .result-box { padding: 1.2rem; background: white; border: 2px solid var(--blue); border-radius: 10px; text-align: center; }
+        .chart-container { height: 250px; background: white; border-radius: 8px; margin-top: 15px; padding: 10px; }
+        .secondary-btn { background: var(--blue); color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; text-align: center; text-decoration: none; display: block; }
         
-        @media (max-width: 600px) { .about-flex { flex-direction: column-reverse; text-align: center; } }
+        .blog-card { border-left: 4px solid var(--blue); padding-left: 15px; margin-bottom: 20px; }
+        .blog-date { font-size: 0.8rem; color: #718096; }
+
+        footer { text-align: center; padding: 2rem; color: #a0aec0; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
 <div id="quiz-overlay">
     <div id="quiz-modal">
-        <span class="close-quiz" onclick="closeQuiz()">&times;</span>
         <h2 style="border:none; text-align:center;">Finanční prověrka</h2>
         <div id="quiz-steps">
             <div class="quiz-q"><input type="checkbox" class="q-check"><label>Mám rezervu na 3-6 měsíců.</label></div>
-            <div class="quiz-q"><input type="checkbox" class="q-check"><label>Investuji aspoň 10 % příjmu.</label></div>
+            <div class="quiz-q"><input type="checkbox" class="q-check"><label>Odkládám si aspoň 10 % příjmu.</label></div>
             <div class="quiz-q"><input type="checkbox" class="q-check"><label>Mám pojištěný výpadek příjmu.</label></div>
             <div class="quiz-q"><input type="checkbox" class="q-check"><label>Moje peníze v bance nepožírá inflace.</label></div>
-            <div class="quiz-q"><input type="checkbox" class="q-check"><label>Plánuji si vlastní rentu (nejen státní).</label></div>
-            <button class="secondary-btn" style="margin-top:15px;" onclick="finishQuiz()">Zobrazit výsledek</button>
+            <div class="quiz-q"><input type="checkbox" class="q-check"><label>Buduji si vlastní rentu na stáří.</label></div>
+            <button class="secondary-btn" style="margin-top:15px;" onclick="finishQuiz()">Vyhodnotit</button>
         </div>
         <div id="quiz-result" style="display:none; text-align:center;">
             <h3 id="quiz-score-title"></h3>
             <p id="quiz-advice" style="margin:15px 0;"></p>
-            <a href="mailto:sarka.brdkova@4fin.cz" class="secondary-btn">Konzultace zdarma</a>
+            <button class="secondary-btn" onclick="closeQuiz()">Zavřít</button>
         </div>
     </div>
 </div>
@@ -87,8 +78,7 @@
 
 <nav>
     <a href="#domu">O mně</a>
-    <a href="#sluzby">Služby</a>
-    <a href="#penze">Renta (DPS/DIP)</a>
+    <a href="#penze">Renta & DIP</a>
     <a href="#kalkulacky">Kalkulačky</a>
     <a href="#blog">Blog</a>
     <a href="#kontakt">Kontakt</a>
@@ -99,7 +89,7 @@
         <div class="about-flex">
             <div class="about-text">
                 <h2>O mně</h2>
-                <p>Pomáhám rodinám a jednotlivcům ovládnout jejich rozpočet a efektivně budovat majetek. Jako certifikovaná poradkyně sítě **4fin** kladu důraz na srozumitelnost a čestnost.</p>
+                <p>Pomáhám rodinám i jednotlivcům ovládnout jejich rozpočet a efektivně budovat majetek. Moje práce je založena na odbornosti sítě 4fin, čestnosti a srozumitelnosti.</p>
             </div>
             <div class="about-photo">
                 <img src="profil.jpg" alt="Šárka Brdková" class="profile-img">
@@ -107,151 +97,95 @@
         </div>
     </section>
 
-    <section id="sluzby">
-        <h2>Moje Služby</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-            <div>
-                <h3>Hypotéky</h3>
-                <p>Srovnání všech bank a vyjednání nejlepších sazeb.</p>
-            </div>
-            <div>
-                <h3>Investice</h3>
-                <p>Tvorba portfolia, které poráží inflaci a buduje kapitál.</p>
-            </div>
-            <div>
-                <h3>Pojištění</h3>
-                <p>Ochrana příjmu a majetku bez zbytečných poplatků.</p>
-            </div>
-        </div>
-    </section>
-
     <section id="penze">
-        <h2>Příprava na rentu</h2>
-        <p>Státní důchod vám životní úroveň nezajistí. Klíčem je kombinace moderních nástrojů:</p>
-        <ul style="margin-left: 20px; margin-top: 10px;">
-            <li><strong>DPS (Doplňkové penzijní spoření):</strong> Státní příspěvky až 340 Kč měsíčně a daňové úlevy.</li>
-            <li><strong>DIP (Dlouhodobý investiční produkt):</strong> Novinka od roku 2024. Obrovská svoboda v tom, do čeho investujete, s podporou státu a zaměstnavatele.</li>
-        </ul>
-        
-        <div class="blog-card" style="background: #fff9e6; padding: 15px; border-radius: 8px; margin-top: 20px;">
-            <h4>⚠️ Pozor na staré „penzijko“</h4>
-            <p>Máte-li peníze v <strong>Transformovaných fondech</strong>, pravděpodobně reálně chudnete. Více informací najdete v mém <a href="#blog">článku níže</a>.</p>
+        <h2>Penzijní produkty & DIP</h2>
+        <p>Státní důchod vám životní úroveň nezajistí. Je potřeba kombinovat moderní nástroje:</p>
+        <div style="margin: 15px 0;">
+            <strong>DIP (Dlouhodobý investiční produkt):</strong> Novinka umožňující investovat do široké škály aktiv s daňovou úsporou až 7 200 Kč ročně a příspěvkem zaměstnavatele.<br><br>
+            <strong>DPS (Doplňkové penzijní spoření):</strong> Klasický nástroj se státním příspěvkem až 340 Kč měsíčně.
+        </div>
+        <div style="background: #fff9e6; padding: 15px; border-radius: 8px; border-left: 4px solid #f6ad55;">
+            <strong>Upozornění:</strong> Pokud máte stále "staré penzijko" (Transformované fondy), reálně vaše úspory ztrácejí hodnotu. Přečtěte si více v mém <a href="#blog">článku níže</a>.
         </div>
     </section>
 
     <section id="kalkulacky">
         <h2>Kalkulačky</h2>
-        <p>Spočítejte si své budoucí finance během minuty:</p>
-        <br>
-        
-        <button class="accordion-btn" onclick="toggleAcc('calc-invest')">Investiční kalkulačka (Majetek) <span>▼</span></button>
-        <div id="calc-invest" class="accordion-content">
-            <div class="calc-box">
-                <div class="input-group">
-                    <label>Měsíční vklad (Kč)</label><input type="number" id="inv-monthly" value="2000" oninput="calcInvest()">
-                    <label>Počet let</label><input type="number" id="inv-years" value="20" oninput="calcInvest()">
-                    <label>Očekávaný výnos (%)</label><input type="number" id="inv-rate" value="7" oninput="calcInvest()">
-                </div>
-                <p>Za danou dobu vybudujete: <strong><span id="inv-res">0</span> Kč</strong></p>
-                <canvas id="invChart" style="max-height: 200px;"></canvas>
+        <button class="acc-btn" onclick="toggleAcc('acc-invest')">Investice - Složené úročení <span>▼</span></button>
+        <div id="acc-invest" class="acc-content">
+            <div class="input-group">
+                <label>Měsíční vklad (Kč)</label><input type="number" id="inv-pmt" value="5000" oninput="calcInv()">
+                <label>Doba (let)</label><input type="number" id="inv-yrs" value="20" oninput="calcInv()">
+                <label>Zhodnocení (%)</label><input type="number" id="inv-rate" value="7" oninput="calcInv()">
             </div>
+            <div class="result-box">Majetek celkem: <span id="inv-res">0</span> Kč</div>
+            <div class="chart-container"><canvas id="invChart"></canvas></div>
         </div>
 
-        <button class="accordion-btn" onclick="toggleAcc('calc-hypo')">Hypoteční kalkulačka (Splátka) <span>▼</span></button>
-        <div id="calc-hypo" class="accordion-content">
-            <div class="calc-box">
-                <div class="input-group">
-                    <label>Výše úvěru (Kč)</label><input type="number" id="hypo-amt" value="3000000" oninput="calcHypo()">
-                    <label>Úrok (%)</label><input type="number" id="hypo-rate" value="5.29" oninput="calcHypo()">
-                    <label>Splatnost (let)</label><input type="number" id="hypo-years" value="30" oninput="calcHypo()">
-                </div>
-                <p>Měsíční splátka: <strong><span id="hypo-res">0</span> Kč</strong></p>
+        <button class="acc-btn" onclick="toggleAcc('acc-hypo')">Hypotéka - Splátka <span>▼</span></button>
+        <div id="acc-hypo" class="acc-content">
+            <div class="input-group">
+                <label>Výše úvěru (Kč)</label><input type="number" id="hypo-amt" value="3000000" oninput="calcHypo()">
+                <label>Úrok (%)</label><input type="number" id="hypo-rate" value="5.39" oninput="calcHypo()">
+                <label>Splatnost (let)</label><input type="number" id="hypo-yrs" value="30" oninput="calcHypo()">
             </div>
-        </div>
-
-        <button class="accordion-btn" onclick="toggleAcc('calc-renta')">Výpočet DPS / Státní příspěvky <span>▼</span></button>
-        <div id="calc-renta" class="accordion-content">
-            <div class="calc-box">
-                <p>Při úložce <strong>1 700 Kč</strong> získáte od státu maximum: <strong>340 Kč/měsíc</strong>.</p>
-                <p>Ročně tak získáte na příspěvcích <strong>4 080 Kč</strong> + daňové úlevy.</p>
-            </div>
+            <div class="result-box">Měsíční splátka: <span id="hypo-res">0</span> Kč</div>
         </div>
     </section>
 
     <section id="blog">
-        <h2>Blog a rady</h2>
+        <h2>Blog</h2>
         <article class="blog-card">
-            <span class="blog-date">26. února 2026</span>
-            <h3>Transformované fondy: Past, ve které vězí miliony Čechů</h3>
-            <p>Víte, že v takzvaném „starém penzijku“ (Transformovaných fondech) stále drží své úspory přes 2,5 milionu lidí? Ačkoliv se tyto fondy tváří bezpečně (díky garanci „nezáporného zhodnocení“), ve skutečnosti jde o jeden z největších finančních problémů českých domácností.</p>
-            <p><strong>Proč je to problém?</strong> Průměrné zhodnocení těchto fondů se dlouhodobě pohybuje kolem 1 %, zatímco inflace v posledních letech dosahovala dvouciferných hodnot. Reálná hodnota vašich peněz tak každým rokem drasticky klesá.</p>
-            <p><strong>Řešení?</strong> Přechod do účastnických fondů (DPS) nebo využití nového DIP. Neruště smlouvy bezhlavě, ale přijďte se poradit, jak peníze přesunout tak, aby konečně začaly vydělávat na vaši budoucnost.</p>
+            <div class="blog-date">2. března 2026</div>
+            <h3>Staré penzijko: Past na vaše úspory?</h3>
+            <p>Téměř 2,5 milionu Čechů stále drží své peníze v Transformovaných fondech. Ty sice garantují "černou nulu", ale jejich výnosy kolem 1 % ani zdaleka nepokryjí inflaci. Po 10 letech v takovém fondu si za své naspořené peníze koupíte mnohem méně než na začátku. Přechod do DPS nebo využití DIP je v roce 2026 klíčovým krokem k ochraně vašich úspor.</p>
         </article>
     </section>
 
-    <section id="kontakt">
+    <section id="kontakt" style="text-align: center;">
         <h2>Kontakt</h2>
-        <div style="text-align: center;">
-            <p>📧 Email: <a href="mailto:sarka.brdkova@4fin.cz">sarka.brdkova@4fin.cz</a></p><br>
-            <a href="https://dobryporadce.cz/poradci/sarka-brdkova" target="_blank" class="dp-badge">Mé reference</a>
-        </div>
+        <p>Email: <a href="mailto:sarka.brdkova@4fin.cz">sarka.brdkova@4fin.cz</a></p><br>
+        <a href="https://dobryporadce.cz/poradci/sarka-brdkova" target="_blank" class="dp-badge">Mé reference na Dobrý poradce</a>
     </section>
 </main>
 
-<footer><p>&copy; 2026 Šárka Brdková | finance_pro_vas</p></footer>
+<footer><p>&copy; 2026 Šárka Brdková | brdkova.cz</p></footer>
 
 <script>
     let myInvChart;
-
-    // AKORDION
     function toggleAcc(id) {
         const el = document.getElementById(id);
         el.style.display = (el.style.display === 'block') ? 'none' : 'block';
-        if (id === 'calc-invest') calcInvest();
+        if(id === 'acc-invest') calcInv();
     }
-
-    // POP-UP LOGIKA
     function openQuiz() { document.getElementById('quiz-overlay').style.display = 'flex'; }
     function closeQuiz() { document.getElementById('quiz-overlay').style.display = 'none'; }
     function finishQuiz() {
         const score = Array.from(document.querySelectorAll('.q-check')).filter(c => c.checked).length;
         document.getElementById('quiz-steps').style.display = 'none';
         document.getElementById('quiz-result').style.display = 'block';
-        document.getElementById('quiz-score-title').innerText = "Skóre: " + score + " / 5";
-        document.getElementById('quiz-advice').innerText = score < 4 ? "Doporučuji revizi vašich smluv." : "Máte dobrý základ!";
+        document.getElementById('quiz-score-title').innerText = "Vaše skóre: " + score + " / 5";
+        document.getElementById('quiz-advice').innerText = score < 4 ? "Pojďme vaše finance nastavit lépe." : "Skvělá práce!";
     }
-
-    // VÝPOČTY
-    function calcInvest() {
-        const pmt = parseFloat(document.getElementById('inv-monthly').value) || 0;
-        const years = parseFloat(document.getElementById('inv-years').value) || 0;
+    function calcInv() {
+        const pmt = parseFloat(document.getElementById('inv-pmt').value) || 0;
+        const yrs = parseFloat(document.getElementById('inv-yrs').value) || 0;
         const r = (parseFloat(document.getElementById('inv-rate').value) || 0) / 100 / 12;
-        const n = years * 12;
+        const n = yrs * 12;
         const total = pmt * ((Math.pow(1 + r, n) - 1) / r);
         document.getElementById('inv-res').innerText = Math.round(total).toLocaleString('cs-CZ');
-        
         const ctx = document.getElementById('invChart').getContext('2d');
         if (myInvChart) myInvChart.destroy();
-        myInvChart = new Chart(ctx, {
-            type: 'line',
-            data: { labels: ['Start', 'Polovina', 'Cíl'], datasets: [{ label: 'Majetek', data: [0, total/3, total], borderColor: '#2b6cb0', fill: true }] },
-            options: { responsive: true, maintainAspectRatio: false }
-        });
+        myInvChart = new Chart(ctx, { type: 'bar', data: { labels: ['Vklad','Zhodnocení'], datasets: [{ data: [pmt*n, total-(pmt*n)], backgroundColor: ['#1a365d','#90cdf4'] }] }, options: { responsive: true, maintainAspectRatio: false } });
     }
-
     function calcHypo() {
         const p = parseFloat(document.getElementById('hypo-amt').value) || 0;
         const r = (parseFloat(document.getElementById('hypo-rate').value) || 0) / 100 / 12;
-        const n = (parseFloat(document.getElementById('hypo-years').value) || 0) * 12;
+        const n = (parseFloat(document.getElementById('hypo-yrs').value) || 0) * 12;
         const res = (r > 0) ? (p * r) / (1 - Math.pow(1 + r, -n)) : p / n;
         document.getElementById('hypo-res').innerText = Math.round(res).toLocaleString('cs-CZ');
     }
-
-    window.onload = function() {
-        setTimeout(openQuiz, 5000);
-        calcInvest();
-        calcHypo();
-    };
+    window.onload = function() { setTimeout(openQuiz, 4000); calcInv(); calcHypo(); };
 </script>
 </body>
 </html>
