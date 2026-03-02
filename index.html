@@ -16,8 +16,8 @@
         <div id="quiz-steps">
             <div class="quiz-q"><input type="checkbox" class="q-check"><label>Mám rezervu na 3-6 měsíců výdajů.</label></div>
             <div class="quiz-q"><input type="checkbox" class="q-check"><label>Investuji alespoň 10 % příjmu.</label></div>
-            <div class="quiz-q"><input type="checkbox" class="q-check"><label>Moje rodina je zajištěna pro případ výpadku příjmu.</label></div>
-            <div class="quiz-q"><input type="checkbox" class="q-check"><label>Vím, kolik platím na poplatcích u smluv.</label></div>
+            <div class="quiz-q"><input type="checkbox" class="q-check"><label>Rodina je zajištěna pro případ výpadku příjmu.</label></div>
+            <div class="quiz-q"><input type="checkbox" class="q-check"><label>Vím, kolik přesně platím na poplatcích.</label></div>
             <div class="quiz-q"><input type="checkbox" class="q-check"><label>Moje úspory v bance nepožírá inflace.</label></div>
             <div class="quiz-q"><input type="checkbox" class="q-check"><label>Využívám daňové úlevy na maximum.</label></div>
             <div class="quiz-q"><input type="checkbox" class="q-check"><label>Buduji si vlastní rentu (DIP/DPS).</label></div>
@@ -29,7 +29,10 @@
         <div id="quiz-result" style="display:none; text-align:center;">
             <h3 id="quiz-score-title">0 / 10</h3>
             <p id="quiz-advice"></p>
-            <a href="mailto:sarka.brdkova@4fin.cz" class="btn">Pošlete mi analýzu</a>
+            <table class="contact-table">
+                <tr><td><strong>Máte zájem o nápravu?</strong></td></tr>
+                <tr><td><a href="mailto:sarka.brdkova@4fin.cz" class="btn">Kontaktovat Šárku Brdkovou</a></td></tr>
+            </table>
         </div>
     </div>
 </div>
@@ -43,21 +46,21 @@
 
 <nav id="main-nav">
     <a href="#" onclick="showSection('home')">O mně</a>
-    <a href="#" onclick="showSection('investice')">Investice</a>
-    <a href="#" onclick="showSection('hypoteky')">Hypotéky & Úvěry</a>
-    <a href="#" onclick="showSection('penze')">Renta (DIP/DPS)</a>
+    <a href="#" onclick="showSection('hypoteky')">Hypotéky</a>
+    <a href="#" onclick="showSection('penze')">Penze (DIP/DPS)</a>
     <a href="#" onclick="showSection('pojisteni')">Pojištění</a>
+    <a href="#" onclick="showSection('uvery')">Úvěry</a>
     <a href="#" onclick="showSection('firmy')">Pro firmy</a>
-    <a href="#" onclick="showSection('blog')">Aktuality</a>
+    <a href="https://dobryporadce.cz/poradci/sarka-brdkova" target="_blank">Reference</a>
 </nav>
 
 <main>
     <div id="section-home" class="page-section active">
-        <section class="about-section">
+        <section class="reveal">
             <div class="about-flex">
                 <div class="about-text">
                     <h2>O mně</h2>
-                    <p>Jako certifikovaná konzultantka sítě <strong>4fin</strong> se specializuji na komplexní správu rodinných a firemních financí. Mým cílem je efektivita, srozumitelnost a váš klid.</p>
+                    <p>Jako certifikovaná konzultantka sítě <strong>4fin</strong> stavím řešení, která dávají smysl vaší peněžence. Finance jsou pro mě o svobodě a klidném spánku. Pomáhám vám ovládnout váš rozpočet tak, abyste si mohli plnit sny.</p>
                 </div>
                 <div class="about-photo">
                     <img src="profil.jpg" alt="Šárka Brdková" class="profile-img">
@@ -65,27 +68,17 @@
             </div>
         </section>
 
-        <section class="news-banner">
-            <span class="tag">Aktuálně</span>
-            <h3>Limitovaná akce: Hypotéka s bonusem</h3>
-            <p>Právě teď vyjednáváme individuální sazby pod 5 % pro bonitní klienty. Zjistěte, zda splňujete podmínky.</p>
-            <a href="#kontakt" class="btn-text">Více informací zde →</a>
-        </section>
-    </div>
-
-    <div id="section-investice" class="page-section">
-        <section>
+        <section class="reveal">
             <h2>Investiční plánovač</h2>
-            <p>Pravidelné investování je cesta k budování skutečného majetku.</p>
             <div class="main-calc-card">
                 <div class="input-grid">
-                    <div class="input-group"><label>Počáteční vklad</label><input type="number" id="p-start" value="100000" oninput="runCalc()"></div>
+                    <div class="input-group"><label>Vklad</label><input type="number" id="p-start" value="100000" oninput="runCalc()"></div>
                     <div class="input-group"><label>Měsíčně</label><input type="number" id="p-monthly" value="5000" oninput="runCalc()"></div>
-                    <div class="input-group"><label>Výnos (%)</label><input type="number" id="p-rate" value="7" oninput="runCalc()"></div>
+                    <div class="input-group"><label>Výnos %</label><input type="number" id="p-rate" value="7" oninput="runCalc()"></div>
                     <div class="input-group"><label>Let</label><input type="number" id="p-years" value="20" oninput="runCalc()"></div>
                 </div>
                 <div class="main-result">
-                    <p>Předpokládaný majetek za <span id="res-years">20</span> let:</p>
+                    <p>Za <span id="res-years">20</span> let vybudujete majetek:</p>
                     <h3 id="total-res">0 Kč</h3>
                 </div>
                 <div class="chart-wrapper">
@@ -93,96 +86,73 @@
                 </div>
             </div>
         </section>
+
+        <section class="reveal news-card">
+            <span class="tag">Aktuálně</span>
+            <h3>Garantovaný úrok 4,99 % u ČS</h3>
+            <p>Limitovaná akce na úvěry pro rekonstrukci či konsolidaci. Prověřte své možnosti včas.</p>
+        </section>
     </div>
 
     <div id="section-hypoteky" class="page-section">
         <section>
-            <h2>Hypotéky a Úvěry</h2>
-            <div class="service-grid">
-                <div class="service-item">
-                    <h3>Hypoteční úvěry</h3>
-                    <p>Srovnání všech bank a vyjednání individuálních podmínek u ČS, KB, Hypoteční banky a dalších.</p>
-                </div>
-                <div class="service-item">
-                    <h3>Spotřebitelské úvěry</h3>
-                    <p>Rychlé financování rekonstrukcí nebo nákupu vozu s výhodným úrokem.</p>
-                </div>
-            </div>
+            <h2>Hypotéky</h2>
+            <p>V roce 2025 dosáhl objem hypoték rekordních výšin. Průměrná výše úvěru stoupla na 3,8 mil. Kč. Srovnám pro vás všechny banky a vyjednám individuální sazbu.</p>
+            <br>
+            <a href="#kontakt" class="btn">Chci spočítat hypotéku</a>
         </section>
     </div>
 
     <div id="section-penze" class="page-section">
         <section>
-            <h2>Renta na stáří (DIP a DPS)</h2>
-            <div class="info-box">
-                <h3>DIP (Dlouhodobý investiční produkt)</h3>
-                <p>Moderní alternativa k penzijku. Umožňuje investovat do akcií a ETF s daňovou úlevou až 48 000 Kč ročně.</p>
-            </div>
-            <div class="info-box">
-                <h3>DPS (Doplňkové penzijní spoření)</h3>
-                <p>Klasické spoření se státním příspěvkem až 340 Kč měsíčně. Pomohu vám s přechodem ze starých nevýhodných fondů.</p>
-            </div>
+            <h2>Penzijní produkty (DIP a DPS)</h2>
+            <p><strong>DIP vs. Penzijko:</strong> DIP přinesl svobodu. Můžete investovat přímo do akcií s daňovou úlevou až 48.000 Kč ročně. Staré penzijko (transformované fondy) reálně chudne kvůli nízkému zhodnocení.</p>
         </section>
     </div>
 
     <div id="section-pojisteni" class="page-section">
         <section>
             <h2>Komplexní pojištění</h2>
-            <div class="insurance-icons">
-                <div class="i-card">🛡️ <h4>Životní</h4></div>
-                <div class="i-card">🏠 <h4>Majetkové</h4></div>
-                <div class="i-card">🚗 <h4>Auto (POV/HAV)</h4></div>
-                <div class="i-card">💼 <h4>Odpovědnost</h4></div>
-            </div>
-            <p style="margin-top: 20px;">Hlídám podpojištění vašeho majetku vlivem inflace a cen stavebních prací.</p>
+            <ul>
+                <li><strong>Životní:</strong> Krytí vážných rizik a výpadku příjmu.</li>
+                <li><strong>Majetkové:</strong> Pozor na podpojištění! Ceny stavebních prací vzrostly o 30 %.</li>
+                <li><strong>Auto:</strong> Výhodné POV a HAV s asistencí.</li>
+            </ul>
+        </section>
+    </div>
+
+    <div id="section-uvery" class="page-section">
+        <section>
+            <h2>Úvěry</h2>
+            <p>Konsolidace dražších dluhů nebo finance na rekonstrukci. Aktuálně s garantovaným úrokem u vybraných partnerů.</p>
         </section>
     </div>
 
     <div id="section-firmy" class="page-section">
-        <section class="corporate-section">
-            <h2>Zaměstnanecké benefity a DIP pro firmy</h2>
-            <p>Pomáhám firmám nastavit efektivní systém benefitů, který motivuje zaměstnance a šetří daně zaměstnavateli.</p>
-            <div class="corp-grid">
-                <div class="corp-item">
-                    <h3>Školení ve firmách</h3>
-                    <p>Přijedu k vám do firmy a udělám pro vaše zaměstnance srozumitelné školení o finanční gramotnosti, DIP a možnostech zajištění na stáří.</p>
-                </div>
-                <div class="corp-item">
-                    <h3>Daňové úlevy</h3>
-                    <p>Příspěvek zaměstnavatele na DIP/DPS až do výše 50 000 Kč ročně je pro firmu daňově uznatelným nákladem a neplatí se z něj odvody.</p>
-                </div>
-            </div>
-            <div class="result-box" style="border-color: var(--accent);">
-                <h4>Máte zájem o školení nebo nastavení DIP pro firmu?</h4>
-                <br><a href="mailto:sarka.brdkova@4fin.cz?subject=Firemni%20skoleni" class="btn">Kontaktujte mě pro termín</a>
-            </div>
-        </section>
-    </div>
-
-    <div id="section-blog" class="page-section">
         <section>
-            <h2>Blog a Aktuality</h2>
-            <div class="blog-grid">
-                <div class="blog-card"><h3>DIP vs DPS: Kdo vyhrál?</h3><p>Detailní rozbor novinek v penzijním zákoně.</p></div>
-                <div class="blog-card"><h3>Pozor na podpojištění!</h3><p>Proč stará smlouva na dům může být rizikem.</p></div>
-            </div>
+            <h2>Pro firmy a zaměstnavatele</h2>
+            <p>Přijedu k vám do firmy a udělám pro zaměstnance školení o finanční gramotnosti, DIP a DPS.</p>
+            <p><strong>Úlevy pro firmy:</strong> Příspěvek zaměstnavatele na DIP/DPS až do výše 50 000 Kč ročně je daňově uznatelným nákladem.</p>
+            <br>
+            <a href="mailto:sarka.brdkova@4fin.cz?subject=Firemni%20skoleni" class="btn">Sjednat školení ve firmě</a>
         </section>
     </div>
 
-    <section id="kontakt">
+    <section id="kontakt" class="reveal">
         <h2>Kontakt</h2>
         <div class="contact-flex">
             <div class="contact-text">
-                <p>Email: <strong>sarka.brdkova@4fin.cz</strong></p>
-                <div class="qr-group">
-                    <div class="qr-item">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=mailto:sarka.brdkova@4fin.cz" alt="Email QR">
-                        <p>Napište mi</p>
-                    </div>
-                    <div class="qr-item">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=tel:+420604131440" alt="Phone QR">
-                        <p>Zavolejte mi</p>
-                    </div>
+                <p>📧 Email: <strong>sarka.brdkova@4fin.cz</strong></p>
+                <p>📞 Telefon: <strong>+420 604 131 440</strong></p>
+            </div>
+            <div class="qr-area">
+                <div class="qr-item">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=mailto:sarka.brdkova@4fin.cz" alt="Email QR">
+                    <p>E-mail</p>
+                </div>
+                <div class="qr-item">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=tel:+42060131440" alt="Phone QR">
+                    <p>Telefon</p>
                 </div>
             </div>
         </div>
