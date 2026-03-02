@@ -24,12 +24,12 @@
             <div class="quiz-q"><input type="checkbox" class="q-check"><label>Moje hypotéka má nejlepší úrok na trhu.</label></div>
             <div class="quiz-q"><input type="checkbox" class="q-check"><label>Mám pojištěný dům na tržní ceny.</label></div>
             <div class="quiz-q"><input type="checkbox" class="q-check"><label>Mám poradce, který mi hlídá termíny.</label></div>
-            <button class="btn main-btn" onclick="finishQuiz()">Vyhodnotit výsledky</button>
+            <button class="btn" onclick="finishQuiz()">Vyhodnotit výsledky</button>
         </div>
         <div id="quiz-result" style="display:none; text-align:center;">
-            <h3 id="quiz-score-title"></h3>
+            <h3 id="quiz-score-title">0 / 10</h3>
             <p id="quiz-advice"></p>
-            <a href="mailto:sarka.brdkova@4fin.cz" class="btn">Pošlete mi skóre k analýze</a>
+            <a href="mailto:sarka.brdkova@4fin.cz" class="btn">Pošlete mi analýzu</a>
         </div>
     </div>
 </div>
@@ -44,19 +44,18 @@
 
 <nav id="main-nav">
     <a href="#" onclick="showSection('home')">O mně</a>
-    <a href="#" onclick="showSection('blog')">Aktuality & Blog</a>
-    <a href="#" onclick="showSection('tools')">Ostatní kalkulačky</a>
+    <a href="#" onclick="showSection('blog')">Aktuality</a>
+    <a href="#" onclick="showSection('tools')">Kalkulačky</a>
     <a href="https://dobryporadce.cz/poradci/sarka-brdkova" target="_blank">Reference</a>
 </nav>
 
 <main>
     <div id="section-home" class="page-section active">
-        <section class="reveal">
+        <section class="reveal about-section">
             <div class="about-flex">
                 <div class="about-text">
                     <h2>O mně</h2>
-                    <p>Jako certifikovaná konzultantka sítě <strong>4fin</strong> neprodávám produkty, ale stavím řešení. Finance jsou pro mě o svobodě a klidném spánku. Pomáhám vám ovládnout váš rozpočet tak, abyste si mohli plnit sny.</p>
-                    <p>Mým úkolem je vnést do vašich financí klid a srozumitelnou strategii, která dává smysl vaší peněžence.</p>
+                    <p>Jako certifikovaná konzultantka sítě <strong>4fin</strong> stavím řešení, která dávají smysl vaší peněžence. Finance jsou pro mě o svobodě a klidném spánku.</p>
                 </div>
                 <div class="about-photo">
                     <img src="profil.jpg" alt="Šárka Brdková" class="profile-img">
@@ -65,46 +64,60 @@
         </section>
 
         <section class="reveal">
-            <h2>Investice: Složené úročení v praxi</h2>
-            <div class="calc-card">
+            <h2 class="centered">Investiční plánovač</h2>
+            <div class="main-calc-card">
                 <div class="input-grid">
-                    <div class="input-group"><label>Počáteční vklad</label><input type="number" id="p-start" value="100000" oninput="runCalc()"></div>
-                    <div class="input-group"><label>Měsíční vklad</label><input type="number" id="p-monthly" value="5000" oninput="runCalc()"></div>
-                    <div class="input-group"><label>Výnos (%)</label><input type="number" id="p-rate" value="7" oninput="calculateInterest()"></div>
-                    <div class="input-group"><label>Doba (let)</label><input type="number" id="p-years" value="20" oninput="runCalc()"></div>
+                    <div class="input-group">
+                        <label>Počáteční vklad</label>
+                        <input type="number" id="p-start" value="100000" oninput="runCalc()">
+                    </div>
+                    <div class="input-group">
+                        <label>Měsíční investice</label>
+                        <input type="number" id="p-monthly" value="5000" oninput="runCalc()">
+                    </div>
+                    <div class="input-group">
+                        <label>Roční výnos (%)</label>
+                        <input type="number" id="p-rate" value="7" oninput="runCalc()">
+                    </div>
+                    <div class="input-group">
+                        <label>Doba (let)</label>
+                        <input type="number" id="p-years" value="20" oninput="runCalc()">
+                    </div>
                 </div>
-                <div class="result-display">
-                    <p>Odhadovaný majetek:</p>
-                    <h3><span id="total-res">0</span> Kč</h3>
+                <div class="main-result">
+                    <p>Za <span id="res-years">20</span> let vybudujete majetek v hodnotě:</p>
+                    <h3 id="total-res">0 Kč</h3>
                 </div>
-                <div class="chart-wrapper"><canvas id="mainChart"></canvas></div>
+                <div class="chart-wrapper">
+                    <canvas id="mainChart"></canvas>
+                </div>
             </div>
         </section>
     </div>
 
     <div id="section-blog" class="page-section">
         <section>
-            <h2>Odborné aktuality</h2>
+            <h2>Aktuální témata</h2>
             <div class="blog-grid">
-                <div class="blog-item">
-                    <span class="badge">Renta</span>
-                    <h3>DIP vs. Penzijko</h3>
-                    <p>Srovnání nového Dlouhodobého investičního produktu a klasického penzijního spoření.</p>
+                <div class="blog-card">
+                    <span class="tag">DIP vs. DPS</span>
+                    <h3>Srovnání penzijních produktů</h3>
+                    <p>Proč je DIP revolucí v investování na stáří a kdy se vyplatí zůstat u klasického penzijka?</p>
                 </div>
-                <div class="blog-item">
-                    <span class="badge">Akce</span>
-                    <h3>Úvěry ČS za 4,99%</h3>
-                    <p>Limitovaná nabídka na konsolidace a rekonstrukce s garantovaným úrokem.</p>
+                <div class="blog-card">
+                    <span class="tag">Akce</span>
+                    <h3>Garantovaný úrok 4,99 % u ČS</h3>
+                    <p>Aktuální akce na úvěry pro rekonstrukci či konsolidaci. Prověřte své možnosti včas.</p>
                 </div>
-                <div class="blog-item">
-                    <span class="badge">Data</span>
-                    <h3>Hypotéky 2025</h3>
-                    <p>Statistika a vývoj trhu za uplynulý rok.</p>
+                <div class="blog-card">
+                    <span class="tag">Hypotéky</span>
+                    <h3>Statistika hypoték 2025</h3>
+                    <p>Rekordní objemy a stabilizace sazeb. Podívejte se, jak se vyvíjí trh s bydlením.</p>
                 </div>
-                <div class="blog-item">
-                    <span class="badge">Majetek</span>
-                    <h3>Podpojištění</h3>
-                    <p>Proč stará smlouva na dům může znamenat finanční katastrofu.</p>
+                <div class="blog-card">
+                    <span class="tag">Pojištění</span>
+                    <h3>Riziko podpojištění majetku</h3>
+                    <p>Ceny nemovitostí rostou rychleji než staré smlouvy. Neplaťte zbytečně málo za ochranu.</p>
                 </div>
             </div>
         </section>
@@ -112,36 +125,50 @@
 
     <div id="section-tools" class="page-section">
         <section>
-            <h2>Doplňkové kalkulačky</h2>
-            <div class="tool-card">
-                <h3>Hypoteční splátka</h3>
-                <p>Výpočet měsíčního zatížení při aktuálních sazbách.</p>
-                <button class="btn-outline">Otevřít výpočet</button>
-            </div>
-            <div class="tool-card">
-                <h3>Státní příspěvky DPS</h3>
-                <p>Kolik získáte od státu při různých úložkách.</p>
-                <button class="btn-outline">Otevřít výpočet</button>
+            <h2>Ostatní výpočty</h2>
+            <div class="tools-flex">
+                <div class="tool-item">
+                    <div class="tool-icon">🏠</div>
+                    <h3>Hypoteční splátka</h3>
+                    <div class="input-group">
+                        <label>Výše úvěru</label>
+                        <input type="number" id="h-amt" value="3000000" oninput="calcHypo()">
+                    </div>
+                    <div class="input-group">
+                        <label>Sazba %</label>
+                        <input type="number" id="h-rate" value="5.29" oninput="calcHypo()">
+                    </div>
+                    <p class="tool-res">Splátka: <span id="h-res">0</span> Kč</p>
+                </div>
+                
+                <div class="tool-item">
+                    <div class="tool-icon">💰</div>
+                    <h3>Penzijní renta</h3>
+                    <div class="input-group">
+                        <label>Měsíční úložka</label>
+                        <input type="number" id="pen-pmt" value="1700" oninput="calcPen()">
+                    </div>
+                    <p class="tool-res">Státní příspěvek: <span id="pen-res">340</span> Kč</p>
+                </div>
             </div>
         </section>
     </div>
 
-    <section id="kontakt" class="reveal">
-        <h2>Kontaktujte mě</h2>
+    <section id="kontakt" class="reveal contact-section">
+        <h2>Pojďme se spojit</h2>
         <div class="contact-flex">
-            <div class="contact-info">
-                <p>📧 Email: <strong>sarka.brdkova@4fin.cz</strong></p>
-                <p>📍 Osobní i online konzultace</p>
-                <a href="mailto:sarka.brdkova@4fin.cz" class="btn">Napsat zprávu</a>
-            </div>
-            <div class="qr-area">
-                <div class="qr-card">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=mailto:sarka.brdkova@4fin.cz" alt="Email QR">
-                    <p>Napište mi</p>
-                </div>
-                <div class="qr-card">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=tel:+420604131440" alt="Phone QR">
-                    <p>Zavolejte mi</p>
+            <div class="contact-text">
+                <p>📧 Email: <strong><a href="mailto:sarka.brdkova@4fin.cz">sarka.brdkova@4fin.cz</a></strong></p>
+                <p>📍 Osobní i online konzultace po celé ČR</p>
+                <div class="qr-group">
+                    <div class="qr-item">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=mailto:sarka.brdkova@4fin.cz" alt="Email QR">
+                        <p>Uložit email</p>
+                    </div>
+                    <div class="qr-item">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=tel:+420604131440" alt="Phone QR">
+                        <p>Uložit telefon</p>
+                    </div>
                 </div>
             </div>
         </div>
