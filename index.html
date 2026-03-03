@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Šárka Brdková | finance_pro_vas</title>
+    <title>www.brdkova.cz | finance_pro_vas</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,7 +12,7 @@
 <div id="quiz-overlay">
     <div id="quiz-modal">
         <span class="close-quiz" onclick="closeQuiz()">&times;</span>
-        <h2>Audit finančního zdraví</h2>
+        <h2>Test finančního zdraví</h2>
         <div id="quiz-steps">
             <div class="quiz-q"><input type="checkbox" class="q-check"><label>Mám rezervu na 3-6 měsíců výdajů.</label></div>
             <div class="quiz-q"><input type="checkbox" class="q-check"><label>Investuji alespoň 10 % příjmu.</label></div>
@@ -29,23 +29,24 @@
         <div id="quiz-result" style="display:none; text-align:center;">
             <h3 id="quiz-score-title">0 / 10</h3>
             <p id="quiz-advice"></p>
-            <table class="contact-table">
-                <tr><td><strong>Máte zájem o nápravu?</strong></td></tr>
-                <tr><td><a href="mailto:sarka.brdkova@4fin.cz" class="btn">Kontaktovat Šárku Brdkovou</a></td></tr>
-            </table>
+            <div class="contact-box-mini">
+                <p><strong>Chcete své skóre vylepšit?</strong></p>
+                <a href="mailto:sarka.brdkova@4fin.cz" class="btn">Kontaktovat Šárku Brdkovou</a>
+            </div>
         </div>
     </div>
 </div>
 
 <header>
     <div class="header-overlay">
-        <p class="brand">brdkova.cz</p>
+        <p class="brand">www.brdkova.cz</p>
         <h1>finance_pro_vas</h1>
     </div>
 </header>
 
 <nav id="main-nav">
     <a href="#" onclick="showSection('home')">O mně</a>
+    <a href="#" onclick="showSection('investice')">Investice</a>
     <a href="#" onclick="showSection('hypoteky')">Hypotéky</a>
     <a href="#" onclick="showSection('penze')">Penze (DIP/DPS)</a>
     <a href="#" onclick="showSection('pojisteni')">Pojištění</a>
@@ -69,20 +70,22 @@
         </section>
 
         <section class="reveal">
-            <h2>Investiční plánovač</h2>
-            <div class="main-calc-card">
-                <div class="input-grid">
-                    <div class="input-group"><label>Vklad</label><input type="number" id="p-start" value="100000" oninput="runCalc()"></div>
-                    <div class="input-group"><label>Měsíčně</label><input type="number" id="p-monthly" value="5000" oninput="runCalc()"></div>
-                    <div class="input-group"><label>Výnos %</label><input type="number" id="p-rate" value="7" oninput="runCalc()"></div>
-                    <div class="input-group"><label>Let</label><input type="number" id="p-years" value="20" oninput="runCalc()"></div>
+            <h2>Kalkulačky na míru</h2>
+            <div class="calc-grid">
+                <div class="calc-link-card" onclick="showSection('investice')">
+                    <span class="icon">📈</span>
+                    <h4>Investice</h4>
+                    <p>Složené úročení</p>
                 </div>
-                <div class="main-result">
-                    <p>Za <span id="res-years">20</span> let vybudujete majetek:</p>
-                    <h3 id="total-res">0 Kč</h3>
+                <div class="calc-link-card" onclick="showSection('hypoteky')">
+                    <span class="icon">🏠</span>
+                    <h4>Hypotéky</h4>
+                    <p>Měsíční splátka</p>
                 </div>
-                <div class="chart-wrapper">
-                    <canvas id="mainChart"></canvas>
+                <div class="calc-link-card" onclick="showSection('penze')">
+                    <span class="icon">💰</span>
+                    <h4>Penzijní renta</h4>
+                    <p>Státní příspěvky</p>
                 </div>
             </div>
         </section>
@@ -94,49 +97,93 @@
         </section>
     </div>
 
+    <div id="section-investice" class="page-section">
+        <section>
+            <h2>Investiční plánovač</h2>
+            <div class="main-calc-card">
+                <div class="input-grid">
+                    <div class="input-group"><label>Počáteční vklad</label><input type="number" id="p-start" value="100000" oninput="runCalc()"></div>
+                    <div class="input-group"><label>Měsíčně</label><input type="number" id="p-monthly" value="5000" oninput="runCalc()"></div>
+                    <div class="input-group"><label>Výnos (%)</label><input type="number" id="p-rate" value="7" oninput="runCalc()"></div>
+                    <div class="input-group"><label>Let</label><input type="number" id="p-years" value="20" oninput="runCalc()"></div>
+                </div>
+                <div class="main-result">
+                    <p>Za <span id="res-years">20</span> let vybudujete majetek:</p>
+                    <h3 id="total-res">0 Kč</h3>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="mainChart"></canvas>
+                </div>
+            </div>
+        </section>
+    </div>
+
     <div id="section-hypoteky" class="page-section">
         <section>
             <h2>Hypotéky</h2>
-            <p>V roce 2025 dosáhl objem hypoték rekordních výšin. Průměrná výše úvěru stoupla na 3,8 mil. Kč. Srovnám pro vás všechny banky a vyjednám individuální sazbu.</p>
-            <br>
-            <a href="#kontakt" class="btn">Chci spočítat hypotéku</a>
+            <p>Najdu pro vás nejvýhodnější financování bydlení. Srovnávám nabídky všech bank na trhu.</p>
+            <div class="main-calc-card" style="margin-top:20px;">
+                <div class="input-grid">
+                    <div class="input-group"><label>Výše úvěru</label><input type="number" id="h-amt" value="3000000" oninput="calcHypo()"></div>
+                    <div class="input-group"><label>Sazba (%)</label><input type="number" id="h-rate" value="5.29" step="0.01" oninput="calcHypo()"></div>
+                    <div class="input-group"><label>Splatnost (let)</label><input type="number" id="h-yrs" value="30" oninput="calcHypo()"></div>
+                </div>
+                <div class="main-result">
+                    <p>Měsíční splátka:</p>
+                    <h3 id="h-res">0 Kč</h3>
+                </div>
+            </div>
         </section>
     </div>
 
     <div id="section-penze" class="page-section">
         <section>
             <h2>Penzijní produkty (DIP a DPS)</h2>
-            <p><strong>DIP vs. Penzijko:</strong> DIP přinesl svobodu. Můžete investovat přímo do akcií s daňovou úlevou až 48.000 Kč ročně. Staré penzijko (transformované fondy) reálně chudne kvůli nízkému zhodnocení.</p>
+            <p><strong>DIP:</strong> Možnost investovat do akcií s daňovou úlevou až 48.000 Kč ročně.</p>
+            <p><strong>DPS:</strong> Státní příspěvek až 340 Kč měsíčně.</p>
+            <div class="info-box-yellow">
+                <p><strong>Pozor:</strong> Transformované fondy (staré penzijko) reálně prodělávají kvůli inflaci.</p>
+            </div>
         </section>
     </div>
 
     <div id="section-pojisteni" class="page-section">
         <section>
             <h2>Komplexní pojištění</h2>
-            <ul>
-                <li><strong>Životní:</strong> Krytí vážných rizik a výpadku příjmu.</li>
-                <li><strong>Majetkové:</strong> Pozor na podpojištění! Ceny stavebních prací vzrostly o 30 %.</li>
-                <li><strong>Auto:</strong> Výhodné POV a HAV s asistencí.</li>
-            </ul>
+            <div class="insurance-grid">
+                <div class="i-card">🛡️ Životní</div>
+                <div class="i-card">🏠 Majetkové</div>
+                <div class="i-card">🚗 Auta</div>
+                <div class="i-card">💼 Odpovědnost</div>
+            </div>
         </section>
     </div>
 
     <div id="section-uvery" class="page-section">
         <section>
-            <h2>Úvěry</h2>
-            <p>Konsolidace dražších dluhů nebo finance na rekonstrukci. Aktuálně s garantovaným úrokem u vybraných partnerů.</p>
+            <h2>Spotřebitelské úvěry</h2>
+            <p>Konsolidace stávajících dluhů nebo finance na rekonstrukci a auto.</p>
         </section>
     </div>
 
     <div id="section-firmy" class="page-section">
         <section>
             <h2>Pro firmy a zaměstnavatele</h2>
-            <p>Přijedu k vám do firmy a udělám pro zaměstnance školení o finanční gramotnosti, DIP a DPS.</p>
-            <p><strong>Úlevy pro firmy:</strong> Příspěvek zaměstnavatele na DIP/DPS až do výše 50 000 Kč ročně je daňově uznatelným nákladem.</p>
+            <p>Přijedu k vám do firmy a udělám pro zaměstnance školení o finanční gramotnosti a DIPu.</p>
+            <p><strong>Daňové úlevy:</strong> Příspěvek na DIP/DPS až 50 000 Kč ročně je pro firmu daňově uznatelný náklad.</p>
             <br>
-            <a href="mailto:sarka.brdkova@4fin.cz?subject=Firemni%20skoleni" class="btn">Sjednat školení ve firmě</a>
+            <a href="mailto:sarka.brdkova@4fin.cz?subject=Firemni%20skoleni" class="btn">Sjednat školení</a>
         </section>
     </div>
+
+    <section class="reveal">
+        <h2 style="text-align:center;">Spolupracuji s lídry trhu</h2>
+        <div class="partners-grid">
+            <span>Česká spořitelna</span><span>UniCredit</span><span>RB</span><span>KB</span><span>Allianz</span>
+            <span>Kooperativa</span><span>NN pojišťovna</span><span>Generali Česká poj.</span><span>Direct</span>
+            <span>Uniqa</span><span>mBank</span><span>Moneta</span><span>MetLife</span>
+        </div>
+    </section>
 
     <section id="kontakt" class="reveal">
         <h2>Kontakt</h2>
@@ -151,7 +198,7 @@
                     <p>E-mail</p>
                 </div>
                 <div class="qr-item">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=tel:+42060131440" alt="Phone QR">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=tel:+420604131440" alt="Phone QR">
                     <p>Telefon</p>
                 </div>
             </div>
@@ -159,7 +206,11 @@
     </section>
 </main>
 
-<footer><p>&copy; 2026 Šárka Brdková | www.brdkova.cz</p></footer>
+<footer class="main-footer">
+    <div class="footer-bar">
+        <p>&copy; 2026 Šárka Brdková | www.brdkova.cz</p>
+    </div>
+</footer>
 
 <script src="script.js"></script>
 </body>

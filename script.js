@@ -1,11 +1,17 @@
 let mainChart;
 
+// Přepínání sekcí
 function showSection(id) {
     document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
-    document.getElementById('section-' + id).classList.add('active');
-    if (id === 'home') runCalc();
+    const target = document.getElementById('section-' + id);
+    if(target) {
+        target.classList.add('active');
+        window.scrollTo(0, 0);
+    }
+    if (id === 'investice') setTimeout(runCalc, 100);
 }
 
+// Investiční kalkulačka
 function runCalc() {
     const P = parseFloat(document.getElementById('p-start').value) || 0;
     const PMT = parseFloat(document.getElementById('p-monthly').value) || 0;
@@ -27,12 +33,12 @@ function runCalc() {
     const ctx = document.getElementById('mainChart').getContext('2d');
     if (mainChart) mainChart.destroy();
     mainChart = new Chart(ctx, {
-        type: 'bar', // Sloupcový graf
+        type: 'bar',
         data: {
             labels: labels,
             datasets: [
-                { label: 'Vložené peníze', data: deposits, backgroundColor: '#1a365d' },
-                { label: 'Zhodnocení (zisk)', data: interest, backgroundColor: '#90cdf4' }
+                { label: 'Vklady', data: deposits, backgroundColor: '#1a365d' },
+                { label: 'Zisk', data: interest, backgroundColor: '#90cdf4' }
             ]
         },
         options: { 
@@ -43,6 +49,16 @@ function runCalc() {
     });
 }
 
+// Ostatní výpočty
+function calcHypo() {
+    const p = parseFloat(document.getElementById('h-amt').value) || 0;
+    const r = (parseFloat(document.getElementById('h-rate').value) || 0) / 100 / 12;
+    const n = (parseFloat(document.getElementById('h-yrs').value) || 0) * 12;
+    const res = (r > 0) ? (p * r) / (1 - Math.pow(1 + r, -n)) : p / n;
+    document.getElementById('h-res').innerText = Math.round(res).toLocaleString('cs-CZ') + " Kč";
+}
+
+// Animace vynoření
 function reveal() {
     let reveals = document.querySelectorAll(".reveal");
     for (let i = 0; i < reveals.length; i++) {
@@ -52,6 +68,7 @@ function reveal() {
     }
 }
 
+// Kvíz
 function openQuiz() { document.getElementById('quiz-overlay').style.display = 'flex'; }
 function closeQuiz() { document.getElementById('quiz-overlay').style.display = 'none'; }
 function finishQuiz() {
@@ -59,8 +76,8 @@ function finishQuiz() {
     document.getElementById('quiz-steps').style.display = 'none';
     document.getElementById('quiz-result').style.display = 'block';
     document.getElementById('quiz-score-title').innerText = score + " / 10";
-    document.getElementById('quiz-advice').innerText = score < 7 ? "Pojďme vaše finance nastavit lépe." : "Výborný výsledek!";
+    document.getElementById('quiz-advice').innerText = score < 7 ? "Pojďme to probrat u kávy." : "Vypadá to na velmi solidní základ!";
 }
 
 window.addEventListener("scroll", reveal);
-window.onload = () => { setTimeout(openQuiz, 4000); runCalc(); reveal(); };
+window.onload = () => { setTimeout(openQuiz, 4000); runCalc(); calcHypo(); reveal(); };
