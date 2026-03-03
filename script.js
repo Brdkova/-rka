@@ -68,15 +68,14 @@ function reveal() {
     }
 }
 
-// Kvíz
 function openQuiz() { document.getElementById('quiz-overlay').style.display = 'flex'; }
 function closeQuiz() { document.getElementById('quiz-overlay').style.display = 'none'; }
 function finishQuiz() {
     const score = Array.from(document.querySelectorAll('.q-check')).filter(c => c.checked).length;
     document.getElementById('quiz-steps').style.display = 'none';
     document.getElementById('quiz-result').style.display = 'block';
-    document.getElementById('quiz-score-title').innerText = score + " / 10";
-    document.getElementById('quiz-advice').innerText = score < 7 ? "Pojďme to probrat u kávy." : "Vypadá to na velmi solidní základ!";
+    document.getElementById('quiz-score-num').innerText = score;
+    document.getElementById('quiz-score-title').innerText = score < 7 ? "Je prostor pro zlepšení!" : "Skvělá práce!";
 }
 
 window.addEventListener("scroll", reveal);
