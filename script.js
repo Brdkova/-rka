@@ -1,25 +1,24 @@
 let mainChart;
 
+// Přepínání sekcí
 function showSection(id) {
     document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
-    document.getElementById('section-' + id).classList.add('active');
-    if (id === 'kalkulacky') setTimeout(runCalc, 100);
+    const target = document.getElementById('section-' + id);
+    if(target) {
+        target.classList.add('active');
+        window.scrollTo(0, 0);
+    }
+    if (id === 'investice') setTimeout(runCalc, 100);
 }
 
-function openCalc(evt, calcId) {
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-    document.querySelectorAll('.tab-link').forEach(l => l.classList.remove('active'));
-    document.getElementById(calcId).classList.add('active');
-    evt.currentTarget.classList.add('active');
-    if(calcId === 'calc-invest') runCalc();
-}
-
+// Investiční kalkulačka
 function runCalc() {
     const P = parseFloat(document.getElementById('p-start').value) || 0;
     const PMT = parseFloat(document.getElementById('p-monthly').value) || 0;
     const r = (parseFloat(document.getElementById('p-rate').value) || 0) / 100;
     const t = parseInt(document.getElementById('p-years').value) || 0;
-    
+    document.getElementById('res-years').innerText = t;
+
     let labels = [], deposits = [], interest = [];
     for (let i = 1; i <= t; i++) {
         labels.push("Rok " + i);
@@ -42,26 +41,43 @@ function runCalc() {
                 { label: 'Zisk', data: interest, backgroundColor: '#90cdf4' }
             ]
         },
-        options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: false, 
+            scales: { x: { stacked: true }, y: { stacked: true } } 
+        }
     });
 }
 
+// Ostatní výpočty
 function calcHypo() {
     const p = parseFloat(document.getElementById('h-amt').value) || 0;
     const r = (parseFloat(document.getElementById('h-rate').value) || 0) / 100 / 12;
     const n = (parseFloat(document.getElementById('h-yrs').value) || 0) * 12;
     const res = (r > 0) ? (p * r) / (1 - Math.pow(1 + r, -n)) : p / n;
-    document.getElementById('h-res').innerText = Math.round(res).toLocaleString('cs-CZ');
+    document.getElementById('h-res').innerText = Math.round(res).toLocaleString('cs-CZ') + " Kč";
 }
 
+// Animace vynoření
+function reveal() {
+    let reveals = document.querySelectorAll(".reveal");
+    for (let i = 0; i < reveals.length; i++) {
+        let windowHeight = window.innerHeight;
+        let elementTop = reveals[i].getBoundingClientRect().top;
+        if (elementTop < windowHeight - 100) reveals[i].classList.add("active");
+    }
+}
+
+// Kvíz
 function openQuiz() { document.getElementById('quiz-overlay').style.display = 'flex'; }
 function closeQuiz() { document.getElementById('quiz-overlay').style.display = 'none'; }
 function finishQuiz() {
     const score = Array.from(document.querySelectorAll('.q-check')).filter(c => c.checked).length;
     document.getElementById('quiz-steps').style.display = 'none';
     document.getElementById('quiz-result').style.display = 'block';
-    document.getElementById('quiz-score-num').innerText = score;
-    document.getElementById('quiz-score-title').innerText = score < 7 ? "Je prostor pro zlepšení!" : "Skvělá práce!";
+    document.getElementById('quiz-score-title').innerText = score + " / 10";
+    document.getElementById('quiz-advice').innerText = score < 7 ? "Pojďme to probrat u kávy." : "Vypadá to na velmi solidní základ!";
 }
 
-window.onload = () => { setTimeout(openQuiz, 4000); runCalc(); calcHypo(); };
+window.addEventListener("scroll", reveal);
+window.onload = () => { setTimeout(openQuiz, 4000); runCalc(); calcHypo(); reveal(); };

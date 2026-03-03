@@ -4,11 +4,14 @@
     --light-blue: #90cdf4;
     --gray: #f7fafc;
     --text: #2d3748;
-    --grad: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Inter', sans-serif; background: var(--gray); color: var(--text); overflow-x: hidden; }
+
+/* Animace */
+.reveal { opacity: 0; transform: translateY(20px); transition: 0.8s all ease; }
+.reveal.active { opacity: 1; transform: translateY(0); }
 
 header { background: var(--navy); color: white; padding: 3rem 1rem; text-align: center; }
 .brand { font-size: 1.2rem; font-weight: 800; color: var(--light-blue); letter-spacing: 2px; }
@@ -20,38 +23,45 @@ nav a:hover { background: var(--blue); }
 main { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
 section { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 2rem; }
 
-/* BAREVNÝ KVÍZ */
-#quiz-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 3000; backdrop-filter: blur(5px); }
-#quiz-modal { background: white; padding: 0; border-radius: 25px; max-width: 600px; width: 95%; overflow: hidden; position: relative; }
-.quiz-header { background: var(--grad); color: white; padding: 2rem; text-align: center; }
-#quiz-steps { padding: 2rem; }
-.quiz-q-box { display: flex; gap: 12px; margin-bottom: 12px; font-size: 0.95rem; padding: 10px; border-radius: 10px; transition: 0.3s; cursor: pointer; border: 1px solid #edf2f7; }
-.quiz-q-box:hover { background: #ebf8ff; border-color: var(--light-blue); }
-.score-circle { width: 100px; height: 100px; border-radius: 50%; border: 5px solid var(--blue); margin: 20px auto; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 800; color: var(--blue); }
-.btn-gradient { width: 100%; background: var(--grad); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-.cta-banner { background: var(--navy); color: white; padding: 1.5rem; margin-top: 20px; }
-.btn-white { background: white; color: var(--navy); text-decoration: none; padding: 8px 20px; border-radius: 20px; display: inline-block; margin-top: 10px; font-weight: bold; }
+.page-section { display: none; }
+.page-section.active { display: block; }
 
-/* KALKULAČKY TABS */
-.calc-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #edf2f7; }
-.tab-link { background: none; border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; color: #a0aec0; border-bottom: 3px solid transparent; }
-.tab-link.active { color: var(--blue); border-bottom-color: var(--blue); }
-.tab-content { display: none; }
-.tab-content.active { display: block; animation: fadeIn 0.4s; }
+.about-flex { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+.profile-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid var(--gray); }
 
-/* BLOG KARTY */
-.blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-.blog-item { background: var(--gray); padding: 1.5rem; border-radius: 15px; border-left: 5px solid var(--blue); transition: 0.3s; }
-.blog-item:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-.blog-meta { font-size: 0.75rem; color: #a0aec0; margin-bottom: 8px; }
-.read-more { color: var(--blue); text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+/* Kalkulačky */
+.calc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.calc-link-card { background: var(--gray); padding: 25px; border-radius: 15px; text-align: center; cursor: pointer; transition: 0.3s; }
+.calc-link-card:hover { transform: translateY(-5px); border: 1px solid var(--blue); background: white; }
+.calc-link-card .icon { font-size: 2.5rem; display: block; margin-bottom: 10px; }
 
-/* LOGA PARTNERŮ */
-.logo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 20px; }
-.partner-logo { background: white; border: 1px solid #edf2f7; padding: 15px; border-radius: 10px; text-align: center; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
-.partner-logo:hover { border-color: var(--blue); transform: scale(1.05); }
+.main-calc-card { background: var(--gray); padding: 2rem; border-radius: 20px; }
+.input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
+.input-group label { display: block; font-size: 0.75rem; font-weight: bold; margin-bottom: 5px; }
+.input-group input { width: 100%; padding: 10px; border: 1px solid #cbd5e0; border-radius: 8px; }
+.main-result { text-align: center; margin: 25px 0; border: 3px solid var(--blue); padding: 20px; border-radius: 15px; background: white; }
+.chart-wrapper { height: 400px; background: white; border-radius: 15px; padding: 15px; }
 
-/* GLOBÁLNÍ */
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+/* Ostatní prvky */
+.news-card { border-left: 6px solid #f6ad55; background: #fffaf0; }
+.tag { background: #f6ad55; color: white; padding: 3px 8px; border-radius: 5px; font-size: 0.7rem; font-weight: bold; }
+.info-box-yellow { background: #fff9e6; border-left: 4px solid #f6ad55; padding: 15px; border-radius: 8px; margin-top: 15px; }
+.insurance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.i-card { background: var(--gray); padding: 20px; border-radius: 10px; text-align: center; font-weight: bold; }
+
+.partners-grid { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 20px; }
+.partners-grid span { background: #eee; padding: 6px 12px; border-radius: 5px; font-size: 0.8rem; font-weight: 600; }
+
+.contact-flex { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center; }
+.qr-area { display: flex; gap: 20px; }
+.qr-item { text-align: center; font-size: 0.7rem; font-weight: bold; }
+
+.btn { background: var(--blue); color: white; padding: 12px 25px; border-radius: 30px; text-decoration: none; display: inline-block; font-weight: bold; border: none; cursor: pointer; }
 .main-footer { margin-top: 4rem; }
 .footer-bar { background: var(--navy); color: white; padding: 25px; text-align: center; }
+
+#quiz-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 2000; }
+#quiz-modal { background: white; padding: 2.5rem; border-radius: 20px; max-width: 550px; width: 95%; max-height: 90vh; overflow-y: auto; position: relative; }
+.quiz-q { display: flex; gap: 10px; margin-bottom: 12px; font-size: 0.9rem; padding: 10px; border-radius: 10px; cursor: pointer; }
+
+@media (max-width: 600px) { .about-flex { flex-direction: column-reverse; text-align: center; } .chart-wrapper { height: 250px; } }
