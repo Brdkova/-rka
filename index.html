@@ -11,32 +11,36 @@
 
 <div id="quiz-overlay">
     <div id="quiz-modal">
-        <span class="close-quiz" onclick="closeQuiz()">&times;</span>
-        <h2>Audit finančního zdraví</h2>
-        <div id="quiz-steps">
-            <div class="quiz-q"><input type="checkbox" class="q-check"><label>Mám rezervu na 3-6 měsíců výdajů.</label></div>
-            <div class="quiz-q"><input type="checkbox" class="q-check"><label>Investuji alespoň 10 % příjmu.</label></div>
-            <div class="quiz-q"><input type="checkbox" class="q-check"><label>Rodina je zajištěna pro případ výpadku příjmu.</label></div>
-            <div class="quiz-q"><input type="checkbox" class="q-check"><label>Vím, kolik přesně platím na poplatcích.</label></div>
-            <div class="quiz-q"><input type="checkbox" class="q-check"><label>Moje úspory v bance nepožírá inflace.</label></div>
-            <div class="quiz-q"><input type="checkbox" class="q-check"><label>Využívám daňové úlevy na maximum.</label></div>
-            <div class="quiz-q"><input type="checkbox" class="q-check"><label>Buduji si vlastní rentu (DIP/DPS).</label></div>
-            <div class="quiz-q"><input type="checkbox" class="q-check"><label>Moje hypotéka má nejlepší úrok na trhu.</label></div>
-            <div class="quiz-q"><input type="checkbox" class="q-check"><label>Mám pojištěný dům na tržní ceny.</label></div>
-            <div class="quiz-q"><input type="checkbox" class="q-check"><label>Mám poradce, který mi hlídá termíny.</label></div>
-            <button class="btn" onclick="finishQuiz()">Vyhodnotit výsledky</button>
+        <div class="quiz-header">
+            <span class="close-quiz" onclick="closeQuiz()" style="float:right; cursor:pointer; font-size:1.5rem; color:white;">&times;</span>
+            <h2 style="margin:0; color:white;">Audit finančního zdraví</h2>
+            <p style="font-size:0.9rem; opacity:0.9; color:white; margin-top:5px;">Zjistěte, jak na tom jste během 30 sekund</p>
         </div>
-        <div id="quiz-result" style="display:none; text-align:center;">
-            <h3 id="quiz-score-title">0 / 10</h3>
-            <p id="quiz-advice"></p>
-            <div class="contact-box-mini">
-                <p><strong>Chcete své skóre vylepšit?</strong></p>
-                <a href="mailto:sarka.brdkova@4fin.cz" class="btn">Kontaktovat Šárku Brdkovou</a>
+        
+        <div id="quiz-steps" style="padding: 25px;">
+            <div class="quiz-q"><input type="checkbox" class="q-check"> <label>Mám rezervu na 3-6 měsíců výdajů.</label></div>
+            <div class="quiz-q"><input type="checkbox" class="q-check"> <label>Investuji alespoň 10 % příjmu.</label></div>
+            <div class="quiz-q"><input type="checkbox" class="q-check"> <label>Rodina je zajištěna pro případ výpadku příjmu.</label></div>
+            <div class="quiz-q"><input type="checkbox" class="q-check"> <label>Vím, kolik přesně platím na poplatcích.</label></div>
+            <div class="quiz-q"><input type="checkbox" class="q-check"> <label>Moje úspory v bance nepožírá inflace.</label></div>
+            <div class="quiz-q"><input type="checkbox" class="q-check"> <label>Využívám daňové úlevy na maximum.</label></div>
+            <div class="quiz-q"><input type="checkbox" class="q-check"> <label>Buduji si vlastní rentu (DIP/DPS).</label></div>
+            <div class="quiz-q"><input type="checkbox" class="q-check"> <label>Moje hypotéka má nejlepší úrok na trhu.</label></div>
+            <div class="quiz-q"><input type="checkbox" class="q-check"> <label>Mám pojištěný dům na tržní ceny.</label></div>
+            <div class="quiz-q"><input type="checkbox" class="q-check"> <label>Mám poradce, který mi hlídá termíny.</label></div>
+            <button class="btn" style="width:100%; margin-top:20px; background:var(--grad); border:none;" onclick="finishQuiz()">Vyhodnotit výsledky</button>
+        </div>
+
+        <div id="quiz-result" style="display:none; text-align:center; padding: 40px 20px;">
+            <div style="width:80px; height:80px; border-radius:50%; border:4px solid var(--blue); margin:0 auto 20px; display:flex; align-items:center; justify-content:center; font-size:1.8rem; font-weight:bold; color:var(--blue);">
+                <span id="quiz-score-num">0</span>/10
             </div>
+            <h3 id="quiz-score-title" style="margin-bottom:10px;">Výsledek</h3>
+            <p id="quiz-advice" style="margin-bottom:25px; color:#4a5568;"></p>
+            <a href="mailto:sarka.brdkova@4fin.cz" class="btn" style="background:var(--grad); text-decoration:none;">Kontaktovat Šárku</a>
         </div>
     </div>
 </div>
-
 <header>
     <div class="header-overlay">
         <p class="brand">www.brdkova.cz</p>

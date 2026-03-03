@@ -68,14 +68,35 @@ function reveal() {
     }
 }
 
-function openQuiz() { document.getElementById('quiz-overlay').style.display = 'flex'; }
-function closeQuiz() { document.getElementById('quiz-overlay').style.display = 'none'; }
 function finishQuiz() {
-    const score = Array.from(document.querySelectorAll('.q-check')).filter(c => c.checked).length;
+    // Spočítáme zaškrtnutá políčka
+    const checks = document.querySelectorAll('.q-check');
+    const score = Array.from(checks).filter(c => c.checked).length;
+    
+    // Skryjeme otázky a ukážeme výsledek
     document.getElementById('quiz-steps').style.display = 'none';
     document.getElementById('quiz-result').style.display = 'block';
+    
+    // Vložíme číslo do kroužku
     document.getElementById('quiz-score-num').innerText = score;
-    document.getElementById('quiz-score-title').innerText = score < 7 ? "Je prostor pro zlepšení!" : "Skvělá práce!";
+    
+    // Texty podle skóre
+    let title = "";
+    let advice = "";
+    
+    if(score <= 4) {
+        title = "Je prostor pro zlepšení";
+        advice = "Vaše finanční zdraví vyžaduje pozornost. Malé změny dnes udělají velký rozdíl v budoucnu.";
+    } else if(score <= 7) {
+        title = "Dobrá práce!";
+        advice = "Máte slušný základ. Pojďme se podívat, jak z vašich peněz vytěžit maximum a snížit poplatky.";
+    } else {
+        title = "Skvělý výsledek!";
+        advice = "Gratuluji! Patříte k lidem, kteří mají své finance pod kontrolou. Chcete vyladit detaily?";
+    }
+    
+    document.getElementById('quiz-score-title').innerText = title;
+    document.getElementById('quiz-advice').innerText = advice;
 }
 
 window.addEventListener("scroll", reveal);
