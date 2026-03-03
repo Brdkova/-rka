@@ -110,3 +110,43 @@ section { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0
 .quiz-q { display: flex; gap: 10px; margin-bottom: 12px; font-size: 0.9rem; padding: 10px; border-radius: 10px; cursor: pointer; }
 
 @media (max-width: 600px) { .about-flex { flex-direction: column-reverse; text-align: center; } .chart-wrapper { height: 250px; } }
+
+.insurance-detailed-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.i-card-new {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid #edf2f7;
+    transition: 0.3s;
+    text-align: left;
+}
+
+.i-card-new:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    border-color: var(--blue);
+    transform: translateY(-3px);
+}
+
+.i-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.i-card-new h4 {
+    color: var(--navy);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.i-card-new p {
+    font-size: 0.9rem;
+    color: #4a5568;
+    line-height: 1.5;
+}
