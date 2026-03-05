@@ -101,3 +101,6 @@ function finishQuiz() {
 
 window.addEventListener("scroll", reveal);
 window.onload = () => { setTimeout(openQuiz, 4000); runCalc(); calcHypo(); reveal(); };
+
+function openQuiz() { document.getElementById('quiz-overlay').style.display = 'flex'; }
+function closeQuiz() { document.getElementById('quiz-overlay').style.display = 'none'; }

@@ -105,10 +105,6 @@ section { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0
 .main-footer { margin-top: 4rem; }
 .footer-bar { background: var(--navy); color: white; padding: 25px; text-align: center; }
 
-#quiz-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 2000; }
-#quiz-modal { background: white; padding: 2.5rem; border-radius: 20px; max-width: 550px; width: 95%; max-height: 90vh; overflow-y: auto; position: relative; }
-.quiz-q { display: flex; gap: 10px; margin-bottom: 12px; font-size: 0.9rem; padding: 10px; border-radius: 10px; cursor: pointer; }
-
 @media (max-width: 600px) { .about-flex { flex-direction: column-reverse; text-align: center; } .chart-wrapper { height: 250px; } }
 
 .insurance-detailed-grid {
