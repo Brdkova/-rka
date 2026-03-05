@@ -178,3 +178,23 @@ section { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0
     color: var(--navy);
     font-size: 0.85rem;
 }
+
+.article-preview p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #4a5568;
+}
+
+#dip-more-content p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+#dip-more-content h3 {
+    margin: 25px 0 10px 0;
+    color: var(--navy);
+}
+
+.btn-white:hover {
+    background: var(--gray);
+}

@@ -127,3 +127,18 @@ window.onload = () => { setTimeout(openQuiz, 4000); runCalc(); calcHypo(); revea
 
 function openQuiz() { document.getElementById('quiz-overlay').style.display = 'flex'; }
 function closeQuiz() { document.getElementById('quiz-overlay').style.display = 'none'; }
+
+function toggleDipArticle() {
+    const content = document.getElementById('dip-more-content');
+    const btn = document.getElementById('dip-read-more-btn');
+
+    if (content.style.display === "none") {
+        content.style.display = "block";
+        btn.innerText = "Zobrazit méně ↑";
+    } else {
+        content.style.display = "none";
+        btn.innerText = "Číst celý článek ↓";
+        // Po zavření odscrollujeme zpět k nadpisu článku
+        btn.parentElement.scrollIntoView({ behavior: 'smooth' });
+    }
+}
