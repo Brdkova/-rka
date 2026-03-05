@@ -8,7 +8,9 @@ function showSection(id) {
         target.classList.add('active');
         window.scrollTo(0, 0);
     }
+    // Spustit výpočty při přepnutí, aby tam nebyla nula
     if (id === 'investice') setTimeout(runCalc, 100);
+    if (id === 'penze') setTimeout(calcRenta, 100);
 }
 
 // Investiční kalkulačka
