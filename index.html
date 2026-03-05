@@ -124,6 +124,66 @@
         </section>
     </div>
 
+<div id="section-kalkulacky" class="page-section">
+    <section>
+        <h2>Finanční kalkulačky</h2>
+        <p>Vyberte si oblast, která vás zajímá, a spočítejte si své možnosti.</p>
+        <div class="calc-grid" style="margin-top: 30px;">
+            <div class="calc-link-card" onclick="showSection('investice')">
+                <span class="icon">📈</span>
+                <h4>Složené úročení</h4>
+                <p>Kolik vám vydělají investice v čase.</p>
+            </div>
+            <div class="calc-link-card" onclick="showSection('hypoteky')">
+                <span class="icon">🏠</span>
+                <h4>Hypoteční splátka</h4>
+                <p>Spočítejte si měsíční náklady na bydlení.</p>
+            </div>
+            <div class="calc-link-card" onclick="showSection('penze')">
+                <span class="icon">💰</span>
+                <h4>Penzijní renta</h4>
+                <p>Kolik si naspoříte na klidné stáří.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div id="section-penze" class="page-section">
+    <section>
+        <h2>Penzijní renta (DIP a DPS)</h2>
+        <p>Zjistěte, kolik peněz budete mít k dispozici v důchodu při pravidelném odkládání.</p>
+        
+        <div class="main-calc-card" style="margin-top:20px;">
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>Měsíční úložka (Kč)</label>
+                    <input type="number" id="r-monthly" value="2000" oninput="calcRenta()">
+                </div>
+                <div class="input-group">
+                    <label>Počet let do důchodu</label>
+                    <input type="number" id="r-years" value="30" oninput="calcRenta()">
+                </div>
+                <div class="input-group">
+                    <label>Očekávaný výnos (%)</label>
+                    <input type="number" id="r-rate" value="6" oninput="calcRenta()">
+                </div>
+            </div>
+            
+            <div class="main-result">
+                <p>Váš odhadovaný kapitál při odchodu do důchodu:</p>
+                <h3 id="r-total">0 Kč</h3>
+                <p style="font-size: 0.8rem; margin-top: 10px; color: #718096;">
+                    *Při čerpání renty po dobu 20 let byste měsíčně dostávali cca: <strong id="r-monthly-payout">0 Kč</strong>
+                </p>
+            </div>
+            
+            <div class="info-box-yellow">
+                <strong>Tip Šárky:</strong> Nezapomeňte, že u DIP si můžete odečíst z daní až 48 000 Kč ročně, což vám vrátí dalších 7 200 Kč do rodinného rozpočtu!
+            </div>
+        </div>
+    </section>
+</div>
+
     <div id="section-hypoteky" class="page-section">
         <section>
             <h2>Hypotéky</h2>
