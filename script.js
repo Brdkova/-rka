@@ -58,6 +58,27 @@ function calcHypo() {
     document.getElementById('h-res').innerText = Math.round(res).toLocaleString('cs-CZ') + " Kč";
 }
 
+function calcRenta() {
+    const pmt = parseFloat(document.getElementById('r-monthly').value) || 0;
+    const t = parseInt(document.getElementById('r-years').value) || 0;
+    const r = (parseFloat(document.getElementById('r-rate').value) || 0) / 100 / 12;
+    const n = t * 12;
+
+    // Výpočet budoucí hodnoty (FV) pravidelného spoření
+    let total = 0;
+    if (r > 0) {
+        total = pmt * ((Math.pow(1 + r, n) - 1) / r);
+    } else {
+        total = pmt * n;
+    }
+
+    // Výpočet orientační měsíční renty na 20 let (zjednodušeně)
+    const monthlyPayout = total / 240; 
+
+    document.getElementById('r-total').innerText = Math.round(total).toLocaleString('cs-CZ') + " Kč";
+    document.getElementById('r-monthly-payout').innerText = Math.round(monthlyPayout).toLocaleString('cs-CZ') + " Kč";
+}
+
 // Animace vynoření
 function reveal() {
     let reveals = document.querySelectorAll(".reveal");
