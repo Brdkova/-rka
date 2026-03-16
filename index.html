@@ -19,7 +19,6 @@
         <div id="quiz-steps">
             <div class="quiz-q"><input type="checkbox" class="q-check"> <label>Mám rezervu na 3-6 měsíců výdajů.</label></div>
             <div class="quiz-q"><input type="checkbox" class="q-check"> <label>Investuji alespoň 10 % příjmu.</label></div>
-            <div class="quiz-q"><input type="checkbox" class="q-check"> <label>Rodina je zajištěna pro případ výpadku příjmu.</label></div>
             <div class="quiz-q"><input type="checkbox" class="q-check"> <label>Vím, kolik přesně platím na poplatcích.</label></div>
             <div class="quiz-q"><input type="checkbox" class="q-check"> <label>Buduji si vlastní rentu (DIP/DPS).</label></div>
             <div class="quiz-q"><input type="checkbox" class="q-check"> <label>Moje hypotéka má nejlepší úrok na trhu.</label></div>
@@ -27,7 +26,7 @@
             <button class="btn" style="width:100%; margin-top:20px; background:var(--grad);" onclick="finishQuiz()">Vyhodnotit výsledky</button>
         </div>
         <div id="quiz-result" style="display:none;">
-            <div class="score-circle"><span id="quiz-score-num">0</span>/7</div>
+            <div class="score-circle"><span id="quiz-score-num">0</span>/6</div>
             <h3 id="quiz-score-title">Výsledek</h3>
             <p id="quiz-advice"></p>
             <a href="mailto:sarka.brdkova@4fin.cz" class="btn">Kontaktovat Šárku</a>
@@ -48,7 +47,6 @@
     <a href="#" onclick="showSection('hypoteky')">Hypotéky</a>
     <a href="#" onclick="showSection('penze')">Penze (DIP/DPS)</a>
     <a href="#" onclick="showSection('pojisteni')">Pojištění</a>
-    <a href="#" onclick="showSection('uvery')">Úvěry</a>
     <a href="#" onclick="showSection('kalkulacky')">Kalkulačky</a>
     <a href="#" onclick="showSection('blog')">Blog</a>
     <a href="https://dobryporadce.cz/poradci/sarka-brdkova" target="_blank">Reference</a>
@@ -59,8 +57,13 @@
         <section class="reveal">
             <div class="about-flex">
                 <div class="about-text">
-                    <h2>O mně</h2>
+                    <h1>Šárka Brdková</h1>
+                    <p class="subtitle">Vaše průvodkyně světem financí</p>
                     <p>Jako certifikovaná konzultantka sítě <strong>4fin</strong> stavím řešení, která dávají smysl vaší peněžence. Pomáhám vám ovládnout váš rozpočet tak, abyste si mohli plnit sny.</p>
+                    <div class="mini-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-text">4.9/5 na DobrýPoradce.cz</span>
+                    </div>
                 </div>
                 <div class="about-photo">
                     <img src="profil.jpg" alt="Šárka Brdková" class="profile-img">
@@ -79,6 +82,47 @@
         </section>
 
         <section class="reveal">
+            <h2 style="text-align:center; margin-bottom:20px;">Spočítejte si svou budoucnost</h2>
+            <div class="calc-grid">
+                <div class="calc-link-card" onclick="showSection('investice')">
+                    <span class="icon">📈</span>
+                    <h4>Investiční plán</h4>
+                    <p>Kolik vám vydělá pravidelné investování?</p>
+                </div>
+                <div class="calc-link-card" onclick="showSection('hypoteky')">
+                    <span class="icon">🏠</span>
+                    <h4>Hypoteční splátka</h4>
+                    <p>Aktuální sazby a měsíční náklady.</p>
+                </div>
+                <div class="calc-link-card" onclick="showSection('penze')">
+                    <span class="icon">💰</span>
+                    <h4>Penzijní renta</h4>
+                    <p>Kolik potřebujete na klidné stáří?</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal" style="background: var(--navy); color: white; border-radius: 20px; padding: 2.5rem;">
+            <h2 style="text-align:center; color: white;">Zajímavé čtení</h2>
+            <div class="blog-grid" style="margin-top: 20px;">
+                <div class="blog-card" style="background: rgba(255,255,255,0.1); border: none; cursor:pointer;" onclick="showSection('penze')">
+                    <div class="blog-content">
+                        <span class="tag">TOP Téma</span>
+                        <h4 style="color: white; margin-top:10px;">Vše o DIP v roce 2026</h4>
+                        <p style="color: #cbd5e0;">Jak získat od státu 7 200 Kč zpět na daních.</p>
+                    </div>
+                </div>
+                <div class="blog-card" style="background: rgba(255,255,255,0.1); border: none; cursor:pointer;" onclick="showSection('investice')">
+                    <div class="blog-content">
+                        <span class="tag">Průvodce</span>
+                        <h4 style="color: white; margin-top:10px;">Jak začít investovat?</h4>
+                        <p style="color: #cbd5e0;">ETF, akcie nebo dluhopisy? Poradíme, co vybrat.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
             <h2 style="text-align:center;">Co říkají klienti na DobrýPoradce.cz</h2>
             <div class="slider-container">
                 <div class="testimonial-slider" id="testimonial-slider">
@@ -89,18 +133,13 @@
                     </div>
                     <div class="testimonial-slide">
                         <div class="stars">★★★★★</div>
-                        <p>"S paní Brdkovou jsem řešila zajištění na penzi, vše bylo skvěle vysvětleno a bez miliónu papírů."</p>
+                        <p>"S paní Brdkovou jsem řešila zajištění na penzi, vše bylo skvěle vysvětleno."</p>
                         <span class="client-name">— Hana S., Praha</span>
                     </div>
                     <div class="testimonial-slide">
                         <div class="stars">★★★★★</div>
-                        <p>"Kontrola stávajících smluv... neplatím pojištění zbytečně. Mám pocit, že mám vše funkční."</p>
+                        <p>"Kontrola stávajících smluv... neplatím pojištění zbytečně."</p>
                         <span class="client-name">— Petra K., Praha</span>
-                    </div>
-                    <div class="testimonial-slide">
-                        <div class="stars">★★★★★</div>
-                        <p>"Konečně mi někdo vysvětlil, jak nastavit pojistku správně a proč nekoukat jen na cenu."</p>
-                        <span class="client-name">— Markéta, Praha</span>
                     </div>
                 </div>
             </div>
@@ -124,22 +163,27 @@
                 <div class="chart-wrapper"><canvas id="mainChart"></canvas></div>
             </div>
         </section>
-    </div>
 
-    <div id="section-hypoteky" class="page-section">
-        <section>
-            <h2>Hypotéky</h2>
-            <div class="main-calc-card">
-                <div class="input-grid">
-                    <div class="input-group"><label>Výše úvěru</label><input type="number" id="h-amt" value="3000000" oninput="calcHypo()"></div>
-                    <div class="input-group"><label>Sazba (%)</label><input type="number" id="h-rate" value="5.29" step="0.01" oninput="calcHypo()"></div>
-                    <div class="input-group"><label>Splatnost (let)</label><input type="number" id="h-yrs" value="30" oninput="calcHypo()"></div>
-                </div>
-                <div class="main-result">
-                    <p>Měsíční splátka:</p>
-                    <h3 id="h-res">0 Kč</h3>
+        <section class="reveal" style="margin-top: 30px;">
+            <span class="tag">Investiční akademie</span>
+            <h2>Jak začít investovat a budovat bohatství</h2>
+            <div class="article-preview">
+                <p>Investování je jediný způsob, jak ochránit peníze před inflací. V roce 2026 už nestačí mít peníze na spořicím účtu.</p>
+            </div>
+            <div id="inv-more-content" style="display: none; margin-top: 20px;">
+                <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 20px;">
+                <h3>Možnosti na trhu:</h3>
+                <ul style="margin-left: 20px; line-height: 1.8;">
+                    <li><strong>ETF:</strong> Kupujete tisíce firem najednou (např. S&P 500). Nízké poplatky.</li>
+                    <li><strong>Akcie:</strong> Pro ty, kteří chtějí vlastnit konkrétní firmy jako Apple nebo ČEZ.</li>
+                    <li><strong>Nemovitostní fondy:</strong> Investice do budov a skladů už od malých částek.</li>
+                    <li><strong>Dluhopisy:</strong> Bezpečnější složka s předem daným úrokem.</li>
+                </ul>
+                <div class="info-box-yellow">
+                    <strong>DIP a daně:</strong> DIP vám umožňuje investovat a zároveň ušetřit až 7 200 Kč na daních ročně.
                 </div>
             </div>
+            <button id="inv-read-more-btn" class="btn" style="background:white; color:var(--blue); border:1px solid var(--blue);" onclick="toggleInvArticle()">Číst celý průvodce ↓</button>
         </section>
     </div>
 
@@ -163,21 +207,38 @@
         <section class="reveal" style="margin-top: 20px;">
             <h3>DIP: Revoluce v zajištění na stáří</h3>
             <div class="article-preview">
-                <p>DIP umožňuje odečíst si z daní až 48 000 Kč ročně. To je 7 200 Kč zpět pro vás.</p>
+                <p>DIP umožňuje odečíst si z daní až 48 000 Kč ročně. To je 7 200 Kč přímo do vaší kapsy.</p>
             </div>
             <div id="dip-more-content" style="display: none; margin-top: 15px;">
-                <p>Na rozdíl od starého penzijka můžete investovat do dynamických ETF fondů. Zaměstnavatel vám může přispět až 50 000 Kč ročně bez zdanění.</p>
+                <p>Na rozdíl od starého penzijka můžete u DIPu investovat do dynamických ETF fondů. Zaměstnavatel vám může přispět až 50 000 Kč ročně, což je pro něj daňově uznatelný náklad.</p>
             </div>
             <button id="dip-read-more-btn" class="btn" style="background:white; color:var(--blue); border:1px solid var(--blue);" onclick="toggleDipArticle()">Číst celý článek ↓</button>
         </section>
     </div>
 
+    <div id="section-hypoteky" class="page-section">
+        <section>
+            <h2>Hypotéky a financování bydlení</h2>
+            <div class="main-calc-card">
+                <div class="input-grid">
+                    <div class="input-group"><label>Výše úvěru</label><input type="number" id="h-amt" value="3000000" oninput="calcHypo()"></div>
+                    <div class="input-group"><label>Sazba (%)</label><input type="number" id="h-rate" value="5.29" step="0.01" oninput="calcHypo()"></div>
+                    <div class="input-group"><label>Splatnost (let)</label><input type="number" id="h-yrs" value="30" oninput="calcHypo()"></div>
+                </div>
+                <div class="main-result">
+                    <p>Měsíční splátka:</p>
+                    <h3 id="h-res">0 Kč</h3>
+                </div>
+            </div>
+        </section>
+    </div>
+
     <div id="section-pojisteni" class="page-section">
         <section>
-            <h2>Moje služby v pojištění</h2>
+            <h2>Komplexní ochrana rizik</h2>
             <div class="insurance-detailed-grid">
                 <div class="i-card-new"><span class="i-icon">🚗</span><h4>Auta</h4><p>Povinné i havarijní.</p></div>
-                <div class="i-card-new"><span class="i-icon">🏠</span><h4>Majetek</h4><p>Dům, byt i domácnost.</p></div>
+                <div class="i-card-new"><span class="i-icon">🏠</span><h4>Dům & Byt</h4><p>Pojištění na tržní ceny.</p></div>
                 <div class="i-card-new"><span class="i-icon">🐾</span><h4>Mazlíčci</h4><p>Veterinární péče.</p></div>
                 <div class="i-card-new"><span class="i-icon">🛡️</span><h4>Život</h4><p>Zajištění příjmu.</p></div>
                 <div class="i-card-new"><span class="i-icon">⚖️</span><h4>Odpovědnost</h4><p>Pojistka na blbost.</p></div>
@@ -188,7 +249,7 @@
 
     <div id="section-kalkulacky" class="page-section">
         <section>
-            <h2>Finanční kalkulačky</h2>
+            <h2>Všechny kalkulačky na jednom místě</h2>
             <div class="calc-grid">
                 <div class="calc-link-card" onclick="showSection('investice')"><span class="icon">📈</span><h4>Investice</h4></div>
                 <div class="calc-link-card" onclick="showSection('hypoteky')"><span class="icon">🏠</span><h4>Hypotéky</h4></div>
