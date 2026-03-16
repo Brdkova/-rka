@@ -70,3 +70,26 @@ section { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0
 }
 
 .footer-bar { background: var(--navy); color: white; padding: 20px; text-align: center; margin-top: 2rem; font-size: 0.8rem; }
+
+/* CTA Box na konci článků */
+.cta-box {
+    background: var(--gray);
+    padding: 20px;
+    border-radius: 15px;
+    border-left: 5px solid var(--blue);
+    margin-top: 25px;
+    text-align: center;
+}
+.cta-box p { font-weight: bold; margin-bottom: 15px; }
+.btn-small { background: var(--blue); color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; display: inline-block; transition: 0.3s; }
+.btn-small:hover { background: var(--navy); transform: scale(1.05); }
+
+/* Vylepšení kvízu */
+.quiz-q { display: flex; align-items: center; gap: 15px; padding: 15px 25px; border-bottom: 1px solid #f0f0f0; transition: 0.2s; }
+.quiz-q:hover { background: #fafafa; }
+.quiz-q span { font-size: 1.5rem; }
+.quiz-q input { width: 20px; height: 20px; cursor: pointer; }
+.quiz-q label { cursor: pointer; flex: 1; }
+
+.btn-outline { background: transparent; border: 2px solid var(--blue); color: var(--blue); padding: 10px 25px; border-radius: 30px; cursor: pointer; font-weight: bold; margin-top: 15px; transition: 0.3s; }
+.btn-outline:hover { background: var(--blue); color: white; }

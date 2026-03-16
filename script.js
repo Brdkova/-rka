@@ -103,3 +103,36 @@ function moveSlider() {
 window.addEventListener("scroll", reveal);
 window.onload = () => { setTimeout(openQuiz, 4000); runCalc(); calcHypo(); calcRenta(); reveal(); };
 setInterval(moveSlider, 5000);
+
+// Přidej k ostatním funkcím
+function toggleInsArticle() {
+    const c = document.getElementById('ins-more-content');
+    const b = document.getElementById('ins-read-more-btn');
+    c.style.display = c.style.display === "none" ? "block" : "none";
+    b.innerText = c.style.display === "none" ? "Jak správně pojistit sebe i majetek ↓" : "Zobrazit méně ↑";
+}
+
+// Upravená funkce finishQuiz pro tvůj nový počet otázek (6)
+function finishQuiz() {
+    const score = Array.from(document.querySelectorAll('.q-check')).filter(c => c.checked).length;
+    document.getElementById('quiz-steps').style.display = 'none';
+    document.getElementById('quiz-result').style.display = 'block';
+    document.getElementById('quiz-score-num').innerText = score;
+    
+    let title = "";
+    let advice = "";
+    
+    if(score <= 2) {
+        title = "🔴 Vaše finance jsou v ohrožení";
+        advice = "Doporučuji co nejdříve provést revizi. Aktuální tržní rizika a inflace mohou vaše úspory rychle znehodnotit.";
+    } else if(score <= 4) {
+        title = "🟡 Dobré základy, ale...";
+        advice = "Máte postavené základy, ale unikají vám peníze na daních a poplatcích. DIP a optimalizace pojistek by vám ušetřily tisíce měsíčně.";
+    } else {
+        title = "🟢 Skvělé finanční zdraví";
+        advice = "Gratuluji! Patříte k velmi zodpovědným lidem. Pojďme se podívat na pokročilé strategie pro budování renty.";
+    }
+    
+    document.getElementById('quiz-score-title').innerText = title;
+    document.getElementById('quiz-advice').innerText = advice;
+}
