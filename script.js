@@ -142,3 +142,16 @@ function toggleDipArticle() {
         btn.parentElement.scrollIntoView({ behavior: 'smooth' });
     }
 }
+
+function toggleBlogPost(id) {
+    const post = document.getElementById('blog-post-' + id);
+    const btn = document.getElementById('blog-btn-' + id);
+    
+    if (post.style.display === "none") {
+        post.style.display = "block";
+        btn.innerText = "Zobrazit méně ↑";
+    } else {
+        post.style.display = "none";
+        btn.innerText = "Číst více →";
+    }
+}

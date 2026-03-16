@@ -61,19 +61,94 @@
 </nav>
 
 <main>
-    <div id="section-home" class="page-section active">
-        <section class="reveal">
-            <div class="about-flex">
-                <div class="about-text">
-                    <h2>O mně</h2>
-                    <p>Jako certifikovaná konzultantka sítě <strong>4fin</strong> stavím řešení, která dávají smysl vaší peněžence. Finance jsou pro mě o svobodě a klidném spánku. Pomáhám vám ovládnout váš rozpočet tak, abyste si mohli plnit sny.</p>
-                </div>
-                <div class="about-photo">
-                    <img src="profil.jpg" alt="Šárka Brdková" class="profile-img">
+   <div id="section-home" class="page-section active">
+    <section class="reveal">
+        <div class="about-flex">
+            <div class="about-text">
+                <h1>Šárka Brdková</h1>
+                <p class="subtitle">Vaše průvodkyně světem financí</p>
+                <p>Jako certifikovaná konzultantka sítě <strong>4fin</strong> stavím řešení, která dávají smysl vaší peněžence. Finance jsou pro mě o svobodě a klidném spánku. Pomáhám vám ovládnout váš rozpočet tak, abyste si mohli plnit sny.</p>
+                
+                <div class="mini-rating">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-text">4.9/5 na DobrýPoradce.cz</span>
                 </div>
             </div>
-        </section>
+            <div class="about-photo">
+                <img src="profil.jpg" alt="Šárka Brdková" class="profile-img">
+            </div>
+        </div>
+    </section>
 
+    <section class="reveal highlights-grid">
+        <div class="h-item">
+            <span class="h-icon">💎</span>
+            <h4>Nezávislost</h4>
+            <p>Srovnávám produkty napříč celým trhem, ne jen jedné banky.</p>
+        </div>
+        <div class="h-item">
+            <span class="h-icon">🤝</span>
+            <h4>Lidskost</h4>
+            <p>Složité termíny překládám do lidské řeči.</p>
+        </div>
+        <div class="h-item">
+            <span class="h-icon">📱</span>
+            <h4>Servis</h4>
+            <p>Hlídám výročí smluv a termíny za vás.</p>
+        </div>
+    </section>
+
+    <section class="reveal">
+        <h2 style="text-align:center;">Co říkají klienti</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p>"Šárka nám zachránila hypotéku v hodině dvanácté. Její tah na branku je neuvěřitelný."</p>
+                <span class="client-name">— Petr N., Praha</span>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p>"Profesionální přístup a skvělá komunikace. Konečně mám ve financích jasno."</p>
+                <span class="client-name">— Martina K., Plzeň</span>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div id="section-blog" class="page-section">
+    <section>
+        <h2>Finanční postřehy & Blog</h2>
+        <div class="blog-grid">
+            <article class="blog-card">
+                <div class="blog-content">
+                    <span class="blog-tag">Investice</span>
+                    <h4>Vše o DIP v roce 2026</h4>
+                    <p>Jak využít nové daňové úlevy na maximum a získat od státu tisíce zpět.</p>
+                    
+                    <div id="blog-post-1" style="display:none; margin-top:15px; border-top: 1px solid #eee; pt-15px;">
+                        <p>DIP je v roce 2026 hlavním tématem. Klíčem je využít příspěvek zaměstnavatele až 50 000 Kč, který je osvobozen od daní i odvodů. Pokud si navíc sami odkládáte 4 000 Kč měsíčně, dosáhnete na maximální daňovou vratku.</p>
+                    </div>
+                    
+                    <a href="javascript:void(0)" class="blog-more" id="blog-btn-1" onclick="toggleBlogPost(1)">Číst více →</a>
+                </div>
+            </article>
+            
+            <article class="blog-card">
+                <div class="blog-content">
+                    <span class="blog-tag">Pojištění</span>
+                    <h4>Máte podpojištěný dům?</h4>
+                    <p>Ceny nemovitostí v roce 2026 opět vzrostly. Staré smlouvy už nemusí stačit.</p>
+                    
+                    <div id="blog-post-2" style="display:none; margin-top:15px; border-top: 1px solid #eee; pt-15px;">
+                        <p>Při totální škodě (požár, povodeň) vám pojišťovna vyplatí jen částku ve smlouvě. Pokud se váš dům zhodnotil o 30 %, ale pojistka zůstala stará, dostanete o miliony méně. Revize smlouvy trvá 15 minut, ale může zachránit celoživotní úspory.</p>
+                    </div>
+                    
+                    <a href="javascript:void(0)" class="blog-more" id="blog-btn-2" onclick="toggleBlogPost(2)">Číst více →</a>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
         <section class="reveal news-card">
             <span class="tag">Aktuálně</span>
             <h3>Garantovaný úrok 4,99 % u ČS</h3>
@@ -198,22 +273,7 @@
         </section>
     </div>
 
-    <div id="section-blog" class="page-section">
-        <section>
-            <h2>Finanční postřehy & Blog</h2>
-            <div class="blog-grid">
-                <article class="blog-card">
-                    <div class="blog-content">
-                        <span class="blog-tag">Investice</span>
-                        <h4>Vše o DIP v roce 2026</h4>
-                        <p>Jak využít nové daňové úlevy na maximum.</p>
-                        <a href="#" class="blog-more">Číst více →</a>
-                    </div>
-                </article>
-            </div>
-        </section>
-    </div>
-
+    
     <section class="reveal">
         <h2 style="text-align:center;">Spolupracuji s lídry trhu</h2>
         <div class="partners-grid">
