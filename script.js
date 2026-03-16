@@ -155,3 +155,32 @@ function toggleBlogPost(id) {
         btn.innerText = "Číst více →";
     }
 }
+
+let currentSlide = 0;
+
+function moveSlider() {
+    const slider = document.getElementById('testimonial-slider');
+    if (!slider) return;
+
+    const slides = document.querySelectorAll('.testimonial-slide');
+    const totalSlides = slides.length;
+    const isMobile = window.innerWidth <= 768;
+    
+    // Na desktopu vidíme 2, na mobilu 1
+    const visibleSlides = isMobile ? 1 : 2;
+    const maxIndex = totalSlides - visibleSlides;
+
+    currentSlide++;
+
+    if (currentSlide > maxIndex) {
+        currentSlide = 0; // Skoč zpět na začátek
+    }
+
+    // Výpočet posunu: šířka jednoho slidu + gap (mezera)
+    // Na desktopu je to 50% šířky kontejneru
+    const offset = isMobile ? (currentSlide * 100) : (currentSlide * 51); 
+    slider.style.transform = `translateX(-${offset}%)`;
+}
+
+// Spustit automatiku každé 5 sekund (aby lidé stihli ty delší texty přečíst)
+setInterval(moveSlider, 5000);
