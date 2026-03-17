@@ -164,3 +164,62 @@ window.onload = () => {
     reveal(); 
 };
 setInterval(moveSlider, 5000);
+
+let mainChart;
+
+function showSection(id) {
+    // Schová všechny sekce
+    document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+    // Ukáže jen tu vybranou
+    const target = document.getElementById('section-' + id);
+    if(target) {
+        target.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // Pokud je to investice, spustí kalkulačku
+    if (id === 'investice') setTimeout(runCalc, 100);
+}
+
+function runCalc() {
+    const P = parseFloat(document.getElementById('p-start').value) || 0;
+    const PMT = parseFloat(document.getElementById('p-monthly').value) || 0;
+    const r = (parseFloat(document.getElementById('p-rate').value) || 0) / 100;
+    const t = parseInt(document.getElementById('p-years').value) || 0;
+
+    const labels = [];
+    const deposits = [];
+    const interest = [];
+
+    for (let i = 1; i <= t; i++) {
+        labels.push("Rok " + i);
+        const dep = P + (PMT * 12 * i);
+        const totalVal = P * Math.pow(1 + r, i) + (PMT * 12) * ((Math.pow(1 + r, i) - 1) / (r || 0.0001));
+        deposits.push(dep);
+        interest.push(Math.max(0, Math.round(totalVal - dep)));
+    }
+
+    document.getElementById('total-res').innerText = Math.round(deposits[t-1] + interest[t-1]).toLocaleString('cs-CZ') + " Kč";
+    document.getElementById('res-years').innerText = t;
+
+    const ctx = document.getElementById('mainChart').getContext('2d');
+    if (mainChart) mainChart.destroy();
+    mainChart = new Chart(ctx, {
+        type: 'bar',
+        data: { labels: labels, datasets: [
+            { label: 'Vklady', data: deposits, backgroundColor: '#1a365d' },
+            { label: 'Zisk', data: interest, backgroundColor: '#90cdf4' }
+        ]},
+        options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
+    });
+}
+
+function toggleDipArticle() {
+    const content = document.getElementById('dip-more-content');
+    const btn = document.getElementById('dip-read-more-btn');
+    const isHidden = content.style.display === "none";
+    content.style.display = isHidden ? "block" : "none";
+    btn.innerText = isHidden ? "Zobrazit méně ↑" : "Zobrazit celý článek o DIP ↓";
+}
+
+// Inicializace
+window.onload = () => { runCalc(); };
