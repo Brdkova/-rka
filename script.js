@@ -1,6 +1,6 @@
 let mainChart;
 
-// Přepínání sekcí (stránek)
+// 1. Přepínání sekcí (stránek)
 function showSection(id) {
     document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
     const target = document.getElementById('section-' + id);
@@ -15,7 +15,7 @@ function showSection(id) {
     if (id === 'hypoteky') setTimeout(calcHypo, 100);
 }
 
-// Investiční kalkulačka (Graf)
+// 2. Investiční kalkulačka (Graf)
 function runCalc() {
     const pStartInput = document.getElementById('p-start');
     if (!pStartInput) return;
@@ -51,7 +51,7 @@ function runCalc() {
     });
 }
 
-// Ostatní kalkulačky
+// 3. Ostatní kalkulačky
 function calcHypo() {
     const p = parseFloat(document.getElementById('h-amt').value) || 0;
     const r = (parseFloat(document.getElementById('h-rate').value) || 0) / 100 / 12;
@@ -70,11 +70,11 @@ function calcRenta() {
     document.getElementById('r-monthly-payout').innerText = Math.round(total / 240).toLocaleString('cs-CZ') + " Kč";
 }
 
-// Rozbalování článků (DIP, Investice, Pojištění)
+// 4. Rozbalování článků
 function toggleInvArticle() {
     const c = document.getElementById('inv-more-content');
     const b = document.getElementById('inv-read-more-btn');
-    const isHidden = c.style.display === "none";
+    const isHidden = c.style.display === "none" || c.style.display === "";
     c.style.display = isHidden ? "block" : "none";
     b.innerText = isHidden ? "Zobrazit méně ↑" : "Číst celý článek ↓";
 }
@@ -82,7 +82,7 @@ function toggleInvArticle() {
 function toggleDipArticle() {
     const c = document.getElementById('dip-more-content');
     const b = document.getElementById('dip-read-more-btn');
-    const isHidden = c.style.display === "none";
+    const isHidden = c.style.display === "none" || c.style.display === "";
     c.style.display = isHidden ? "block" : "none";
     b.innerText = isHidden ? "Zobrazit méně ↑" : "Zobrazit celý článek o DIP ↓";
 }
@@ -90,12 +90,12 @@ function toggleDipArticle() {
 function toggleInsArticle() {
     const c = document.getElementById('ins-more-content');
     const b = document.getElementById('ins-read-more-btn');
-    const isHidden = c.style.display === "none";
+    const isHidden = c.style.display === "none" || c.style.display === "";
     c.style.display = isHidden ? "block" : "none";
     b.innerText = isHidden ? "Zobrazit méně ↑" : "Jak správně pojistit majetek ↓";
 }
 
-// Kvíz
+// 5. Kvíz
 function openQuiz() { document.getElementById('quiz-overlay').style.display = 'flex'; }
 function closeQuiz() { document.getElementById('quiz-overlay').style.display = 'none'; }
 function finishQuiz() {
@@ -107,10 +107,23 @@ function finishQuiz() {
     document.getElementById('quiz-advice').innerText = "Vaše skóre je " + score + " z 5. Doporučuji revizi portfolia.";
 }
 
+// 6. Automatický slider pro recenze
+let currentSlide = 0;
+function moveSlider() {
+    const s = document.getElementById('testimonial-slider');
+    if (!s) return;
+    const slides = document.querySelectorAll('.testimonial-slide');
+    const isMob = window.innerWidth <= 768;
+    // Na desktopu posouváme o dva, na mobilu o jeden
+    currentSlide = (currentSlide >= slides.length - (isMob ? 1 : 2)) ? 0 : currentSlide + 1;
+    s.style.transform = `translateX(-${currentSlide * (isMob ? 100 : 51.5)}%)`;
+}
+
 // Spuštění při načtení
 window.onload = () => {
     setTimeout(openQuiz, 4000);
     runCalc();
     calcHypo();
     calcRenta();
+    setInterval(moveSlider, 5000); // Každých 5 sekund posune recenze
 };
