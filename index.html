@@ -46,7 +46,7 @@
     <a href="#" onclick="showSection('hypoteky')">Hypotéky</a>
     <a href="#" onclick="showSection('penze')">Penze (DIP)</a>
     <a href="#" onclick="showSection('pojisteni')">Pojištění</a>
-    <a href="https://dobryporadce.cz/poradci/sarka-brdkova" target="_blank">Reference</a>
+    <a href="#" onclick="showSection('kalkulacky')">Kalkulačky</a>
 </nav>
 
 <main>
@@ -132,11 +132,8 @@
                 <p>Jak ochránit majetek v éře nejistoty? Diverzifikace je dnes důležitější než kdy dříve.</p>
             </div>
             <div id="inv-more-content" class="article-full-text" style="display:none;">
-                <p>Kvalitní portfolio dnes musí obsahovat globální ETF (akcie firem z celého světa), ale i defenzivní složky jako jsou nemovitostní fondy nebo státní dluhopisy. Nejdůležitější je disciplína a pravidelnost.</p>
-                <div class="cta-box">
-                    <p>Chcete zkontrolovat své portfolio?</p>
-                    <a href="mailto:sarka.brdkova@4fin.cz" class="btn">Probrat se Šárkou</a>
-                </div>
+                <p>Kvalitní portfolio dnes musí obsahovat globální ETF, ale i defenzivní složky. Nejdůležitější je disciplína.</p>
+                <a href="mailto:sarka.brdkova@4fin.cz" class="btn">Probrat se Šárkou</a>
             </div>
             <button id="inv-read-more-btn" class="btn-outline" onclick="toggleInvArticle()">Číst celý článek ↓</button>
         </section>
@@ -177,16 +174,11 @@
         <section class="reveal article-card">
             <h2>DIP: Vše o novém spoření na stáří</h2>
             <div class="article-preview">
-                <p>DIP je revoluce. Můžete investovat do ETF, akcií i dluhopisů s podporou státu.</p>
+                <p>DIP je revoluce v investování na důchod se státní podporou.</p>
             </div>
             <div id="dip-more-content" class="article-full-text" style="display:none;">
-                <p><strong>Varianty investic:</strong> V rámci DIP můžete využít široké spektrum nástrojů od nízkonákladových ETF přes podílové fondy až po termínované vklady.</p>
-                <p><strong>Podmínky:</strong> Peníze lze vybrat nejdříve v 60 letech a po 10 letech trvání smlouvy.</p>
-                <p><strong>Daně:</strong> Možnost odečíst až 48 000 Kč ze základu daně (úspora 7 200 Kč ročně).</p>
-                <div class="cta-box">
-                    <p>Pomůžu vám nastavit DIP efektivně.</p>
-                    <a href="mailto:sarka.brdkova@4fin.cz" class="btn">Chci konzultaci k DIP</a>
-                </div>
+                <p>Možnost odečíst až 48 000 Kč ze základu daně a získat příspěvek zaměstnavatele.</p>
+                <a href="mailto:sarka.brdkova@4fin.cz" class="btn">Chci konzultaci k DIP</a>
             </div>
             <button id="dip-read-more-btn" class="btn-outline" onclick="toggleDipArticle()">Zobrazit detail o DIP ↓</button>
         </section>
@@ -194,18 +186,26 @@
 
     <div id="section-pojisteni" class="page-section">
         <section class="reveal article-card">
-            <h2>Chytré pojištění majetku a zdraví</h2>
+            <h2>Chytré pojištění</h2>
             <div class="article-preview">
-                <p>Většina lidí má staré pojistky, které nekryjí aktuální ceny nemovitostí.</p>
+                <p>Máte své smlouvy aktuální vzhledem k rostoucím cenám nemovitostí?</p>
             </div>
             <div id="ins-more-content" class="article-full-text" style="display:none;">
-                <p>U aut hlídám GAP, u nemovitostí tržní ceny a u životního pojištění krytí invalidity. Správná pojistka vám má zachránit životní úroveň, ne jen vyplatit "bolestné".</p>
-                <div class="cta-box">
-                    <p>Udělejme revizi vašich smluv.</p>
-                    <a href="mailto:sarka.brdkova@4fin.cz" class="btn">Chci revizi smluv</a>
-                </div>
+                <p>U aut hlídám GAP, u nemovitostí tržní ceny. Správná pojistka vám má zachránit životní úroveň.</p>
+                <a href="mailto:sarka.brdkova@4fin.cz" class="btn">Chci revizi smluv</a>
             </div>
             <button id="ins-read-more-btn" class="btn-outline" onclick="toggleInsArticle()">Jak správně pojistit? ↓</button>
+        </section>
+    </div>
+
+    <div id="section-kalkulacky" class="page-section">
+        <section>
+            <h2>Všechny kalkulačky na jednom místě</h2>
+            <div class="calc-hub-grid">
+                <div class="hub-card" onclick="showSection('investice')">📈 Složené úročení</div>
+                <div class="hub-card" onclick="showSection('hypoteky')">🏠 Hypotéka</div>
+                <div class="hub-card" onclick="showSection('penze')">💰 Renta</div>
+            </div>
         </section>
     </div>
 
