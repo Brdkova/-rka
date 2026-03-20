@@ -11,8 +11,9 @@
 body { font-family: 'Inter', sans-serif; background: var(--gray); color: var(--text); overflow-x: hidden; }
 
 /* ANIMACE */
-.reveal { opacity: 0; transform: translateY(20px); transition: 0.8s all ease; }
-.reveal.active { opacity: 1; transform: translateY(0); }
+.reveal { opacity: 1; transform: translateY(0); transition: 0.8s all ease; }
+.reveal.animate { opacity: 0; transform: translateY(20px); }
+.reveal.animate.active { opacity: 1; transform: translateY(0); }
 
 /* HLAVIČKA A NAVIGACE */
 header { background: var(--navy); color: white; padding: 3rem 1rem; text-align: center; }
