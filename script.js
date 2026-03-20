@@ -138,28 +138,6 @@ function finishQuiz() {
     }
 }
 
-// 6. SLIDER PRO RECENZE
-let currentSlide = 0;
-function moveSlider() {
-    const s = document.getElementById('testimonial-slider');
-    if (!s) return;
-    const slides = document.querySelectorAll('.testimonial-slide');
-    const isMob = window.innerWidth <= 768;
-    const maxIndex = isMob ? slides.length - 1 : slides.length - 2;
-    currentSlide = (currentSlide >= maxIndex) ? 0 : currentSlide + 1;
-    const moveAmount = isMob ? 100 : 51.5; 
-    s.style.transform = `translateX(-${currentSlide * moveAmount}%)`;
-}
-
-// SPUŠTĚNÍ
-window.addEventListener("load", () => {
-    setTimeout(openQuiz, 4000); 
-    runCalc();
-    calcHypo();
-    calcRenta();
-    setInterval(moveSlider, 5000);
-});
-
 // Upravená část pro Slider (bod 6)
 function moveSlider() {
     const s = document.getElementById('testimonial-slider');
@@ -178,3 +156,13 @@ function moveSlider() {
     const moveAmount = isMob ? 100 : 51.5; 
     s.style.transform = `translateX(-${currentSlide * moveAmount}%)`;
 }
+
+// SPUŠTĚNÍ
+window.addEventListener("load", () => {
+    setTimeout(openQuiz, 4000); 
+    runCalc();
+    calcHypo();
+    calcRenta();
+    setInterval(moveSlider, 5000);
+});
+
