@@ -1,18 +1,17 @@
 let mainChart;
 
-// 1. PŘEPÍNÁNÍ SEKCÍ (STRÁNEK)
+// 1. PŘEPÍNÁNÍ SEKCÍ
 function showSection(id) {
-    // Schovat všechny sekce
-    document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+    const sections = document.querySelectorAll('.page-section');
+    sections.forEach(s => s.classList.remove('active'));
     
     const target = document.getElementById('section-' + id);
     if(target) {
         target.classList.add('active');
-        // Plynulý scroll nahoru
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     
-    // Spuštění kalkulaček po přepnutí, aby se grafy/data ihned vykreslily
+    // Spuštění kalkulaček po přepnutí
     if (id === 'investice') setTimeout(runCalc, 100);
     if (id === 'penze') setTimeout(calcRenta, 100);
     if (id === 'hypoteky') setTimeout(calcHypo, 100);
@@ -26,26 +25,28 @@ function runCalc() {
     const P = parseFloat(pStartInput.value) || 0;
     const PMT = parseFloat(document.getElementById('p-monthly').value) || 0;
     const r = (parseFloat(document.getElementById('p-rate').value) || 0) / 100;
-    const t = parseInt(document.getElementById('p-years').value) || 1; // Minimálně 1 rok
+    const t = parseInt(document.getElementById('p-years').value) || 1;
 
     let labels = [], deposits = [], interest = [];
     for (let i = 1; i <= t; i++) {
         labels.push("Rok " + i);
         const dep = P + (PMT * 12 * i);
-        // Výpočet složeného úročení
         const totalVal = P * Math.pow(1 + r, i) + (PMT * 12) * ((Math.pow(1 + r, i) - 1) / (r || 0.0001));
         deposits.push(Math.round(dep));
         interest.push(Math.max(0, Math.round(totalVal - dep)));
     }
 
-    // Aktualizace textových výsledků
-    document.getElementById('total-res').innerText = (deposits[deposits.length-1] + interest[interest.length-1]).toLocaleString('cs-CZ') + " Kč";
-    document.getElementById('res-years').innerText = t;
+    if(document.getElementById('total-res')) {
+        document.getElementById('total-res').innerText = (deposits[deposits.length-1] + interest[interest.length-1]).toLocaleString('cs-CZ') + " Kč";
+    }
+    if(document.getElementById('res-years')) {
+        document.getElementById('res-years').innerText = t;
+    }
 
     const canvas = document.getElementById('mainChart');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    if (!canvas || typeof Chart === 'undefined') return; 
     
+    const ctx = canvas.getContext('2d');
     if (mainChart) mainChart.destroy();
     
     mainChart = new Chart(ctx, {
@@ -60,59 +61,48 @@ function runCalc() {
         options: { 
             responsive: true, 
             maintainAspectRatio: false, 
-            scales: { 
-                x: { stacked: true }, 
-                y: { stacked: true, ticks: { callback: value => value.toLocaleString('cs-CZ') + ' Kč' } } 
-            },
-            plugins: {
-                tooltip: {
-                    callbacks: {
-                        label: (context) => context.dataset.label + ': ' + context.raw.toLocaleString('cs-CZ') + ' Kč'
-                    }
-                }
-            }
+            scales: { x: { stacked: true }, y: { stacked: true } }
         }
     });
 }
 
-// 3. OSTATNÍ KALKULAČKY (HYPOTÉKA & RENTA)
+// 3. OSTATNÍ KALKULAČKY
 function calcHypo() {
     const amtEl = document.getElementById('h-amt');
-    if (!amtEl) return;
+    const resEl = document.getElementById('h-res');
+    if (!amtEl || !resEl) return;
     const p = parseFloat(amtEl.value) || 0;
     const r = (parseFloat(document.getElementById('h-rate').value) || 0) / 100 / 12;
     const n = (parseFloat(document.getElementById('h-yrs').value) || 0) * 12;
     const res = (r > 0) ? (p * r) / (1 - Math.pow(1 + r, -n)) : p / (n || 1);
-    document.getElementById('h-res').innerText = Math.round(res).toLocaleString('cs-CZ') + " Kč";
+    resEl.innerText = Math.round(res).toLocaleString('cs-CZ') + " Kč";
 }
 
 function calcRenta() {
     const pmtEl = document.getElementById('r-monthly');
     if (!pmtEl) return;
     const pmt = parseFloat(pmtEl.value) || 0;
-    const t = parseInt(document.getElementById('r-years').value) || 0;
+    const tEl = document.getElementById('r-years');
+    const t = tEl ? parseInt(tEl.value) : 0;
     const r = (parseFloat(document.getElementById('r-rate').value) || 0) / 100 / 12;
     const n = t * 12;
     
     let total = (r > 0) ? pmt * ((Math.pow(1 + r, n) - 1) / r) : pmt * n;
-    const monthlyPayout = total / 240; // Odhad renty na 20 let
+    const monthlyPayout = total / 240; 
 
-    document.getElementById('r-total').innerText = Math.round(total).toLocaleString('cs-CZ') + " Kč";
-    document.getElementById('r-monthly-payout').innerText = Math.round(monthlyPayout).toLocaleString('cs-CZ') + " Kč";
+    if(document.getElementById('r-total')) document.getElementById('r-total').innerText = Math.round(total).toLocaleString('cs-CZ') + " Kč";
+    if(document.getElementById('r-monthly-payout')) document.getElementById('r-monthly-payout').innerText = Math.round(monthlyPayout).toLocaleString('cs-CZ') + " Kč";
 }
 
-// 4. FUNKCE PRO ROZBALOVÁNÍ ČLÁNKŮ
+// 4. ROZBALOVÁNÍ ČLÁNKŮ
 function toggleArticle(contentId, btnId, baseText) {
     const c = document.getElementById(contentId);
     const b = document.getElementById(btnId);
     if (!c || !b) return;
-    
     const isHidden = c.style.display === "none" || c.style.display === "";
     c.style.display = isHidden ? "block" : "none";
     b.innerText = isHidden ? "Zobrazit méně ↑" : baseText;
 }
-
-// Propojení s vašimi konkrétními tlačítky
 function toggleInvArticle() { toggleArticle('inv-more-content', 'inv-read-more-btn', 'Číst celý článek ↓'); }
 function toggleDipArticle() { toggleArticle('dip-more-content', 'dip-read-more-btn', 'Zobrazit celý článek o DIP ↓'); }
 function toggleInsArticle() { toggleArticle('ins-more-content', 'ins-read-more-btn', 'Jak správně pojistit majetek ↓'); }
@@ -126,52 +116,46 @@ function closeQuiz() {
     const quiz = document.getElementById('quiz-overlay');
     if(quiz) quiz.style.display = 'none'; 
 }
-
 function finishQuiz() {
     const score = Array.from(document.querySelectorAll('.q-check')).filter(c => c.checked).length;
-    document.getElementById('quiz-steps').style.display = 'none';
-    document.getElementById('quiz-result').style.display = 'block';
-    document.getElementById('quiz-score-num').innerText = score;
+    if(document.getElementById('quiz-steps')) document.getElementById('quiz-steps').style.display = 'none';
+    if(document.getElementById('quiz-result')) document.getElementById('quiz-result').style.display = 'block';
+    if(document.getElementById('quiz-score-num')) document.getElementById('quiz-score-num').innerText = score;
     
     const title = document.getElementById('quiz-score-title');
     const advice = document.getElementById('quiz-advice');
-    
+    if(!title || !advice) return;
+
     if(score <= 2) {
         title.innerText = "🔴 Vaše finance jsou v ohrožení";
-        advice.innerText = "Doporučuji co nejdříve provést revizi portfolia a pojistných smluv.";
+        advice.innerText = "Doporučuji co nejdříve provést revizi portfolia.";
     } else if(score <= 4) {
         title.innerText = "🟡 Dobré základy, ale...";
-        advice.innerText = "Unikají vám peníze na daních a poplatcích. DIP by vám mohl ušetřit tisíce.";
+        advice.innerText = "Unikají vám peníze na daních. DIP by vám mohl ušetřit tisíce.";
     } else {
         title.innerText = "🟢 Skvělé finanční zdraví";
-        advice.innerText = "Gratuluji! Patříte k velmi zodpovědným lidem. Pojďme doladit detaily.";
+        advice.innerText = "Gratuluji! Pojďme doladit detaily.";
     }
 }
 
-// 6. AUTOMATICKÝ SLIDER PRO RECENZE
+// 6. SLIDER PRO RECENZE
 let currentSlide = 0;
 function moveSlider() {
     const s = document.getElementById('testimonial-slider');
     if (!s) return;
     const slides = document.querySelectorAll('.testimonial-slide');
     const isMob = window.innerWidth <= 768;
-    
-    // Na desktopu posouváme po jednom (vidíme dva), na mobilu po jednom (vidíme jeden)
     const maxIndex = isMob ? slides.length - 1 : slides.length - 2;
-    
-    currentSlide++;
-    if (currentSlide > maxIndex) currentSlide = 0;
-
-    // Přesnější výpočet šířky včetně mezer
+    currentSlide = (currentSlide >= maxIndex) ? 0 : currentSlide + 1;
     const moveAmount = isMob ? 100 : 51.5; 
     s.style.transform = `translateX(-${currentSlide * moveAmount}%)`;
 }
 
-// SPUŠTĚNÍ PŘI NAČTENÍ
+// SPUŠTĚNÍ
 window.addEventListener("load", () => {
-    setTimeout(openQuiz, 4000); // Kvíz vyskočí po 4 sekundách
+    setTimeout(openQuiz, 4000); 
     runCalc();
     calcHypo();
     calcRenta();
-    setInterval(moveSlider, 5000); // Slider se hýbe každých 5 sekund
+    setInterval(moveSlider, 5000);
 });
