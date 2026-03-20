@@ -29,23 +29,21 @@ section { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0
 .page-section.active { display: block; }
 
 /* SEKCE O MNĚ */
-.about-top-flex { display: flex; align-items: flex-start; gap: 2.5rem; flex-wrap: wrap; margin-bottom: 0; }
+.about-top-flex { display: flex; align-items: flex-start; gap: 2.5rem; flex-wrap: wrap; }
 .about-text-top { flex: 1; min-width: 250px; }
 .about-text-top h1 { font-size: 2rem; margin-bottom: 0.5rem; }
 .about-text-top .subtitle { color: var(--blue); font-weight: 600; margin-bottom: 0.5rem; }
 .about-photo { flex-shrink: 0; }
-.certifications-block { width: 100%; }
-.cert-grid-row { display: flex; gap: 12px; justify-content: center; flex-wrap: nowrap; }
+.certifications-block { margin-top: 1rem; }
+.cert-grid-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .cert-item-small { 
     background: var(--gray); 
-    padding: 14px 20px; 
+    padding: 18px 10px; 
     border-radius: 12px; 
     text-align: center; 
     border: 1px solid #edf2f7;
-    flex: 1;
-    min-width: 0;
 }
-.cert-item-small span { font-size: 1.6rem; display: block; margin-bottom: 6px; }
+.cert-item-small span { font-size: 1.8rem; display: block; margin-bottom: 6px; }
 .cert-item-small h4 { font-size: 0.85rem; }
 .profile-img { 
     width: 220px; 
