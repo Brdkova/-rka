@@ -11,9 +11,8 @@
 body { font-family: 'Inter', sans-serif; background: var(--gray); color: var(--text); overflow-x: hidden; }
 
 /* ANIMACE */
-.reveal { opacity: 1; transform: translateY(0); transition: 0.8s all ease; }
-.reveal.animate { opacity: 0; transform: translateY(20px); }
-.reveal.animate.active { opacity: 1; transform: translateY(0); }
+.reveal { opacity: 0; transform: translateY(20px); transition: 0.8s all ease; }
+.reveal.active { opacity: 1; transform: translateY(0); }
 
 /* HLAVIČKA A NAVIGACE */
 header { background: var(--navy); color: white; padding: 3rem 1rem; text-align: center; }
@@ -31,7 +30,13 @@ section { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0
 .page-section.active { display: block; }
 
 /* SEKCE O MNĚ */
-.about-flex { display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; }
+.about-text-top { margin-bottom: 2rem; }
+.about-text-top h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+.about-text-top .subtitle { color: var(--blue); font-weight: 600; margin-bottom: 0.5rem; }
+.about-bottom-flex { display: flex; align-items: flex-start; gap: 2.5rem; flex-wrap: wrap; }
+.about-photo { flex-shrink: 0; }
+.certifications-block { flex: 1; min-width: 200px; }
+.certifications-block h3 { margin-bottom: 1rem; }
 .profile-img { 
     width: 220px; 
     height: 220px; 
@@ -101,7 +106,8 @@ section { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0
 /* RESPONZIVITA */
 @media (max-width: 768px) {
     .testimonial-slide { min-width: 100%; }
-    .about-flex { flex-direction: column-reverse; text-align: center; }
+    .about-bottom-flex { flex-direction: column; align-items: center; text-align: center; }
     .profile-img { width: 180px; height: 180px; }
+    .certifications-block { width: 100%; }
 }
 .footer-bar { background: var(--navy); color: white; padding: 20px; text-align: center; margin-top: 2rem; }
