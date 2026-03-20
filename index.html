@@ -1,168 +1,233 @@
-let mainChart;
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Šárka Brdková | finance_pro_vas</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-// 1. PŘEPÍNÁNÍ SEKCÍ
-function showSection(id) {
-    const sections = document.querySelectorAll('.page-section');
-    sections.forEach(s => s.classList.remove('active'));
-    
-    const target = document.getElementById('section-' + id);
-    if(target) {
-        target.classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    
-    // Spuštění kalkulaček po přepnutí
-    if (id === 'investice') setTimeout(runCalc, 100);
-    if (id === 'penze') setTimeout(calcRenta, 100);
-    if (id === 'hypoteky') setTimeout(calcHypo, 100);
-}
+<div id="quiz-overlay">
+    <div id="quiz-modal">
+        <div class="quiz-header">
+            <span class="close-quiz" onclick="closeQuiz()">&times;</span>
+            <h2>💰 Audit finančního zdraví 2026</h2>
+            <p>Zjistěte, zda jsou vaše peníze v bezpečí.</p>
+        </div>
+        <div id="quiz-steps" style="padding: 30px;">
+            <div class="quiz-q"><span>🛡️</span><input type="checkbox" class="q-check"> <label>Mám rezervu na 3-6 měsíců výdajů.</label></div>
+            <div class="quiz-q"><span>📈</span><input type="checkbox" class="q-check"> <label>Investuji alespoň 10 % příjmu.</label></div>
+            <div class="quiz-q"><span>📉</span><input type="checkbox" class="q-check"> <label>Moje životní pojistka kryje invaliditu.</label></div>
+            <div class="quiz-q"><span>🏦</span><input type="checkbox" class="q-check"> <label>Využívám DIP k snížení daní.</label></div>
+            <div class="quiz-q"><span>🏠</span><input type="checkbox" class="q-check"> <label>Nemovitost je pojištěna na tržní cenu.</label></div>
+            <button class="btn" style="width:100%; margin-top:25px;" onclick="finishQuiz()">Vyhodnotit výsledky</button>
+        </div>
+        <div id="quiz-result" style="display:none; padding: 40px; text-align:center;">
+            <div class="score-circle"><span id="quiz-score-num">0</span>/5</div>
+            <h3 id="quiz-score-title">Výsledek</h3>
+            <p id="quiz-advice" style="margin-bottom: 20px;"></p>
+            <a href="mailto:sarka.brdkova@4fin.cz" class="btn">Chci konzultaci</a>
+        </div>
+    </div>
+</div>
 
-// 2. INVESTIČNÍ KALKULAČKA (GRAF)
-function runCalc() {
-    const pStartInput = document.getElementById('p-start');
-    if (!pStartInput) return;
+<header>
+    <div class="header-overlay">
+        <p class="brand">www.brdkova.cz</p>
+        <h1>finance_pro_vas</h1>
+    </div>
+</header>
 
-    const P = parseFloat(pStartInput.value) || 0;
-    const PMT = parseFloat(document.getElementById('p-monthly').value) || 0;
-    const r = (parseFloat(document.getElementById('p-rate').value) || 0) / 100;
-    const t = parseInt(document.getElementById('p-years').value) || 1;
+<nav id="main-nav">
+    <a href="#" onclick="showSection('home')">O mně</a>
+    <a href="#" onclick="showSection('investice')">Investice</a>
+    <a href="#" onclick="showSection('hypoteky')">Hypotéky</a>
+    <a href="#" onclick="showSection('penze')">Penze (DIP)</a>
+    <a href="#" onclick="showSection('pojisteni')">Pojištění</a>
+    <a href="#" onclick="showSection('kalkulacky')">Kalkulačky</a>
+</nav>
 
-    let labels = [], deposits = [], interest = [];
-    for (let i = 1; i <= t; i++) {
-        labels.push("Rok " + i);
-        const dep = P + (PMT * 12 * i);
-        const totalVal = P * Math.pow(1 + r, i) + (PMT * 12) * ((Math.pow(1 + r, i) - 1) / (r || 0.0001));
-        deposits.push(Math.round(dep));
-        interest.push(Math.max(0, Math.round(totalVal - dep)));
-    }
+<main>
+    <div id="section-home" class="page-section active">
+        <section class="reveal">
+            <div class="about-flex">
+                <div class="about-text">
+                    <h1>Šárka Brdková</h1>
+                    <p class="subtitle">Vaše průvodkyně světem financí</p>
+                    <p>Pomáhám vám stavět finanční plány, které mají hlavu a patu. Finance jsou o svobodě a klidném spánku.</p>
+                </div>
+                <div class="about-photo">
+                    <img src="profil.jpg" alt="Šárka Brdková" class="profile-img">
+                </div>
+            </div>
+            <div class="certifications-block">
+                <h3 style="text-align:center; margin: 30px 0 20px;">Moje odbornost</h3>
+                <div class="cert-grid">
+                    <div class="cert-item"><span>🛡️</span><h4>Pojištění</h4></div>
+                    <div class="cert-item"><span>📈</span><h4>Investice</h4></div>
+                    <div class="cert-item"><span>💰</span><h4>Penze</h4></div>
+                    <div class="cert-item"><span>🏠</span><h4>Úvěry</h4></div>
+                </div>
+            </div>
+        </section>
 
-    if(document.getElementById('total-res')) {
-        document.getElementById('total-res').innerText = (deposits[deposits.length-1] + interest[interest.length-1]).toLocaleString('cs-CZ') + " Kč";
-    }
-    if(document.getElementById('res-years')) {
-        document.getElementById('res-years').innerText = t;
-    }
+        <section class="reveal">
+            <h2 style="text-align:center; margin-bottom:30px;">Spočítejte si svou budoucnost</h2>
+            <div class="calc-hub-grid">
+                <div class="hub-card" onclick="showSection('investice')">
+                    <span class="hub-icon">📈</span>
+                    <h3>Složené úročení</h3>
+                    <p>Podívejte se, jak čas tvoří váš majetek.</p>
+                    <span class="hub-link">Otevřít kalkulačku →</span>
+                </div>
+                <div class="hub-card" onclick="showSection('hypoteky')">
+                    <span class="hub-icon">🏠</span>
+                    <h3>Hypoteční splátka</h3>
+                    <p>Kolik vás bude měsíčně stát bydlení?</p>
+                    <span class="hub-link">Otevřít kalkulačku →</span>
+                </div>
+                <div class="hub-card" onclick="showSection('penze')">
+                    <span class="hub-icon">💰</span>
+                    <h3>Penzijní renta</h3>
+                    <p>Kolik potřebujete pro klidné stáří?</p>
+                    <span class="hub-link">Otevřít kalkulačku →</span>
+                </div>
+            </div>
+        </section>
 
-    const canvas = document.getElementById('mainChart');
-    if (!canvas || typeof Chart === 'undefined') return; 
-    
-    const ctx = canvas.getContext('2d');
-    if (mainChart) mainChart.destroy();
-    
-    mainChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [
-                { label: 'Vklady', data: deposits, backgroundColor: '#1a365d' },
-                { label: 'Zhodnocení', data: interest, backgroundColor: '#90cdf4' }
-            ]
-        },
-        options: { 
-            responsive: true, 
-            maintainAspectRatio: false, 
-            scales: { x: { stacked: true }, y: { stacked: true } }
-        }
-    });
-}
+        <section class="reveal">
+            <h2 style="text-align:center;">Co říkají klienti</h2>
+            <div class="slider-container">
+                <div class="testimonial-slider" id="testimonial-slider">
+                    <div class="testimonial-slide"><div class="stars">★★★★★</div><p>"Skvělá podpora při řešení pojistné události."</p><span>— Olda</span></div>
+                    <div class="testimonial-slide"><div class="stars">★★★★★</div><p>"Vše skvěle vysvětleno a bez papírů."</p><span>— Hana S.</span></div>
+                    <div class="testimonial-slide"><div class="stars">★★★★★</div><p>"Neplatím pojištění zbytečně, mám v něm pořádek."</p><span>— Petra K.</span></div>
+                </div>
+            </div>
+        </section>
+    </div>
 
-// 3. OSTATNÍ KALKULAČKY
-function calcHypo() {
-    const amtEl = document.getElementById('h-amt');
-    const resEl = document.getElementById('h-res');
-    if (!amtEl || !resEl) return;
-    const p = parseFloat(amtEl.value) || 0;
-    const r = (parseFloat(document.getElementById('h-rate').value) || 0) / 100 / 12;
-    const n = (parseFloat(document.getElementById('h-yrs').value) || 0) * 12;
-    const res = (r > 0) ? (p * r) / (1 - Math.pow(1 + r, -n)) : p / (n || 1);
-    resEl.innerText = Math.round(res).toLocaleString('cs-CZ') + " Kč";
-}
+    <div id="section-investice" class="page-section">
+        <section>
+            <h2>Kalkulačka složeného úročení</h2>
+            <div class="main-calc-card">
+                <div class="input-grid">
+                    <div class="input-group"><label>Počáteční vklad</label><input type="number" id="p-start" value="100000" oninput="runCalc()"></div>
+                    <div class="input-group"><label>Měsíční úložka</label><input type="number" id="p-monthly" value="5000" oninput="runCalc()"></div>
+                    <div class="input-group"><label>Výnos (%)</label><input type="number" id="p-rate" value="7" oninput="runCalc()"></div>
+                    <div class="input-group"><label>Doba (let)</label><input type="number" id="p-years" value="20" oninput="runCalc()"></div>
+                </div>
+                <div class="main-result">
+                    <h3>Za <span id="res-years">20</span> let: <span id="total-res">0 Kč</span></h3>
+                </div>
+                <div class="chart-wrapper"><canvas id="mainChart"></canvas></div>
+            </div>
+        </section>
 
-function calcRenta() {
-    const pmtEl = document.getElementById('r-monthly');
-    if (!pmtEl) return;
-    const pmt = parseFloat(pmtEl.value) || 0;
-    const tEl = document.getElementById('r-years');
-    const t = tEl ? parseInt(tEl.value) : 0;
-    const r = (parseFloat(document.getElementById('r-rate').value) || 0) / 100 / 12;
-    const n = t * 12;
-    
-    let total = (r > 0) ? pmt * ((Math.pow(1 + r, n) - 1) / r) : pmt * n;
-    const monthlyPayout = total / 240; 
+        <section class="reveal article-card">
+            <h2>Investice a geopolitika 2026</h2>
+            <div class="article-preview">
+                <p>Jak ochránit majetek v éře nejistoty? Diverzifikace je dnes důležitější než kdy dříve.</p>
+            </div>
+            <div id="inv-more-content" class="article-full-text" style="display:none;">
+                <p>Kvalitní portfolio dnes musí obsahovat globální ETF, ale i defenzivní složky. Nejdůležitější je disciplína.</p>
+                <a href="mailto:sarka.brdkova@4fin.cz" class="btn">Probrat se Šárkou</a>
+            </div>
+            <button id="inv-read-more-btn" class="btn-outline" onclick="toggleInvArticle()">Číst celý článek ↓</button>
+        </section>
+    </div>
 
-    if(document.getElementById('r-total')) document.getElementById('r-total').innerText = Math.round(total).toLocaleString('cs-CZ') + " Kč";
-    if(document.getElementById('r-monthly-payout')) document.getElementById('r-monthly-payout').innerText = Math.round(monthlyPayout).toLocaleString('cs-CZ') + " Kč";
-}
+    <div id="section-hypoteky" class="page-section">
+        <section>
+            <h2>Hypoteční kalkulačka</h2>
+            <div class="main-calc-card">
+                <div class="input-grid">
+                    <div class="input-group"><label>Výše úvěru</label><input type="number" id="h-amt" value="3000000" oninput="calcHypo()"></div>
+                    <div class="input-group"><label>Sazba (%)</label><input type="number" id="h-rate" value="5.29" step="0.01" oninput="calcHypo()"></div>
+                    <div class="input-group"><label>Splatnost (let)</label><input type="number" id="h-yrs" value="30" oninput="calcHypo()"></div>
+                </div>
+                <div class="main-result">
+                    <h3>Měsíční splátka: <span id="h-res">0 Kč</span></h3>
+                </div>
+            </div>
+        </section>
+    </div>
 
-// 4. ROZBALOVÁNÍ ČLÁNKŮ
-function toggleArticle(contentId, btnId, baseText) {
-    const c = document.getElementById(contentId);
-    const b = document.getElementById(btnId);
-    if (!c || !b) return;
-    const isHidden = c.style.display === "none" || c.style.display === "";
-    c.style.display = isHidden ? "block" : "none";
-    b.innerText = isHidden ? "Zobrazit méně ↑" : baseText;
-}
-function toggleInvArticle() { toggleArticle('inv-more-content', 'inv-read-more-btn', 'Číst celý článek ↓'); }
-function toggleDipArticle() { toggleArticle('dip-more-content', 'dip-read-more-btn', 'Zobrazit celý článek o DIP ↓'); }
-function toggleInsArticle() { toggleArticle('ins-more-content', 'ins-read-more-btn', 'Jak správně pojistit majetek ↓'); }
+    <div id="section-penze" class="page-section">
+        <section>
+            <h2>Penzijní kalkulačka</h2>
+            <div class="main-calc-card">
+                <div class="input-grid">
+                    <div class="input-group"><label>Měsíční úložka</label><input type="number" id="r-monthly" value="2000" oninput="calcRenta()"></div>
+                    <div class="input-group"><label>Let do důchodu</label><input type="number" id="r-years" value="30" oninput="calcRenta()"></div>
+                    <div class="input-group"><label>Výnos (%)</label><input type="number" id="r-rate" value="6" oninput="calcRenta()"></div>
+                </div>
+                <div class="main-result">
+                    <h3>Kapitál: <span id="r-total">0 Kč</span></h3>
+                    <p>Měsíční renta (20 let): <strong id="r-monthly-payout">0 Kč</strong></p>
+                </div>
+            </div>
+        </section>
 
-// 5. KVÍZOVÉ FUNKCE
-function openQuiz() { 
-    const quiz = document.getElementById('quiz-overlay');
-    if(quiz) quiz.style.display = 'flex'; 
-}
-function closeQuiz() { 
-    const quiz = document.getElementById('quiz-overlay');
-    if(quiz) quiz.style.display = 'none'; 
-}
-function finishQuiz() {
-    const score = Array.from(document.querySelectorAll('.q-check')).filter(c => c.checked).length;
-    if(document.getElementById('quiz-steps')) document.getElementById('quiz-steps').style.display = 'none';
-    if(document.getElementById('quiz-result')) document.getElementById('quiz-result').style.display = 'block';
-    if(document.getElementById('quiz-score-num')) document.getElementById('quiz-score-num').innerText = score;
-    
-    const title = document.getElementById('quiz-score-title');
-    const advice = document.getElementById('quiz-advice');
-    if(!title || !advice) return;
+        <section class="reveal article-card">
+            <h2>DIP: Vše o novém spoření na stáří</h2>
+            <div class="article-preview">
+                <p>DIP je revoluce v investování na důchod se státní podporou.</p>
+            </div>
+            <div id="dip-more-content" class="article-full-text" style="display:none;">
+                <p>Možnost odečíst až 48 000 Kč ze základu daně a získat příspěvek zaměstnavatele.</p>
+                <a href="mailto:sarka.brdkova@4fin.cz" class="btn">Chci konzultaci k DIP</a>
+            </div>
+            <button id="dip-read-more-btn" class="btn-outline" onclick="toggleDipArticle()">Zobrazit detail o DIP ↓</button>
+        </section>
+    </div>
 
-    if(score <= 2) {
-        title.innerText = "🔴 Vaše finance jsou v ohrožení";
-        advice.innerText = "Doporučuji co nejdříve provést revizi portfolia.";
-    } else if(score <= 4) {
-        title.innerText = "🟡 Dobré základy, ale...";
-        advice.innerText = "Unikají vám peníze na daních. DIP by vám mohl ušetřit tisíce.";
-    } else {
-        title.innerText = "🟢 Skvělé finanční zdraví";
-        advice.innerText = "Gratuluji! Pojďme doladit detaily.";
-    }
-}
+    <div id="section-pojisteni" class="page-section">
+        <section class="reveal article-card">
+            <h2>Chytré pojištění</h2>
+            <div class="article-preview">
+                <p>Máte své smlouvy aktuální vzhledem k rostoucím cenám nemovitostí?</p>
+            </div>
+            <div id="ins-more-content" class="article-full-text" style="display:none;">
+                <p>U aut hlídám GAP, u nemovitostí tržní ceny. Správná pojistka vám má zachránit životní úroveň.</p>
+                <a href="mailto:sarka.brdkova@4fin.cz" class="btn">Chci revizi smluv</a>
+            </div>
+            <button id="ins-read-more-btn" class="btn-outline" onclick="toggleInsArticle()">Jak správně pojistit? ↓</button>
+        </section>
+    </div>
 
-// Upravená část pro Slider (bod 6)
-function moveSlider() {
-    const s = document.getElementById('testimonial-slider');
-    if (!s) return;
-    const slides = document.querySelectorAll('.testimonial-slide');
-    if (slides.length === 0) return; // Ochrana proti chybě
+    <div id="section-kalkulacky" class="page-section">
+        <section>
+            <h2>Všechny kalkulačky na jednom místě</h2>
+            <div class="calc-hub-grid">
+                <div class="hub-card" onclick="showSection('investice')">📈 Složené úročení</div>
+                <div class="hub-card" onclick="showSection('hypoteky')">🏠 Hypotéka</div>
+                <div class="hub-card" onclick="showSection('penze')">💰 Renta</div>
+            </div>
+        </section>
+    </div>
 
-    const isMob = window.innerWidth <= 768;
-    const maxIndex = isMob ? slides.length - 1 : slides.length - 2;
+    <section id="kontakt">
+        <h2>Kontakt</h2>
+        <div class="contact-flex">
+            <div class="contact-text">
+                <p>📧 <strong>sarka.brdkova@4fin.cz</strong></p>
+                <p>📞 <strong>+420 604 131 440</strong></p>
+            </div>
+            <div class="qr-area">
+                <div class="qr-item"><img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=mailto:sarka.brdkova@4fin.cz"><p>Email</p></div>
+                <div class="qr-item"><img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=tel:+420604131440"><p>Volat</p></div>
+            </div>
+        </div>
+    </section>
+</main>
 
-    currentSlide++;
-    if (currentSlide > maxIndex) {
-        currentSlide = 0; // Restart na začátek
-    }
+<footer class="footer-bar">
+    <p>&copy; 2026 Šárka Brdková | www.brdkova.cz</p>
+</footer>
 
-    const moveAmount = isMob ? 100 : 51.5; 
-    s.style.transform = `translateX(-${currentSlide * moveAmount}%)`;
-}
-
-// SPUŠTĚNÍ
-window.addEventListener("load", () => {
-    setTimeout(openQuiz, 4000); 
-    runCalc();
-    calcHypo();
-    calcRenta();
-    setInterval(moveSlider, 5000);
-});
-
+<script src="script.js"></script>
+</body>
+</html>

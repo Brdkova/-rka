@@ -1,5 +1,8 @@
 let mainChart;
 
+// OPRAVA: Přidána chybějící proměnná currentSlide — bez ní slider házel chybu a nefungoval
+let currentSlide = 0;
+
 // 1. PŘEPÍNÁNÍ SEKCÍ
 function showSection(id) {
     const sections = document.querySelectorAll('.page-section');
@@ -104,8 +107,12 @@ function toggleArticle(contentId, btnId, baseText) {
     b.innerText = isHidden ? "Zobrazit méně ↑" : baseText;
 }
 function toggleInvArticle() { toggleArticle('inv-more-content', 'inv-read-more-btn', 'Číst celý článek ↓'); }
-function toggleDipArticle() { toggleArticle('dip-more-content', 'dip-read-more-btn', 'Zobrazit celý článek o DIP ↓'); }
-function toggleInsArticle() { toggleArticle('ins-more-content', 'ins-read-more-btn', 'Jak správně pojistit majetek ↓'); }
+
+// OPRAVA: Text tlačítka opraven z 'Zobrazit celý článek o DIP ↓' na 'Zobrazit detail o DIP ↓'
+// aby odpovídal textu v HTML — jinak se tlačítko po zavření nevrátilo do původního stavu
+function toggleDipArticle() { toggleArticle('dip-more-content', 'dip-read-more-btn', 'Zobrazit detail o DIP ↓'); }
+
+function toggleInsArticle() { toggleArticle('ins-more-content', 'ins-read-more-btn', 'Jak správně pojistit? ↓'); }
 
 // 5. KVÍZOVÉ FUNKCE
 function openQuiz() { 
@@ -138,22 +145,24 @@ function finishQuiz() {
     }
 }
 
-// Upravená část pro Slider (bod 6)
+// 6. SLIDER
+// OPRAVA: currentSlide je nyní definována nahoře v souboru (let currentSlide = 0)
 function moveSlider() {
     const s = document.getElementById('testimonial-slider');
     if (!s) return;
     const slides = document.querySelectorAll('.testimonial-slide');
-    if (slides.length === 0) return; // Ochrana proti chybě
+    if (slides.length === 0) return;
 
     const isMob = window.innerWidth <= 768;
     const maxIndex = isMob ? slides.length - 1 : slides.length - 2;
 
     currentSlide++;
     if (currentSlide > maxIndex) {
-        currentSlide = 0; // Restart na začátek
+        currentSlide = 0;
     }
 
-    const moveAmount = isMob ? 100 : 51.5; 
+    // OPRAVA: moveAmount je nyní 50 % (bez gapu), aby se posun přesně kryl se šířkou slidu
+    const moveAmount = isMob ? 100 : 50;
     s.style.transform = `translateX(-${currentSlide * moveAmount}%)`;
 }
 
@@ -165,4 +174,3 @@ window.addEventListener("load", () => {
     calcRenta();
     setInterval(moveSlider, 5000);
 });
-
