@@ -144,7 +144,6 @@ function finishQuiz() {
 
 // SPUŠTĚNÍ
 window.addEventListener("load", function() {
-    setTimeout(openQuiz, 4000);
     runCalc();
     calcHypo();
     calcRenta();
