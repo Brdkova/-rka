@@ -142,41 +142,10 @@ function finishQuiz() {
     }
 }
 
-// 6. RECENZE - autoplay každé 3 sekundy
-function carouselInit() {
-    const track = document.getElementById('reviews-track');
-    const dotsContainer = document.getElementById('reviews-dots');
-    if (!track || !dotsContainer) return;
-
-    const pages = track.querySelectorAll('.reviews-page');
-    let current = 0;
-
-    // Vytvoř tečky
-    pages.forEach((_, i) => {
-        const dot = document.createElement('button');
-        dot.className = 'reviews-dot' + (i === 0 ? ' active' : '');
-        dot.onclick = () => goTo(i);
-        dotsContainer.appendChild(dot);
-    });
-
-    function goTo(index) {
-        current = index;
-        track.style.transform = 'translateX(-' + (current * 100) + '%)';
-        document.querySelectorAll('.reviews-dot').forEach(function(d, i) {
-            d.classList.toggle('active', i === current);
-        });
-    }
-
-    setInterval(function() {
-        goTo((current + 1) % pages.length);
-    }, 3000);
-}
-
 // SPUŠTĚNÍ
-window.addEventListener("load", () => {
-    setTimeout(openQuiz, 4000); 
+window.addEventListener("load", function() {
+    setTimeout(openQuiz, 4000);
     runCalc();
     calcHypo();
     calcRenta();
-    carouselInit();
 });
