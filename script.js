@@ -142,35 +142,34 @@ function finishQuiz() {
     }
 }
 
-// 6. CAROUSEL - jednoduchý a spolehlivý autoplay
+// 6. RECENZE - autoplay každé 3 sekundy
 function carouselInit() {
-    const track = document.getElementById('carousel-track');
-    const dotsContainer = document.getElementById('carousel-dots');
+    const track = document.getElementById('reviews-track');
+    const dotsContainer = document.getElementById('reviews-dots');
     if (!track || !dotsContainer) return;
 
-    const slides = track.querySelectorAll('.carousel-slide');
+    const pages = track.querySelectorAll('.reviews-page');
     let current = 0;
 
     // Vytvoř tečky
-    slides.forEach((_, i) => {
+    pages.forEach((_, i) => {
         const dot = document.createElement('button');
-        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        dot.className = 'reviews-dot' + (i === 0 ? ' active' : '');
         dot.onclick = () => goTo(i);
         dotsContainer.appendChild(dot);
     });
 
     function goTo(index) {
         current = index;
-        track.style.transform = `translateX(-${current * 100}%)`;
-        document.querySelectorAll('.carousel-dot').forEach((d, i) => {
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        document.querySelectorAll('.reviews-dot').forEach(function(d, i) {
             d.classList.toggle('active', i === current);
         });
     }
 
-    // Autoplay každé 2.5 sekundy
-    setInterval(() => {
-        goTo((current + 1) % slides.length);
-    }, 2500);
+    setInterval(function() {
+        goTo((current + 1) % pages.length);
+    }, 3000);
 }
 
 // SPUŠTĚNÍ

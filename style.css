@@ -97,29 +97,17 @@ section { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0
 .quiz-q { display: flex; align-items: center; gap: 10px; padding: 10px 25px; border-bottom: 1px solid #eee; }
 .score-circle { width: 100px; height: 100px; border-radius: 50%; border: 5px solid var(--blue); margin: 20px auto; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 800; color: var(--blue); }
 
-/* CAROUSEL */
-.carousel { width: 100%; margin-top: 20px; }
-.carousel-track-wrapper { overflow: hidden; width: 100%; }
-.carousel-track { display: flex; transition: transform 0.6s ease; }
-.carousel-slide { 
-    min-width: 100%; 
-    background: var(--gray); 
-    padding: 30px; 
-    border-radius: 15px; 
-    border-bottom: 4px solid #f39c12; 
-    box-sizing: border-box;
-    text-align: center;
-}
-.carousel-slide p { font-size: 1.05rem; line-height: 1.6; margin-bottom: 15px; }
-.carousel-slide span { font-weight: 600; color: var(--blue); }
-.stars { color: #f39c12; font-size: 1.2rem; margin-bottom: 12px; }
-.carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 15px; flex-wrap: wrap; }
-.carousel-dot { 
-    width: 10px; height: 10px; border-radius: 50%; 
-    background: #cbd5e0; border: none; cursor: pointer; transition: 0.3s; 
-    padding: 0;
-}
-.carousel-dot.active { background: var(--navy); }
+/* RECENZE */
+.reviews-wrapper { overflow: hidden; width: 100%; margin-top: 20px; }
+.reviews-track { display: flex; transition: transform 0.6s ease; }
+.reviews-page { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; min-width: 100%; box-sizing: border-box; }
+.review-card { background: var(--gray); padding: 25px; border-radius: 15px; border-bottom: 4px solid #f39c12; }
+.review-card p { line-height: 1.6; margin-bottom: 12px; }
+.review-card span { font-weight: 600; color: var(--blue); font-size: 0.9rem; }
+.stars { color: #f39c12; font-size: 1.1rem; margin-bottom: 10px; }
+.reviews-dots { display: flex; justify-content: center; gap: 8px; margin-top: 15px; }
+.reviews-dot { width: 10px; height: 10px; border-radius: 50%; background: #cbd5e0; border: none; cursor: pointer; transition: 0.3s; padding: 0; }
+.reviews-dot.active { background: var(--navy); }
 
 /* KONTAKT */
 .contact-flex { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center; align-items: center; margin-top: 1.5rem; }
