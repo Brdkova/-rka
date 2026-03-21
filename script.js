@@ -1,8 +1,5 @@
 let mainChart;
 
-// OPRAVA: Přidána chybějící proměnná currentSlide — bez ní slider házel chybu a nefungoval
-let currentSlide = 0;
-
 // 1. PŘEPÍNÁNÍ SEKCÍ
 function showSection(id) {
     const sections = document.querySelectorAll('.page-section');
@@ -145,25 +142,41 @@ function finishQuiz() {
     }
 }
 
-// 6. SLIDER
-// OPRAVA: currentSlide je nyní definována nahoře v souboru (let currentSlide = 0)
-function moveSlider() {
-    const s = document.getElementById('testimonial-slider');
-    if (!s) return;
-    const slides = document.querySelectorAll('.testimonial-slide');
-    if (slides.length === 0) return;
+// 6. CAROUSEL
+let carouselIndex = 0;
 
-    const isMob = window.innerWidth <= 768;
-    const maxIndex = isMob ? slides.length - 1 : slides.length - 2;
+function carouselInit() {
+    const track = document.getElementById('carousel-track');
+    const dotsContainer = document.getElementById('carousel-dots');
+    if (!track || !dotsContainer) return;
 
-    currentSlide++;
-    if (currentSlide > maxIndex) {
-        currentSlide = 0;
-    }
+    const slides = track.querySelectorAll('.carousel-slide');
+    dotsContainer.innerHTML = '';
+    slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        dot.onclick = () => carouselGoTo(i);
+        dotsContainer.appendChild(dot);
+    });
 
-    // OPRAVA: moveAmount je nyní 50 % (bez gapu), aby se posun přesně kryl se šířkou slidu
-    const moveAmount = isMob ? 100 : 50;
-    s.style.transform = `translateX(-${currentSlide * moveAmount}%)`;
+    setInterval(() => carouselMove(1), 5000);
+}
+
+function carouselMove(dir) {
+    const track = document.getElementById('carousel-track');
+    if (!track) return;
+    const slides = track.querySelectorAll('.carousel-slide');
+    carouselIndex = (carouselIndex + dir + slides.length) % slides.length;
+    carouselGoTo(carouselIndex);
+}
+
+function carouselGoTo(index) {
+    const track = document.getElementById('carousel-track');
+    const dots = document.querySelectorAll('.carousel-dot');
+    if (!track) return;
+    carouselIndex = index;
+    track.style.transform = `translateX(-${index * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === index));
 }
 
 // SPUŠTĚNÍ
@@ -172,5 +185,5 @@ window.addEventListener("load", () => {
     runCalc();
     calcHypo();
     calcRenta();
-    setInterval(moveSlider, 5000);
+    carouselInit();
 });

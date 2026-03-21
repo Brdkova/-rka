@@ -102,13 +102,27 @@
 
         <section class="reveal">
             <h2 style="text-align:center;">Co říkají klienti</h2>
-            <div class="slider-container">
-                <div class="testimonial-slider" id="testimonial-slider">
-                    <div class="testimonial-slide"><div class="stars">★★★★★</div><p>"Skvělá podpora při řešení pojistné události."</p><span>— Olda</span></div>
-                    <div class="testimonial-slide"><div class="stars">★★★★★</div><p>"Vše skvěle vysvětleno a bez papírů."</p><span>— Hana S.</span></div>
-                    <div class="testimonial-slide"><div class="stars">★★★★★</div><p>"Neplatím pojištění zbytečně, mám v něm pořádek."</p><span>— Petra K.</span></div>
+            <div class="carousel">
+                <button class="carousel-btn prev" onclick="carouselMove(-1)">&#8592;</button>
+                <div class="carousel-track-wrapper">
+                    <div class="carousel-track" id="carousel-track">
+                        <div class="carousel-slide"><div class="stars">★★★★★</div><p>"Skvělé služby a zejména podpora při řešení pojistné události."</p><span>— Olda, Praha</span></div>
+                        <div class="carousel-slide"><div class="stars">★★★★★</div><p>"Konečně mi někdo vysvětlil jak nastavit pojistku správně, proč je důležité vybírat pojištění nejen podle ceny."</p><span>— Markéta, Praha</span></div>
+                        <div class="carousel-slide"><div class="stars">★★★★★</div><p>"S návrhy řešení jsem spokojen a obdivuji kolik informací jsem dostal, jelikož jsou věci o kterých jsem nikdy neslyšel od bankéřů ani jiných poradců."</p><span>— Marek, Praha</span></div>
+                        <div class="carousel-slide"><div class="stars">★★★★★</div><p>"Moc děkuji za všechny rady a těším se na další spolupráci."</p><span>— Lucka, Praha</span></div>
+                        <div class="carousel-slide"><div class="stars">★★★★★</div><p>"Paní Brdková se mnou vyřešila špatně uzavřené pojištění, vše mi ochotně vysvětlila."</p><span>— Eva K., Mělník</span></div>
+                        <div class="carousel-slide"><div class="stars">★★★★★</div><p>"Díky Šárce jsem zjistil, že pojištění funguje. Děkuji a určitě doporučuji i ostatním!"</p><span>— Richard, Praha</span></div>
+                        <div class="carousel-slide"><div class="stars">★★★★★</div><p>"Paní Šárka se mnou prošla všechna pojištění která jsem měla sjednaná a ty, které neodpovídaly mým potřebám postupně změnila."</p><span>— Alena Eliášová, Praha</span></div>
+                        <div class="carousel-slide"><div class="stars">★★★★★</div><p>"Už jsem řešil několik věcí a vždy vše mi líbí možnost si vybrat a hlavně na cokoliv se zeptat. Nemám pocit, že bych byl do ničeho tlačen."</p><span>— Michal Š., Praha</span></div>
+                        <div class="carousel-slide"><div class="stars">★★★★★</div><p>"Jsem spokojen a už jsem doporučil i svým známým."</p><span>— Honza, Praha</span></div>
+                        <div class="carousel-slide"><div class="stars">★★★★★</div><p>"Děkuji za pomoc i vysvětlení."</p><span>— Adéla, Praha</span></div>
+                        <div class="carousel-slide"><div class="stars">★★★★★</div><p>"Zatím jsem velmi spokojena."</p><span>— Míša, Praha</span></div>
+                        <div class="carousel-slide"><div class="stars">★★★★★</div><p>"Vše bylo vyřešeno rychle a odborně. Děkuji."</p><span>— Zuzana, Praha</span></div>
+                    </div>
                 </div>
+                <button class="carousel-btn next" onclick="carouselMove(1)">&#8594;</button>
             </div>
+            <div class="carousel-dots" id="carousel-dots"></div>
         </section>
     </div>
 
@@ -216,7 +230,7 @@
         <h2>Kontakt</h2>
         <div class="contact-flex">
             <div class="contact-text">
-                <p>📧 <strong>sarka.brdkova@4fin.cz</strong></p>
+                <p>📧 <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cebdafbca5afe0acbcaaa5a1b8af8efaa8a7a0e0adb4">[email&#160;protected]</a></strong></p>
                 <p>📞 <strong>+420 604 131 440</strong></p>
             </div>
             <div class="qr-area">
@@ -233,7 +247,4 @@
     </section>
 </main>
 
-<footer class="footer-bar">
-    <p>Šárka Brdková &copy; 2026 | www.brdkova.cz</p>
-</footer>
-                <div class="qr-item"><img src="http
+<footer class="footer-
