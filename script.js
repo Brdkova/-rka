@@ -142,41 +142,35 @@ function finishQuiz() {
     }
 }
 
-// 6. CAROUSEL
-let carouselIndex = 0;
-
+// 6. CAROUSEL - jednoduchý a spolehlivý autoplay
 function carouselInit() {
     const track = document.getElementById('carousel-track');
     const dotsContainer = document.getElementById('carousel-dots');
     if (!track || !dotsContainer) return;
 
     const slides = track.querySelectorAll('.carousel-slide');
-    dotsContainer.innerHTML = '';
+    let current = 0;
+
+    // Vytvoř tečky
     slides.forEach((_, i) => {
         const dot = document.createElement('button');
         dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-        dot.onclick = () => carouselGoTo(i);
+        dot.onclick = () => goTo(i);
         dotsContainer.appendChild(dot);
     });
 
-    setInterval(() => carouselMove(1), 5000);
-}
+    function goTo(index) {
+        current = index;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        document.querySelectorAll('.carousel-dot').forEach((d, i) => {
+            d.classList.toggle('active', i === current);
+        });
+    }
 
-function carouselMove(dir) {
-    const track = document.getElementById('carousel-track');
-    if (!track) return;
-    const slides = track.querySelectorAll('.carousel-slide');
-    carouselIndex = (carouselIndex + dir + slides.length) % slides.length;
-    carouselGoTo(carouselIndex);
-}
-
-function carouselGoTo(index) {
-    const track = document.getElementById('carousel-track');
-    const dots = document.querySelectorAll('.carousel-dot');
-    if (!track) return;
-    carouselIndex = index;
-    track.style.transform = `translateX(-${index * 100}%)`;
-    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+    // Autoplay každé 2.5 sekundy
+    setInterval(() => {
+        goTo((current + 1) % slides.length);
+    }, 2500);
 }
 
 // SPUŠTĚNÍ
