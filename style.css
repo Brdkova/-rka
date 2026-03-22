@@ -131,7 +131,20 @@ section { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0
 .review-card span { font-weight: 600; color: var(--blue); font-size: 0.9rem; }
 .stars { color: #f39c12; font-size: 1.1rem; margin-bottom: 10px; }
 
-/* KONTAKT */
+/* BLOG */
+.blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 2rem; }
+.blog-card { background: white; border-radius: 20px; border: 1px solid #edf2f7; padding: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+.blog-tag { display: inline-block; background: var(--light-blue); color: var(--navy); font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+.blog-card h2 { font-size: 1.3rem; color: var(--navy); margin-bottom: 0.5rem; }
+.blog-date { font-size: 0.85rem; color: #a0aec0; margin-bottom: 1.2rem; }
+.blog-body h3 { font-size: 1rem; color: var(--navy); margin: 1.2rem 0 0.5rem; }
+.blog-body p { line-height: 1.7; color: var(--text); margin-bottom: 0.5rem; }
+.blog-cta { background: var(--gray); border-left: 4px solid var(--blue); padding: 1rem 1.5rem; border-radius: 10px; margin-top: 1.5rem; }
+.blog-cta p { margin-bottom: 0.8rem; font-weight: 600; }
+
+@media (max-width: 768px) {
+    .blog-grid { grid-template-columns: 1fr; }
+}
 .contact-flex { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center; align-items: center; margin-top: 1.5rem; }
 .contact-text p { margin-bottom: 0.5rem; font-size: 1.1rem; }
 .qr-area { display: flex; gap: 30px; justify-content: center; }

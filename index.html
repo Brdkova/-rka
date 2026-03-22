@@ -28,7 +28,7 @@
             <div class="score-circle"><span id="quiz-score-num">0</span>/5</div>
             <h3 id="quiz-score-title">Výsledek</h3>
             <p id="quiz-advice" style="margin-bottom: 20px;"></p>
-            <a href="mailto:sarka.brdkova@4fin.cz" class="btn">Chci konzultaci</a>
+            <a href="/cdn-cgi/l/email-protection#413220332a206f2333252a2e3720017527282f6f223b" class="btn">Chci konzultaci</a>
         </div>
     </div>
 </div>
@@ -47,6 +47,7 @@
     <a href="#" onclick="showSection('penze')">Penze (DIP)</a>
     <a href="#" onclick="showSection('pojisteni')">Pojištění</a>
     <a href="#" onclick="showSection('kalkulacky')">Kalkulačky</a>
+    <a href="#" onclick="showSection('blog')">Blog</a>
 </nav>
 
 <main>
@@ -197,27 +198,19 @@
         <section class="reveal article-card">
             <h2>DIP: Vše o novém spoření na stáří</h2>
             <div class="article-preview">
-                <p>DIP je revoluce v investování na důchod se státní podporou.</p>
+                <p>DIP je revoluce v investování na důchod se státní podporou. Od roku 2024 si můžete odečíst až 48 000 Kč ze základu daně ročně a navíc získat příspěvek od zaměstnavatele. Víte, jak na to?</p>
             </div>
-            <div id="dip-more-content" class="article-full-text" style="display:none;">
-                <p>Možnost odečíst až 48 000 Kč ze základu daně a získat příspěvek zaměstnavatele.</p>
-                <a href="/cdn-cgi/l/email-protection#f58694879e94db9787919e9a8394b5c1939c9bdb968f" class="btn">Chci konzultaci k DIP</a>
-            </div>
-            <button id="dip-read-more-btn" class="btn-outline" onclick="toggleDipArticle()">Zobrazit detail o DIP ↓</button>
+            <button class="btn-outline" onclick="showSection('blog'); document.getElementById('clanek-dip').scrollIntoView({behavior:'smooth'})">Číst celý článek →</button>
         </section>
     </div>
 
     <div id="section-pojisteni" class="page-section">
         <section class="reveal article-card">
-            <h2>Chytré pojištění</h2>
+            <h2>Proč nestačí nejlevnější pojištění?</h2>
             <div class="article-preview">
-                <p>Máte své smlouvy aktuální vzhledem k rostoucím cenám nemovitostí?</p>
+                <p>Mnoho lidí volí pojištění podle nejnižší ceny. To může být velmi drahá chyba. Správná pojistka vám má zachránit životní úroveň — ne jen formálně existovat v šuplíku.</p>
             </div>
-            <div id="ins-more-content" class="article-full-text" style="display:none;">
-                <p>U aut hlídám GAP, u nemovitostí tržní ceny. Správná pojistka vám má zachránit životní úroveň.</p>
-                <a href="/cdn-cgi/l/email-protection#5221332039337c302036393d24331266343b3c7c3128" class="btn">Chci revizi smluv</a>
-            </div>
-            <button id="ins-read-more-btn" class="btn-outline" onclick="toggleInsArticle()">Jak správně pojistit? ↓</button>
+            <button class="btn-outline" onclick="showSection('blog'); document.getElementById('clanek-pojisteni').scrollIntoView({behavior:'smooth'})">Číst celý článek →</button>
         </section>
     </div>
 
@@ -229,6 +222,62 @@
                 <div class="hub-card" onclick="showSection('hypoteky')">🏠 Hypotéka</div>
                 <div class="hub-card" onclick="showSection('penze')">💰 Renta</div>
             </div>
+        </section>
+    </div>
+
+    <div id="section-blog" class="page-section">
+        <section>
+            <h2 style="text-align:center; margin-bottom: 2rem;">Blog</h2>
+            <div class="blog-grid">
+
+                <article class="blog-card" id="clanek-dip">
+                    <div class="blog-tag">Penze &amp; DIP</div>
+                    <h2>Jak funguje DIP a proč ušetříte na daních</h2>
+                    <p class="blog-date">📅 Březen 2026</p>
+                    <div class="blog-body">
+                        <p>Dlouhodobý investiční produkt (DIP) je od roku 2024 jednou z nejzajímavějších možností, jak investovat na důchod a zároveň legálně snížit daňovou zátěž.</p>
+
+                        <h3>Co je DIP?</h3>
+                        <p>DIP je investiční účet, na který pravidelně odkládáte peníze na důchod. Na rozdíl od klasického spoření si však můžete odečíst vklady ze základu daně — až 48 000 Kč ročně. Při sazbě daně 15 % to znamená reálnou úsporu až 7 200 Kč ročně na daních.</p>
+
+                        <h3>Příspěvek od zaměstnavatele</h3>
+                        <p>Velkou výhodou DIP je, že i váš zaměstnavatel může přispívat — a to daňově výhodně pro obě strany. Zaměstnavatel si příspěvek odečte z nákladů, vy ho dostanete bez odvodů. To může být tisíce korun navíc každý rok.</p>
+
+                        <h3>Jak začít?</h3>
+                        <p>DIP si lze sjednat prostřednictvím licencovaného poradce. Důležité je vybrat správné podkladové fondy a nastavit výši měsíčního vkladu tak, aby odpovídala vašim cílům a době do důchodu. Každá situace je jiná — proto doporučuji osobní konzultaci.</p>
+
+                        <div class="blog-cta">
+                            <p>Chcete zjistit, kolik byste ušetřili na daních s DIP?</p>
+                            <a href="mailto:sarka.brdkova@4fin.cz" class="btn">Domluvit konzultaci</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card" id="clanek-pojisteni">
+                    <div class="blog-tag">Pojištění</div>
+                    <h2>Proč nestačí nejlevnější pojištění?</h2>
+                    <p class="blog-date">📅 Únor 2026</p>
+                    <div class="blog-body">
+                        <p>Pojištění je jednou z oblastí, kde lidé nejčastěji šetří na špatném místě. Nejlevnější tarif vypadá lákavě — ale v momentě pojistné události se může ukázat, že krytí nestačí.</p>
+
+                        <h3>Podpojištění nemovitostí</h3>
+                        <p>Ceny nemovitostí v posledních letech výrazně vzrostly, ale pojistné částky zůstávají u mnoha smluv na starých hodnotách. Pokud váš dům pojistíte na 3 miliony, ale jeho tržní hodnota je 6 milionů, dostanete v případě škody jen zlomek skutečných nákladů. Tato situace se nazývá podpojištění a je velmi častá.</p>
+
+                        <h3>Životní pojistka bez invalidity</h3>
+                        <p>Mnoho lidí má životní pojistku, která kryje pouze smrt. Přitom pravděpodobnost dlouhodobé invalidity je statisticky vyšší než předčasné úmrtí. Pojistka bez krytí invalidity a závažných onemocnění vás v nejtěžší chvíli ochrání jen částečně.</p>
+
+                        <h3>Jak na správné pojištění?</h3>
+                        <p>Správné pojištění není to nejlevnější ani nejdražší — je to takové, které skutečně kryje vaše rizika. Doporučuji pravidelnou revizi smluv, ideálně každé 2 roky nebo po větší životní změně.</p>
+
+                        <div class="blog-cta">
+                            <p>Chcete nechat zkontrolovat své pojistné smlouvy?</p>
+                            <a href="mailto:sarka.brdkova@4fin.cz" class="btn">Chci revizi smluv</a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+            <p style="text-align:center; margin-top: 2rem; color: #718096;">Další články připravuji — sledujte blog pravidelně. 📝</p>
         </section>
     </div>
 
@@ -257,15 +306,9 @@
     <p>Šárka Brdková &copy; 2026 | www.brdkova.cz</p>
 </footer>
 
-<script src="script.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
 <script>
     // Kvíz spuštěn přímo zde — nezávisí na načtení script.js
     window.addEventListener("load", function() {
         setTimeout(function() {
-            var quiz = document.getElementById('quiz-overlay');
-            if (quiz) quiz.style.display = 'flex';
-        }, 4000);
-    });
-</script>
-</body>
-</html>
+            va
