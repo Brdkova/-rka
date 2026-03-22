@@ -131,6 +131,14 @@ section { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0
 .review-card span { font-weight: 600; color: var(--blue); font-size: 0.9rem; }
 .stars { color: #f39c12; font-size: 1.1rem; margin-bottom: 10px; }
 
+/* PARTNEŘI */
+#partneri { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 2rem; }
+.partners-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 20px; }
+.partner-item { display: flex; align-items: center; justify-content: center; width: 130px; height: 70px; background: var(--gray); border-radius: 12px; border: 1px solid #edf2f7; padding: 10px; transition: 0.3s; }
+.partner-item:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.08); transform: translateY(-2px); }
+.partner-item img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.partner-name-fallback { display: none; font-weight: 700; color: var(--navy); font-size: 0.9rem; text-align: center; }
+
 /* BLOG */
 .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 2rem; }
 .blog-card { background: white; border-radius: 20px; border: 1px solid #edf2f7; padding: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
