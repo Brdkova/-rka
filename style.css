@@ -152,6 +152,34 @@ section { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0
 
 @media (max-width: 768px) {
     .blog-grid { grid-template-columns: 1fr; }
+    .testimonial-slide { min-width: 100%; }
+    .about-top-flex { flex-direction: column; align-items: center; text-align: center; }
+    .profile-img { width: 180px; height: 180px; }
+
+    /* Dlaždice odbornosti — 2x2 na mobilu */
+    .cert-grid-row { grid-template-columns: repeat(2, 1fr); }
+
+    /* Kalkulačky hub — pod sebou */
+    .calc-hub-grid { grid-template-columns: 1fr; }
+
+    /* Recenze — jedna pod druhou */
+    .reviews-css-page { grid-template-columns: 1fr; }
+    .reviews-css-track { width: calc(100% * 12); }
+    .reviews-css-page { width: calc(100% / 12); }
+
+    /* Kvíz — nepřesahuje okraj */
+    #quiz-modal { width: 92%; max-width: 420px; }
+    .quiz-q { padding: 8px 12px; font-size: 0.88rem; }
+    .quiz-header h2 { font-size: 1.1rem; }
+    #quiz-steps { padding: 15px !important; }
+
+    /* Partneři */
+    .partners-grid { gap: 10px; }
+    .partner-item { width: 95px; height: 52px; }
+
+    /* Navigace */
+    nav { gap: 4px; padding: 8px; }
+    nav a { font-size: 0.72rem; padding: 5px 8px; }
 }
 .contact-flex { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center; align-items: center; margin-top: 1.5rem; }
 .contact-text p { margin-bottom: 0.5rem; font-size: 1.1rem; }
@@ -164,12 +192,5 @@ section { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0
 .btn { background: var(--blue); color: white; padding: 12px 25px; border-radius: 30px; text-decoration: none; display: inline-block; font-weight: bold; border: none; cursor: pointer; transition: 0.3s; }
 .btn-outline { background: transparent; border: 2px solid var(--blue); color: var(--blue); padding: 10px 25px; border-radius: 30px; cursor: pointer; font-weight: bold; margin-top: 15px; }
 
-/* RESPONZIVITA */
-@media (max-width: 768px) {
-    .testimonial-slide { min-width: 100%; }
-    .about-top-flex { flex-direction: column-reverse; align-items: center; text-align: center; }
-    .profile-img { width: 180px; height: 180px; }
-    .cert-grid-row { flex-wrap: wrap; }
-    .cert-item-small { min-width: 120px; }
-}
+/* FOOTER */
 .footer-bar { background: var(--navy); color: white; padding: 20px; text-align: center; margin-top: 2rem; }
